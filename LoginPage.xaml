@@ -2,11 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FantasyFootballMAUI.LoginPage"
-             BackgroundColor="#7785ac"
+             BackgroundColor="#233b66"
              Title="Wait...Authenticate">
 
     <Grid x:Name="LoginGrid">
-        <StackLayout
+        <!--<StackLayout>
+            <Label FontFamily="OpenSansRegular" BackgroundColor="#de6b28" FontSize="16" Margin="5, 0, 0, 0" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>-->
+        <!--TO CREATE BARS OF COLOR ACROSS THE SCREEN-->
+
+    <StackLayout
             Spacing="0"
             Padding="5,0"
             VerticalOptions="Center">
@@ -17,24 +22,25 @@
                     Text="Sign in or register to continue"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="16"
-                    TextColor="#5b2a86"
+                    TextColor="#438696"
                     HorizontalOptions="Center" />
 
             </StackLayout>
             <StackLayout x:Name="StackLayoutAdd">
-                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Email" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+                <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Email" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
 
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
-                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
-                    <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#360568"
+                    <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
+                    <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#438696"
                        PlaceholderColor="LightGray" MaxLength ="20" />
                 </Grid>
 
-                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+                <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
 
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
-                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
-                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#360568"
+                    <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
+                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#438696"
                            PlaceholderColor="LightGray" MaxLength="16" />
                 </Grid>
 
@@ -44,8 +50,8 @@
                         Text="Login"
                         SemanticProperties.Hint="Logs user in if login credentials are valid"
                         Clicked="OnLoginBtnClicked"
-                        BackgroundColor="#360568"
-                        TextColor="#7785ac"
+                        BackgroundColor="#438696"
+                        TextColor="#eeeeee"
                         FontAttributes="Bold"
                         HorizontalOptions="Center" />
 
@@ -54,8 +60,8 @@
                         Text="Register"
                         SemanticProperties.Hint="Creates an account with provided login credentials if account doesn't already exist"
                         Clicked="OnRegisterBtnClicked"
-                        BackgroundColor="#360568"
-                        TextColor="#7785ac"
+                        BackgroundColor="#438696"
+                        TextColor="#eeeeee"
                         FontAttributes="Bold"
                         HorizontalOptions="Center" />
                 </HorizontalStackLayout>

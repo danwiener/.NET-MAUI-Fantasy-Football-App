@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasyFootballMAUI.OpeningPage"
+              BackgroundColor="#eeeeee"
+             Title="OpeningPage">
+
+    <Grid x:Name="LoginGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+        <Button 
+                        x:Name="LoginBtn"
+                        Text="Login"
+                        SemanticProperties.Hint="Navigates to login page"
+                        Clicked="OnLoginBtnClicked"
+                        BackgroundColor="#438696"
+                        TextColor="#eeeeee"
+                        FontSize="32"
+                        Grid.Column="0"
+            CornerRadius="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Grid.ColumnSpan="1" />
+
+        <Button
+                        x:Name="RegisterBtn"
+                        Text="Register"
+                        SemanticProperties.Hint="Navigates to register page"
+                        Clicked="OnRegisterBtnClicked"
+                        BackgroundColor="#233b66"
+                        TextColor="#eeeeee"
+                        FontSize="32"
+                        Grid.Column="1"
+            CornerRadius="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand" 
+                        Grid.ColumnSpan="1"/>
+    </Grid>
+</ContentPage>

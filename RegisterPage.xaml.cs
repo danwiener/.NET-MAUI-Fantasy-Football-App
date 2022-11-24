@@ -78,7 +78,7 @@ public partial class RegisterPage : ContentPage
         Label PasswordLengthLabel = new Label
         {
             FontFamily = "OpenSansRegular",
-            TextColor = Color.FromArgb("#5b2a86"),
+            TextColor = Color.FromArgb("#438696"),
             FontSize = 16,
             LineBreakMode = LineBreakMode.WordWrap,
             Text = "How long would you like your password to be (between 8-16 characters)",
@@ -111,7 +111,7 @@ public partial class RegisterPage : ContentPage
             PlaceholderColor = Color.Parse("LightGray"),
             TextColor = Color.FromArgb("#360568"),
             HorizontalTextAlignment = TextAlignment.Start,
-            VerticalTextAlignment = TextAlignment.Start,
+            VerticalTextAlignment = TextAlignment.Center,
             MaxLength = 2
         };
 
@@ -121,8 +121,8 @@ public partial class RegisterPage : ContentPage
         EnterPasswordLengthBtn = new Button
         {
             Text = "Enter",
-            Background = Color.FromArgb("#03254C"),
-            TextColor = Color.FromArgb("1167B1"),
+            Background = Color.FromArgb("#438696"),
+            TextColor = Color.FromArgb("#eeeeee"),
             FontAttributes = FontAttributes.Bold,
             HorizontalOptions = LayoutOptions.Center,
             WidthRequest = 200
