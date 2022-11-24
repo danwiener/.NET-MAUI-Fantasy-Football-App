@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FantasyFootballMAUI.OpeningPage"
               BackgroundColor="#eeeeee"
-             Title="OpeningPage">
+             Title="Welcome : Fantasy Football">
 
     <Grid x:Name="LoginGrid">
         <Grid.ColumnDefinitions>

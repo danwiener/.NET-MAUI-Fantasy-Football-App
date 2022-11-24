@@ -81,8 +81,18 @@ public partial class RegisterPage : ContentPage
             TextColor = Color.FromArgb("#438696"),
             FontSize = 16,
             LineBreakMode = LineBreakMode.WordWrap,
-            Text = "How long would you like your password to be (between 8-16 characters)",
+            Text = "How long would you like your password",
             HorizontalOptions= LayoutOptions.Center,
+            Margin = new Thickness(5, 0, 0, 0)
+        };
+        Label PasswordLengthLabel2 = new Label
+        {
+            FontFamily = "OpenSansRegular",
+            TextColor = Color.FromArgb("#438696"),
+            FontSize = 16,
+            LineBreakMode = LineBreakMode.WordWrap,
+            Text = "to be (between 8-16 characters)",
+            HorizontalOptions = LayoutOptions.Center,
             Margin = new Thickness(5, 0, 0, 0)
         };
 
@@ -101,15 +111,14 @@ public partial class RegisterPage : ContentPage
 
         Frame PasswordLengthFrame = new Frame
         {
-            BorderColor = Color.FromArgb("#360568"),
+            BorderColor = Color.FromArgb("#eeeeee"),
             BackgroundColor = Color.FromArgb("#317773")
 
         };
         PasswordLengthEntry = new Entry
         {
-            BackgroundColor = Color.FromArgb("#9ac6c5"),
-            PlaceholderColor = Color.Parse("LightGray"),
-            TextColor = Color.FromArgb("#360568"),
+            BackgroundColor = Color.FromArgb("#eeeeee"),
+            TextColor = Color.FromArgb("#438696"),
             HorizontalTextAlignment = TextAlignment.Start,
             VerticalTextAlignment = TextAlignment.Center,
             MaxLength = 2
@@ -134,6 +143,7 @@ public partial class RegisterPage : ContentPage
         HorizontalStack.Add(EnterPasswordLengthBtn);
 
         StackLayoutAdd.Add(PasswordLengthLabel);
+        StackLayoutAdd.Add(PasswordLengthLabel2);
         StackLayoutAdd.Add(HorizontalStack);
 
         GeneratePasswordBtn.Clicked -= OnPasswordBtnClicked;
@@ -166,7 +176,7 @@ public partial class RegisterPage : ContentPage
                 Label UpperCaseLabel = new Label
                 {
                     FontFamily = "OpenSansRegular",
-                    TextColor = Color.FromArgb("#360568"),
+                    TextColor = Color.FromArgb("#438696"),
                     FontSize = 16,
                     Text = "Include uppercase letters",
                     Margin = new Thickness(5, 0, 0, 0)
@@ -174,13 +184,13 @@ public partial class RegisterPage : ContentPage
 
                 UpperCaseCheckBox = new CheckBox
                 {
-                    Color = Color.FromArgb("a5e6ba")
+                    Color = Color.FromArgb("#de6b28")
                 };
 
                 Label LowerCaseLabel = new Label
                 {
                     FontFamily = "OpenSansRegular",
-                    TextColor = Color.FromArgb("#360568"),
+                    TextColor = Color.FromArgb("#438696"),
                     FontSize = 16,
                     Text = "Include lowercase letters",
                     Margin = new Thickness(5, 0, 0, 0)
@@ -188,14 +198,14 @@ public partial class RegisterPage : ContentPage
 
                 LowerCaseCheckBox = new CheckBox
                 {
-                    Color = Color.FromArgb("a5e6ba")
+                    Color = Color.FromArgb("#de6b28")
 
                 };
 
                 Label IncludeNumbersLabel = new Label
                 {
                     FontFamily = "OpenSansRegular",
-                    TextColor = Color.FromArgb("#360568"),
+                    TextColor = Color.FromArgb("#438696"),
                     FontSize = 16,
                     Text = "Include numbers",
                     Margin = new Thickness(5, 0, 0, 0)
@@ -203,14 +213,14 @@ public partial class RegisterPage : ContentPage
 
                 IncludeNumbersCheckBox = new CheckBox
                 {
-                    Color = Color.FromArgb("a5e6ba")
+                    Color = Color.FromArgb("#de6b28")
 
                 };
 
                 Label IncludeSymbolsLabel = new Label
                 {
                     FontFamily = "OpenSansRegular",
-                    TextColor = Color.FromArgb("#360568"),
+                    TextColor = Color.FromArgb("#438696"),
                     FontSize = 16,
                     Text = "Include symbols",
                     Margin = new Thickness(5, 0, 0, 0)
@@ -218,7 +228,7 @@ public partial class RegisterPage : ContentPage
 
                 IncludeSymbolsCheckBox = new CheckBox
                 {
-                    Color = Color.FromArgb("a5e6ba")
+                    Color = Color.FromArgb("#de6b28")
 
                 };
 
@@ -248,15 +258,14 @@ public partial class RegisterPage : ContentPage
                 GoBtn = new Button
                 {
                     Text = "Go",
-                    Background = Color.FromArgb("#a5e6ba"),
-                    TextColor = Color.FromArgb("#360568"),
+                    Background = Color.FromArgb("#978d83"),
+                    TextColor = Color.FromArgb("#438696"),
                     FontAttributes = FontAttributes.Bold,
                     HorizontalOptions = LayoutOptions.Start,
                     CornerRadius = 40,
                     Margin = new Thickness(5, 0, 0, 0),
                     HeightRequest = 80,
                     WidthRequest = 80,
-                    BackgroundColor = Color.FromArgb("a5e6ba")
                 };
                 GoBtn.Clicked += OnGoBtnClicked;
                 SemanticProperties.SetHint(GoBtn, "Creates an account with provided login credentials if account doesn't already exist");
@@ -264,7 +273,7 @@ public partial class RegisterPage : ContentPage
                 GeneratingRandomLabel = new Label
                 {
                     FontFamily = "OpenSansRegular",
-                    TextColor = Color.FromArgb("#7785ac"),
+                    TextColor = Color.FromArgb("#233b66"),
                     FontSize = 16,
                     Text = "[Generating Random]",
                     VerticalTextAlignment = TextAlignment.Center,
@@ -922,7 +931,7 @@ public partial class RegisterPage : ContentPage
                     checkBoxes[i].IsChecked = false;
                 }
             }
-            GeneratingRandomLabel.TextColor = Color.FromRgb(243, 79, 28);
+            GeneratingRandomLabel.TextColor = Color.FromArgb("#de6b28");
             goto Start;
         }
         PasswordEntry.Text = $"{_password.ToString()}";
@@ -961,7 +970,7 @@ public partial class RegisterPage : ContentPage
         IncludeNumbersCheckBox.IsChecked = false;
         IncludeSymbolsCheckBox.IsChecked = false;
 
-        GeneratingRandomLabel.TextColor = Color.FromArgb("#7785ac");
+        GeneratingRandomLabel.TextColor = Color.FromArgb("#233b66");
 
         GoBtn.Clicked += OnGoBtnClicked;
         return;
