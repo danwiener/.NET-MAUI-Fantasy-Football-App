@@ -33,7 +33,8 @@
         HorizontalOptions="Start"
         VerticalTextAlignment="Center"
         Margin="0,5"
-        Grid.ColumnSpan="2"
+        Grid.ColumnSpan="1"
+        Grid.Column="1"
         Grid.Row="0"/>
 
         <BoxView Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Color="#438696" Opacity=".1" />
