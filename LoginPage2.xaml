@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasyFootballMAUI.LoginPage2"
+             BackgroundColor="#7785ac"
+             Title="Wait...Authenticate">
+
+    <Grid x:Name="LoginGrid">
+        <StackLayout
+            Spacing="0"
+            Padding="5,0"
+            VerticalOptions="Center">
+
+            <StackLayout Margin="0,5">
+
+                <Label
+                    Text="Sign in or register to continue"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="16"
+                    TextColor="#5b2a86"
+                    HorizontalOptions="Center" />
+
+            </StackLayout>
+            <StackLayout x:Name="StackLayoutAdd">
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Email" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
+                    <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#360568"
+                       PlaceholderColor="LightGray" MaxLength ="20" />
+                </Grid>
+
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
+                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#360568"
+                           PlaceholderColor="LightGray" MaxLength="16" />
+                </Grid>
+
+                <HorizontalStackLayout Margin="0, 10, 0, 0" HorizontalOptions="Center">
+                    <Button 
+                        x:Name="LoginBtn"
+                        Text="Login"
+                        SemanticProperties.Hint="Logs user in if login credentials are valid"
+                        Clicked="OnLoginBtnClicked"
+                        BackgroundColor="#360568"
+                        TextColor="#7785ac"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                    <Button
+                        x:Name="RegisterBtn"
+                        Text="Register"
+                        SemanticProperties.Hint="Creates an account with provided login credentials if account doesn't already exist"
+                        Clicked="OnRegisterBtnClicked"
+                        BackgroundColor="#360568"
+                        TextColor="#7785ac"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+                </HorizontalStackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

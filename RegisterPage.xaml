@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasyFootballMAUI.RegisterPage"
+             Title="Register"
+             BackgroundColor="#7785ac"
+             x:Name="PageHeader">
+
+    <ScrollView x:Name="LoginGrid">
+        <StackLayout
+            Spacing="0"
+            Padding="5,0"
+            VerticalOptions="Start">
+
+            <StackLayout Margin="0,5">
+
+                <Label
+                    Text="Register to continue"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="16"
+                    TextColor="#5b2a86"
+                    HorizontalOptions="Center" />
+
+                <!--<Label
+                    Text="Welcome to .NET Multi-platform App UI"
+                    FontFamily="OpenSansRegular"
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                    FontSize="32"
+                    HorizontalOptions="Center" />-->
+
+            </StackLayout>
+            <StackLayout x:Name="StackLayoutAdd">
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Username" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568" HasShadow="True"/>
+                    <Entry x:Name="UsernameEntry" BackgroundColor="Transparent" TextColor="#03254C"
+                       PlaceholderColor="LightGray" MaxLength ="20" />
+                </Grid>
+
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Name" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
+                    <Entry x:Name="NameEntry" BackgroundColor="Transparent" TextColor="#03254C"
+                           PlaceholderColor="LightGray" MaxLength="16" />
+                </Grid>
+
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Email Address" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
+                    <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#03254C"
+                           PlaceholderColor="LightGray" MaxLength="32" />
+                </Grid>
+
+
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
+                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#03254C"
+                           PlaceholderColor="LightGray" MaxLength="16" />
+                </Grid>
+
+                <Label FontFamily="OpenSansRegular" TextColor="#360568" FontSize="16" Text="Confirm Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
+
+                <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
+                    <Frame Opacity="16" BackgroundColor="#9ac6c5" BorderColor="#360568"/>
+                    <Entry x:Name="PasswordConfirmEntry" BackgroundColor="Transparent" TextColor="#03254C"
+                           PlaceholderColor="LightGray" MaxLength="16" />
+                </Grid>
+
+
+                <HorizontalStackLayout Margin="0, 10, 0, 0" HorizontalOptions="Center">
+                    <Button
+                        x:Name="AccountBtn"
+                        Text="Create Account"
+                        SemanticProperties.Hint="Creates an account with provided login credentials if account doesn't already exist"
+                        Clicked="OnAccountBtnClicked"
+                        BackgroundColor="#360568"
+                        TextColor="#7785ac"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                    <Button
+                        x:Name="GeneratePasswordBtn"
+                        Text="Generate Password"
+                        SemanticProperties.Hint="Generates a password and password generation UI"
+                        Clicked="OnPasswordBtnClicked"
+                        BackgroundColor="#360568"
+                        TextColor="#7785ac"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+                </HorizontalStackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
