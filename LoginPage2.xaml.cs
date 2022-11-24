@@ -29,8 +29,8 @@ public partial class LoginPage2 : ContentPage
     {
         base.OnAppearing();
 
-        var existingPages = Navigation.NavigationStack.ToList();
-        Navigation.RemovePage(existingPages[0]);
+        //var existingPages = Navigation.NavigationStack.ToList();
+        //Navigation.RemovePage(existingPages[0]);
 
         NewUser nu = new NewUser(user_name, name, email, password, password_confirm);
         RegisterNewUserAsync(nu);

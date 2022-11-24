@@ -19,10 +19,11 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".4*"/>
-            <ColumnDefinition Width=".4*"/>
-            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width=".05*"/>
+            <ColumnDefinition Width=".7*"/>
+            <ColumnDefinition Width=".25*"/>
         </Grid.ColumnDefinitions>
+        
         <BoxView Grid.ColumnSpan="2" Grid.Row="0" Color="#de6b28" Opacity=".1"/>
         <Label
         Text="Register to continue"
@@ -35,46 +36,70 @@
         Grid.ColumnSpan="2"
         Grid.Row="0"/>
 
-        <!--First Column-->
         <BoxView Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Color="#438696" Opacity=".1" />
-        <Label Grid.Column="0" Grid.Row="1" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Username" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
-        <Label Grid.Column="0" Grid.Row="2" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Name" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
-        <Label Grid.Column="0" Grid.Row="3" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Email Address" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
-        <Label Grid.Column="0" Grid.Row="4" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Password" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
-        <Label Grid.Column="0" Grid.Row="5" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Confirm Password" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".34*"/>
+                <ColumnDefinition Width=".66*"/>
+            </Grid.ColumnDefinitions>
+            <!--First Column-->
+            <BoxView Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Color="#438696" Opacity=".1" />
+            <BoxView Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Color="#eeeeee" Opacity=".1" />
+            <Label Grid.Column="0" Grid.Row="0" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Username" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+            <Label Grid.Column="0" Grid.Row="1" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Name" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+            <Label Grid.Column="0" Grid.Row="2" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Email Address" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+            <Label Grid.Column="0" Grid.Row="3" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Password" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+            <Label Grid.Column="0" Grid.Row="4" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Confirm Password" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
 
-        <!--Second Column-->
-        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="1">
+            <!--Second Column-->
+            <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="0">
                 <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83" HasShadow="True"/>
                 <Entry x:Name="UsernameEntry" BackgroundColor="Transparent" TextColor="#438696"
                        PlaceholderColor="#978d83" MaxLength ="20" VerticalTextAlignment="Center" />
             </Grid>
 
-        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="2">
+            <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="1">
                 <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                 <Entry x:Name="NameEntry" BackgroundColor="Transparent" TextColor="#438696"
                        PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center" />
             </Grid>
 
-        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="3">
+            <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="2">
                 <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                 <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#438696"
                        PlaceholderColor="#978d83" MaxLength="32" VerticalTextAlignment="Center" />
             </Grid>
 
-        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="4">
+            <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="3">
                 <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                 <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#438696"
                        PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center" />
             </Grid>
 
-        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="5">
+            <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="4">
                 <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                 <Entry x:Name="PasswordConfirmEntry" BackgroundColor="Transparent" TextColor="#438696"
                        PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center" />
             </Grid>
+        </Grid>
 
-        <HorizontalStackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="1">
+
+
+        <Grid Grid.Column="1" Grid.Row="6">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".35*"/>
+                <ColumnDefinition Width=".65*"/>
+            </Grid.ColumnDefinitions>
             <Button
             x:Name="AccountBtn"
             Text="Create Account"
@@ -83,9 +108,8 @@
             BackgroundColor="#438696"
             TextColor="#eeeeee"
             FontAttributes="Bold"
-            HorizontalOptions="End"
-            WidthRequest="155"
-            Grid.Column="1"
+            HorizontalOptions="FillAndExpand"
+            Grid.Column="0"
             Margin="2.5, 0, 0, 0"/>
             
             <Button
@@ -97,10 +121,22 @@
             TextColor="#eeeeee"
             FontAttributes="Bold"
             HorizontalOptions="FillAndExpand"
-            WidthRequest="275"
             Grid.Column="1"
-            Margin="2.5, 0, 0, 0"/>
-        </HorizontalStackLayout>
+            Margin="0, 0, 0, 0"/>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="6">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <BoxView Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Color="#f34f1c" Opacity=".1" />
+            <BoxView Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Color="#7fbc00" Opacity=".1" />
+        </Grid>
 
     </Grid>
 
