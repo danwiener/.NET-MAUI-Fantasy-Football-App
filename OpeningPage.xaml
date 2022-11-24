@@ -5,11 +5,7 @@
               BackgroundColor="#eeeeee"
              Title="Welcome : Fantasy Football">
 
-    <Grid x:Name="LoginGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".5*"/>
-            <ColumnDefinition Width=".5*"/>
-        </Grid.ColumnDefinitions>
+    <Grid x:Name="LoginGrid" ColumnDefinitions=".5*,.5*">
         <Button 
                         x:Name="LoginBtn"
                         Text="Login"

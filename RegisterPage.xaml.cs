@@ -111,7 +111,7 @@ public partial class RegisterPage : ContentPage
 
         Frame PasswordLengthFrame = new Frame
         {
-            BorderColor = Color.FromArgb("#eeeeee"),
+            BorderColor = Color.FromArgb("#978d83"),
             BackgroundColor = Color.FromArgb("#317773")
 
         };
@@ -259,7 +259,7 @@ public partial class RegisterPage : ContentPage
                 {
                     Text = "Go",
                     Background = Color.FromArgb("#978d83"),
-                    TextColor = Color.FromArgb("#438696"),
+                    TextColor = Color.FromArgb("#eeeeee"),
                     FontAttributes = FontAttributes.Bold,
                     HorizontalOptions = LayoutOptions.Start,
                     CornerRadius = 40,

@@ -52,6 +52,7 @@
                         Clicked="OnLoginBtnClicked"
                         BackgroundColor="#438696"
                         TextColor="#eeeeee"
+                        WidthRequest="125"
                         FontAttributes="Bold"
                         HorizontalOptions="Center" />
 
@@ -62,6 +63,7 @@
                         Clicked="OnRegisterBtnClicked"
                         BackgroundColor="#438696"
                         TextColor="#eeeeee"
+                        WidthRequest="125"
                         FontAttributes="Bold"
                         HorizontalOptions="Center" />
                 </HorizontalStackLayout>

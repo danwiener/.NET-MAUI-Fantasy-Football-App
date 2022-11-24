@@ -21,14 +21,6 @@
                     TextColor="#438696"
                     HorizontalOptions="Center" />
 
-                <!--<Label
-                    Text="Welcome to .NET Multi-platform App UI"
-                    FontFamily="OpenSansRegular"
-                    SemanticProperties.HeadingLevel="Level2"
-                    SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                    FontSize="32"
-                    HorizontalOptions="Center" />-->
-
             </StackLayout>
             <StackLayout x:Name="StackLayoutAdd">
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Username" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
@@ -36,7 +28,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83" HasShadow="True"/>
                     <Entry x:Name="UsernameEntry" BackgroundColor="Transparent" TextColor="#438696"
-                       PlaceholderColor="LightGray" MaxLength ="20" />
+                       PlaceholderColor="#978d83" MaxLength ="20" VerticalTextAlignment="Center" />
                 </Grid>
 
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Name" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
@@ -44,7 +36,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="NameEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="LightGray" MaxLength="16" />
+                           PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center"/>
                 </Grid>
 
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Email Address" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
@@ -52,7 +44,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="LightGray" MaxLength="32" />
+                           PlaceholderColor="#978d83" MaxLength="32" />
                 </Grid>
 
 
@@ -61,7 +53,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="LightGray" MaxLength="16" />
+                           PlaceholderColor="#978d83" MaxLength="16" />
                 </Grid>
 
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Confirm Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
@@ -69,7 +61,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="PasswordConfirmEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="LightGray" MaxLength="16" />
+                           PlaceholderColor="#978d83" MaxLength="16" />
                 </Grid>
 
 
