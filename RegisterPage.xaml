@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FantasyFootballMAUI.RegisterPage"
              Title="Register"
-             BackgroundColor="#233b66"
-             x:Name="PageHeader">
+             BackgroundColor="#233b66">
 
     <ScrollView x:Name="LoginGrid">
         <StackLayout
@@ -12,16 +11,14 @@
             Padding="5,0"
             VerticalOptions="Start">
 
-            <StackLayout Margin="0,5">
-
-                <Label
+            <Label
                     Text="Register to continue"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="16"
                     TextColor="#438696"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Center" 
+                    Margin="0,5"/>
 
-            </StackLayout>
             <StackLayout x:Name="StackLayoutAdd">
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Username" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
 
@@ -36,7 +33,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="NameEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center"/>
+                       PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center"/>
                 </Grid>
 
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Email Address" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
@@ -44,7 +41,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="#978d83" MaxLength="32" />
+                       PlaceholderColor="#978d83" MaxLength="32" />
                 </Grid>
 
 
@@ -53,7 +50,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="#978d83" MaxLength="16" />
+                       PlaceholderColor="#978d83" MaxLength="16" />
                 </Grid>
 
                 <Label FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Confirm Password" Margin="5, 0, 0, 0" HorizontalOptions="Center"/>
@@ -61,7 +58,7 @@
                 <Grid WidthRequest="250" HorizontalOptions="Center" Margin="5, 0, 0, 0">
                     <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
                     <Entry x:Name="PasswordConfirmEntry" BackgroundColor="Transparent" TextColor="#438696"
-                           PlaceholderColor="#978d83" MaxLength="16" />
+                       PlaceholderColor="#978d83" MaxLength="16" />
                 </Grid>
 
 

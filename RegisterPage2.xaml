@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasyFootballMAUI.RegisterPage2"
+             Title="RegisterPage2"
+             BackgroundColor="#233b66">
+
+
+
+
+    <Grid x:Name="LoginGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".4*"/>
+            <ColumnDefinition Width=".4*"/>
+            <ColumnDefinition Width=".2*"/>
+        </Grid.ColumnDefinitions>
+        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Color="#de6b28" Opacity=".1"/>
+        <Label
+        Text="Register to continue"
+        SemanticProperties.HeadingLevel="Level1"
+        FontSize="16"
+        TextColor="#438696"
+        HorizontalOptions="Start"
+        VerticalTextAlignment="Center"
+        Margin="0,5"
+        Grid.ColumnSpan="2"
+        Grid.Row="0"/>
+
+        <!--First Column-->
+        <BoxView Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Color="#438696" Opacity=".1" />
+        <Label Grid.Column="0" Grid.Row="1" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Username" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+        <Label Grid.Column="0" Grid.Row="2" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Name" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+        <Label Grid.Column="0" Grid.Row="3" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Email Address" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+        <Label Grid.Column="0" Grid.Row="4" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Password" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+        <Label Grid.Column="0" Grid.Row="5" FontFamily="OpenSansRegular" TextColor="#eeeeee" FontSize="16" Text="Confirm Password" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+
+        <!--Second Column-->
+        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="1">
+                <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83" HasShadow="True"/>
+                <Entry x:Name="UsernameEntry" BackgroundColor="Transparent" TextColor="#438696"
+                       PlaceholderColor="#978d83" MaxLength ="20" VerticalTextAlignment="Center" />
+            </Grid>
+
+        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="2">
+                <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
+                <Entry x:Name="NameEntry" BackgroundColor="Transparent" TextColor="#438696"
+                       PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center" />
+            </Grid>
+
+        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="3">
+                <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
+                <Entry x:Name="EmailEntry" BackgroundColor="Transparent" TextColor="#438696"
+                       PlaceholderColor="#978d83" MaxLength="32" VerticalTextAlignment="Center" />
+            </Grid>
+
+        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="4">
+                <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
+                <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" TextColor="#438696"
+                       PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center" />
+            </Grid>
+
+        <Grid HeightRequest="50" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5, 0, 0, 0" Grid.Column="1" Grid.Row="5">
+                <Frame Opacity="16" BackgroundColor="#eeeeee" BorderColor="#978d83"/>
+                <Entry x:Name="PasswordConfirmEntry" BackgroundColor="Transparent" TextColor="#438696"
+                       PlaceholderColor="#978d83" MaxLength="16" VerticalTextAlignment="Center" />
+            </Grid>
+
+        <HorizontalStackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="1">
+            <Button
+            x:Name="AccountBtn"
+            Text="Create Account"
+            SemanticProperties.Hint="Creates an account with provided login credentials if account doesn't already exist"
+            Clicked="OnAccountBtnClicked"
+            BackgroundColor="#438696"
+            TextColor="#eeeeee"
+            FontAttributes="Bold"
+            HorizontalOptions="End"
+            WidthRequest="155"
+            Grid.Column="1"
+            Margin="2.5, 0, 0, 0"/>
+            
+            <Button
+            x:Name="GeneratePasswordBtn"
+            Text="Generate Password"
+            SemanticProperties.Hint="Generates a password and password generation UI"
+            Clicked="OnPasswordBtnClicked"
+            BackgroundColor="#438696"
+            TextColor="#eeeeee"
+            FontAttributes="Bold"
+            HorizontalOptions="FillAndExpand"
+            WidthRequest="275"
+            Grid.Column="1"
+            Margin="2.5, 0, 0, 0"/>
+        </HorizontalStackLayout>
+
+    </Grid>
+
+
+
+</ContentPage>

@@ -15,7 +15,7 @@
                         TextColor="#eeeeee"
                         FontSize="32"
                         Grid.Column="0"
-            CornerRadius="0"
+                        CornerRadius="0"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Grid.ColumnSpan="1" />
@@ -29,7 +29,7 @@
                         TextColor="#eeeeee"
                         FontSize="32"
                         Grid.Column="1"
-            CornerRadius="0"
+                        CornerRadius="0"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand" 
                         Grid.ColumnSpan="1"/>
