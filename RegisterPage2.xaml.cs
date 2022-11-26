@@ -6,21 +6,7 @@ public partial class RegisterPage2 : ContentPage
 {
     // UI components
 
-    Entry PasswordLengthEntry;
-
-    Button EnterPasswordLengthBtn;
-    Button GoBtn;
-
-    CheckBox UpperCaseCheckBox;
-    CheckBox LowerCaseCheckBox;
-    CheckBox IncludeNumbersCheckBox;
-    CheckBox IncludeSymbolsCheckBox;
-
     //GraphicsView ProgressView;
-
-    HorizontalStackLayout ButtonAndGenerateRandomHorizontalStack;
-
-    Label GeneratingRandomLabel;
 
     // Data components
 
@@ -43,7 +29,7 @@ public partial class RegisterPage2 : ContentPage
     public RegisterPage2()
 	{
 		InitializeComponent();
-	}
+    }
 
     protected override void OnAppearing()
     {
@@ -69,27 +55,761 @@ public partial class RegisterPage2 : ContentPage
         SemanticScreenReader.Announce(GeneratePasswordBtn.Text);
 
         PasswordLengthLabel.IsVisible = true;
+        PasswordLengthLabel2.IsVisible = true;
+        PLFrame.IsVisible = true;
+        PasswordLengthEntry.Focus();
+        EnterPasswordLengthButton.IsVisible = true;
+        InvisibleEnterPasswordLengthButton.IsVisible = true;
 
+        InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
 
-        //EnterPasswordLengthBtn = new Button
-        //{
-        //    Text = "Enter",
-        //    Background = Color.FromArgb("#438696"),
-        //    TextColor = Color.FromArgb("#eeeeee"),
-        //    FontAttributes = FontAttributes.Bold,
-        //    HorizontalOptions = LayoutOptions.Center,
-        //    WidthRequest = 200
-        //};
-        //EnterPasswordLengthBtn.Clicked += OnEnterPasswordLengthBtnClicked;
-        //SemanticProperties.SetHint(AccountBtn, "Creates an account with provided login credentials if account doesn't already exist");
-
-        //HorizontalStack.Add(PasswordLengthInputGrid);
-        //HorizontalStack.Add(EnterPasswordLengthBtn);
-
-        //StackLayoutAdd.Add(PasswordLengthLabel);
-        //StackLayoutAdd.Add(PasswordLengthLabel2);
-        //StackLayoutAdd.Add(HorizontalStack);
-
-        //GeneratePasswordBtn.Clicked -= OnPasswordBtnClicked;
+        GeneratePasswordBtn.Clicked -= OnPasswordBtnClicked;
     } // End method
-}
+
+    private async void OnInvisibleEnterPasswordLengthButtonClickedAsync(object sender, EventArgs e)
+    {
+        SemanticScreenReader.Announce(EnterPasswordLengthButton.Text);
+
+        try
+        {
+            _passwordLength = Int32.Parse(PasswordLengthEntry.Text);
+
+            if (_passwordLength < 8 || _passwordLength > 16)
+            {
+                await DisplayAlert("Invalid entry", "Please enter a length between 8 and 16", "OK");
+            }
+            else
+            {
+                InvisibleEnterPasswordLengthButton.Clicked -= OnInvisibleEnterPasswordLengthButtonClickedAsync;
+
+
+                UpperCaseLabel.IsVisible = true;
+                UpperCaseCheckBox.IsVisible = true;
+                LowerCaseLabel.IsVisible = true;
+                LowerCaseCheckBox.IsVisible = true;
+                IncludeNumbersLabel.IsVisible = true;
+                IncludeNumbersCheckBox.IsVisible = true;
+                IncludeSymbolsLabel.IsVisible = true;
+                IncludeSymbolsCheckBox.IsVisible = true;
+                GoButton.IsVisible = true;
+
+                GoButton.Clicked += OnGoButtonClicked;
+
+                //ProgressView = new GraphicsView()
+                //{
+                //    WidthRequest = 100,
+                //    HeightRequest = 100
+                //};
+            } // End else
+        } // End try
+        catch (FormatException fe)
+        {
+            await DisplayAlert("Invalid entry", "Please enter a valid password between 8 and 16 characters in length", "OK");
+        }
+    } // End method
+
+    private void OnGoButtonClicked(object sender, EventArgs e)
+    {
+        PasswordEntry.Text = $"{string.Empty}";
+        PasswordConfirmEntry.Text = $"{string.Empty}";
+        PasswordEntry.IsPassword = false;
+        PasswordConfirmEntry.IsPassword = false;
+        Random rand = new Random();
+
+        int alphabetIndex;
+        int numIndex;
+        int symIndex;
+        int numUpper;
+        int numLower;
+        int numNum;
+        int numSym;
+        int indexToAdd;
+
+        int[] upperIndexes;
+        int[] lowerIndexes;
+        int[] numIndexes;
+        int[] symIndexes;
+
+        _password = new StringBuilder();
+
+        _passwordLength = Int32.Parse(PasswordLengthEntry.Text);
+
+    Start:
+        if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            // Populate all uppercase letters
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            // Populate all lowercase letters
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            // Populate all numbers
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                numIndex = rand.Next(0, 10);
+                _password.Append(numIndex);
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            // Populate all symbols
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                symIndex = rand.Next(0, _symbols.Length);
+                _password.Append(_symbols[0 + symIndex]);
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            numUpper = rand.Next(1, _passwordLength - 1); // Number of upper case characters to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                // If index is index uppercase should appear at, populate uppercase letter
+                if (upperIndexes.Contains(i))
+                {
+                    _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                }
+                // Populate lowercase letter
+                else
+                {
+                    // If index is index lowercase should appear at, populate lowercase letter
+                    _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            numUpper = rand.Next(1, _passwordLength - 1); // Number of upper case characters to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                // If index is index uppercase should appear at, populate uppercase letter
+                if (upperIndexes.Contains(i))
+                {
+                    _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                }
+                // Populate number
+                else
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index is index number should appear at, populate number
+                    _password.Append((numIndex));
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numUpper = rand.Next(1, _passwordLength - 1); // Number of upper case characters to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                // If index is index uppercase should appear at, populate uppercase letter
+                if (upperIndexes.Contains(i))
+                {
+                    _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                }
+                // Populate symbol
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate symbol
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            numLower = rand.Next(1, _passwordLength - 1); // Number of lowercase characters to be added
+
+            // Establish indexes lowercase characters will appear at
+            lowerIndexes = new int[numLower];
+            for (int i = 0; i < numLower; i++)
+            {
+                lowerIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                // If index is index lowercase should appear at, populate lowercase letter
+                if (lowerIndexes.Contains(i))
+                {
+                    _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                }
+                // Populate number
+                else
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index is index number should appear at, populate number
+                    _password.Append(numIndex);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numLower = rand.Next(1, _passwordLength - 1); // Number of lowercase characters to be added
+
+            // Establish indexes uppercase characters will appear at
+            lowerIndexes = new int[numLower];
+            for (int i = 0; i < numLower; i++)
+            {
+                lowerIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                alphabetIndex = rand.Next(0, 26);
+                // If index is index lowercase should appear at, populate lowercase letter
+                if (lowerIndexes.Contains(i))
+                {
+                    _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                }
+                // Populate number
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate symbol
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            numUpper = rand.Next(1, _passwordLength - 2); // Number of uppercase characters to be added
+            numLower = rand.Next(1, _passwordLength - numUpper - 1); // Number of lowercase characters to be added
+            numNum = _passwordLength - numLower; // Number of numbers (0-9) to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Establish indexes lowercase characters will appear at
+            lowerIndexes = new int[numLower];
+            for (int i = 0; i < numLower; i++)
+            {
+            Restart:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd))
+                {
+                    lowerIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart;
+                }
+            }
+            // Establish indexes number characters will appear at
+            numIndexes = new int[numNum];
+            for (int i = 0; i < numNum; i++)
+            {
+            Restart2:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd) && !lowerIndexes.Contains(indexToAdd))
+                {
+                    numIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart2;
+                }
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                if (upperIndexes.Contains(i) || lowerIndexes.Contains(i))
+                {
+                    alphabetIndex = rand.Next(0, 26);
+
+                    // If index is index uppercase should appear at, populate uppercase letter
+                    if (upperIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                    }
+                    // If index is index lowercase should appear at, populate uppercase letter
+                    else if (lowerIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                    }
+                }
+                else
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index is index number should appear at, populate number
+                    _password.Append(numIndex);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numUpper = rand.Next(1, _passwordLength - 3); // Number of uppercase characters to be added
+            numLower = rand.Next(1, _passwordLength - numUpper - 2); // Number of lowercase characters to be added
+            numNum = rand.Next(1, _passwordLength - numLower - 1); // Number of numbers (0-9) to be added
+            numSym = _passwordLength - numNum; // Number of symbols to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Establish indexes lowercase characters will appear at
+            lowerIndexes = new int[numLower];
+            for (int i = 0; i < numLower; i++)
+            {
+            Restart:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd))
+                {
+                    lowerIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart;
+                }
+            }
+            // Establish indexes number characters will appear at
+            numIndexes = new int[numNum];
+            for (int i = 0; i < numNum; i++)
+            {
+            Restart2:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd) && !lowerIndexes.Contains(indexToAdd))
+                {
+                    numIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart2;
+                }
+            }
+            // Establish indexes symbols will appear at
+            symIndexes = new int[numSym];
+            for (int i = 0; i < numSym; i++)
+            {
+            Restart3:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd) && !lowerIndexes.Contains(indexToAdd) && !numIndexes.Contains(indexToAdd))
+                {
+                    symIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart3;
+                }
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                if (upperIndexes.Contains(i) || lowerIndexes.Contains(i))
+                {
+                    alphabetIndex = rand.Next(0, 26);
+
+                    // If index is index uppercase should appear at, populate uppercase letter
+                    if (upperIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                    }
+                    // If index is index lowercase should appear at, populate uppercase letter
+                    else if (lowerIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                    }
+                }
+                // 
+                else if (numIndexes.Contains(i))
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index is index number should appear at, populate number
+                    _password.Append(numIndex);
+                }
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate number
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numUpper = rand.Next(1, _passwordLength - 2); // Number of uppercase characters to be added
+            numNum = rand.Next(1, _passwordLength - numUpper - 1); // Number of numbers (0-9) to be added
+            numSym = _passwordLength - numNum; // Number of symbols to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Establish indexes numbers characters will appear at
+            numIndexes = new int[numNum];
+            for (int i = 0; i < numNum; i++)
+            {
+            Restart:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd))
+                {
+                    numIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart;
+                }
+            }
+            // Establish indexes symbol characters will appear at
+            symIndexes = new int[numSym];
+            for (int i = 0; i < numNum; i++)
+            {
+            Restart2:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd) && !numIndexes.Contains(indexToAdd))
+                {
+                    symIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart2;
+                }
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                if (upperIndexes.Contains(i))
+                {
+                    alphabetIndex = rand.Next(0, 26);
+
+                    // If index is index uppercase should appear at, populate uppercase letter
+                    if (upperIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                    }
+                }
+                else if (numIndexes.Contains(i))
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index is index number should appear at, populate number
+                    _password.Append(numIndex);
+                }
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate symbol
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numUpper = rand.Next(1, _passwordLength - 2); // Number of uppercase characters to be added
+            numLower = rand.Next(1, _passwordLength - numUpper - 1); // Number of lowercase characters to be added
+            numSym = _passwordLength - numLower; // Number of symbols to be added
+
+            // Establish indexes uppercase characters will appear at
+            upperIndexes = new int[numUpper];
+            for (int i = 0; i < numUpper; i++)
+            {
+                upperIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Establish indexes lowercase characters will appear at
+            lowerIndexes = new int[numLower];
+            for (int i = 0; i < numLower; i++)
+            {
+            Restart:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd))
+                {
+                    lowerIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart;
+                }
+            }
+            // Establish indexes symbol characters will appear at
+            symIndexes = new int[numSym];
+            for (int i = 0; i < numSym; i++)
+            {
+            Restart2:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!upperIndexes.Contains(indexToAdd) && !lowerIndexes.Contains(indexToAdd))
+                {
+                    symIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart2;
+                }
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                if (upperIndexes.Contains(i) || lowerIndexes.Contains(i))
+                {
+                    alphabetIndex = rand.Next(0, 26);
+
+                    // If index is index uppercase should appear at, populate uppercase letter
+                    if (upperIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToUpper('a') + alphabetIndex));
+                    }
+                    // If index is index lowercase should apppear at, populate lowercase letter
+                    else if (lowerIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                    }
+                }
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate symbol
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == true && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numLower = rand.Next(1, _passwordLength - 2); // Number of lowercase characters to be added
+            numNum = rand.Next(1, _passwordLength - numLower - 1); // Number of number characters (0-9) to be added
+            numSym = _passwordLength - numLower; // Number of symbols to be added
+
+            // Establish indexes lowercase characters will appear at
+            lowerIndexes = new int[numLower];
+            for (int i = 0; i < numLower; i++)
+            {
+                lowerIndexes[i] = rand.Next(0, _passwordLength - 1);
+            }
+            // Establish indexes number characters will appear at
+            numIndexes = new int[numNum];
+            for (int i = 0; i < numNum; i++)
+            {
+            Restart:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!lowerIndexes.Contains(indexToAdd))
+                {
+                    numIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart;
+                }
+            }
+            // Establish indexes symbol characters will appear at
+            symIndexes = new int[numSym];
+            for (int i = 0; i < numSym; i++)
+            {
+            Restart2:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!lowerIndexes.Contains(indexToAdd) && !numIndexes.Contains(indexToAdd))
+                {
+                    symIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart2;
+                }
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                if (lowerIndexes.Contains(i))
+                {
+                    alphabetIndex = rand.Next(0, 26);
+
+                    // If index is index lowercase should appear at, populate lowercase letter
+                    if (lowerIndexes.Contains(i))
+                    {
+                        _password.Append((char)(Char.ToLower('a') + alphabetIndex));
+                    }
+                }
+                else if (numIndexes.Contains(i))
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index in index number should appear at, populate number
+                    _password.Append(numIndex);
+                }
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate symbol
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == true && IncludeSymbolsCheckBox.IsChecked == true)
+        {
+            numNum = rand.Next(1, _passwordLength - 1); // Number of number characters (0-9) to be added
+            numSym = _passwordLength - numNum; // Number of symbols to be added
+
+            // Establish indexes number characters will appear at
+            numIndexes = new int[numNum];
+            for (int i = 0; i < numNum; i++)
+            {
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                numIndexes[i] = indexToAdd;
+            }
+            // Establish indexes symbol characters will appear at
+            symIndexes = new int[numSym];
+            for (int i = 0; i < numSym; i++)
+            {
+            Restart:
+                indexToAdd = rand.Next(0, _passwordLength - 1);
+                if (!numIndexes.Contains(indexToAdd))
+                {
+                    symIndexes[i] = indexToAdd;
+                }
+                else
+                {
+                    goto Restart;
+                }
+            }
+            // Add characters to _password
+            for (int i = 0; i < _passwordLength; i++)
+            {
+                if (numIndexes.Contains(i))
+                {
+                    numIndex = rand.Next(0, 10);
+
+                    // If index in index number should appear at, populate number
+                    _password.Append(numIndex);
+                }
+                else
+                {
+                    symIndex = rand.Next(0, _symbols.Length);
+
+                    // If index is index symbol should appear at, populate symbol
+                    _password.Append(_symbols[0 + symIndex]);
+                }
+            }
+        }
+        else if (UpperCaseCheckBox.IsChecked == false && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == false)
+        {
+            CheckBox[] checkBoxes = new CheckBox[4] { UpperCaseCheckBox, LowerCaseCheckBox, IncludeNumbersCheckBox, IncludeSymbolsCheckBox };
+            for (int i = 0; i < checkBoxes.Length; i++)
+            {
+                int result = rand.Next(0, 2);
+
+                if (result == 0)
+                {
+                    checkBoxes[i].IsChecked = true;
+                }
+                else if (result == 1)
+                {
+                    checkBoxes[i].IsChecked = false;
+                }
+            }
+            GeneratingRandomLabel.IsVisible = true;
+            goto Start;
+        }
+        PasswordEntry.Text = $"{_password.ToString()}";
+        PasswordConfirmEntry.Text = $"{_password.ToString()}";
+
+        _startTime = DateTime.Now;
+        _cancellationTokenSource = new CancellationTokenSource();
+        UpdateArc();
+    } // End method
+
+    private async void UpdateArc()
+    {
+        GoButton.Clicked -= OnGoButtonClicked;
+        while (!_cancellationTokenSource.IsCancellationRequested)
+        {
+            var elapsedTime = (DateTime.Now - _startTime);
+            int secondsRemaining = (int)(_duration - elapsedTime.TotalMilliseconds) / 1000;
+
+            GoButton.Text = $"{secondsRemaining}";
+
+            //_progress = Math.Ceiling(elapsedTime.TotalSeconds);
+            //_progress %= _duration;
+            //_progressArc.Progress = _progress / _duration;
+            //ProgressView.Invalidate();
+
+            if (secondsRemaining == 0)
+            {
+                _cancellationTokenSource.Cancel();
+            }
+            await Task.Delay(500);
+        }
+        GoButton.Text = "Go";
+
+        UpperCaseCheckBox.IsChecked = false;
+        LowerCaseCheckBox.IsChecked = false;
+        IncludeNumbersCheckBox.IsChecked = false;
+        IncludeSymbolsCheckBox.IsChecked = false;
+
+        GeneratingRandomLabel.IsVisible = false; // Hide generating random label
+
+        PasswordEntry.IsPassword = true; // Conceal password
+        PasswordConfirmEntry.IsPassword = true; // Conceal password
+
+        GoButton.Clicked += OnGoButtonClicked;
+        return;
+    } // End method
+
+} // End class
+
+//public class ProgressArc : IDrawable
+//{
+//    public double Progress { get; set; } = 100;
+//    public void Draw(ICanvas canvas, RectF dirtyRect)
+//    {
+//        // Angle of the arc in degrees
+//        var endAngle = 90 - (int)Math.Round(Progress * 360, MidpointRounding.AwayFromZero);
+//        // Drawing code goes here
+//        canvas.StrokeColor = Color.FromRgba("F34F1C");
+//        canvas.StrokeSize = 4;
+//        Debug.WriteLine($"The rect width is {dirtyRect.Width} and height is {dirtyRect.Height}");
+//        canvas.DrawArc(5, 5, (dirtyRect.Width - 10), (dirtyRect.Height - 10), 90, endAngle, false, false);
+//    }
+//}
