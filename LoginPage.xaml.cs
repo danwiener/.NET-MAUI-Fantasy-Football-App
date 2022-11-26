@@ -24,7 +24,7 @@ public partial class LoginPage : ContentPage
     private void OnRegisterBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(RegisterBtn.Text);
-        Navigation.PushAsync(new RegisterPage());
+        Navigation.PushAsync(new RegisterPage2());
     } // End method
     //    Microsoft.Maui.Controls.Application.Current?.CloseWindow(Microsoft.Maui.Controls.Application.Current.MainPage.Window);
 

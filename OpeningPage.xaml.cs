@@ -16,6 +16,6 @@ public partial class OpeningPage : ContentPage
 	private void OnRegisterBtnClicked(object sender, EventArgs e)
 	{
         SemanticScreenReader.Announce(RegisterBtn.Text);
-        Navigation.PushAsync(new RegisterPage());
+        Navigation.PushAsync(new RegisterPage2());
     }
 }

@@ -6,8 +6,6 @@ public partial class RegisterPage2 : ContentPage
 {
     // UI components
 
-    //GraphicsView ProgressView;
-
     // Data components
 
     CancellationTokenSource _cancellationTokenSource = new();
@@ -34,7 +32,6 @@ public partial class RegisterPage2 : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        //ProgressView.Drawable = _progressArc;
     }
 
     // Button event handlers
@@ -57,9 +54,14 @@ public partial class RegisterPage2 : ContentPage
         PasswordLengthLabel.IsVisible = true;
         PasswordLengthLabel2.IsVisible = true;
         PLFrame.IsVisible = true;
+        PasswordLengthEntry.IsVisible= true;
         PasswordLengthEntry.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
+        b1.IsVisible = true;
+        b2.IsVisible = true;
+        b3.IsVisible = true;
+        b4.IsVisible = true;
 
         InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
 
@@ -92,6 +94,8 @@ public partial class RegisterPage2 : ContentPage
                 IncludeSymbolsLabel.IsVisible = true;
                 IncludeSymbolsCheckBox.IsVisible = true;
                 GoButton.IsVisible = true;
+                MicrosoftGrid.IsVisible = true;
+                //b5.IsVisible = true;
 
                 GoButton.Clicked += OnGoButtonClicked;
 
@@ -769,11 +773,15 @@ public partial class RegisterPage2 : ContentPage
             int secondsRemaining = (int)(_duration - elapsedTime.TotalMilliseconds) / 1000;
 
             GoButton.Text = $"{secondsRemaining}";
+            M1.RotationX += 3;
+            M1.RotationY -= 3;
+            M2.RotationX -= 2;
+            M2.RotationY += 4;
+            M3.RotationX += 4;
+            M3.RotationY += 2;
+            M4.RotationX -= 5;
+            M4.RotationY += 1;
 
-            //_progress = Math.Ceiling(elapsedTime.TotalSeconds);
-            //_progress %= _duration;
-            //_progressArc.Progress = _progress / _duration;
-            //ProgressView.Invalidate();
 
             if (secondsRemaining == 0)
             {
@@ -798,18 +806,3 @@ public partial class RegisterPage2 : ContentPage
     } // End method
 
 } // End class
-
-//public class ProgressArc : IDrawable
-//{
-//    public double Progress { get; set; } = 100;
-//    public void Draw(ICanvas canvas, RectF dirtyRect)
-//    {
-//        // Angle of the arc in degrees
-//        var endAngle = 90 - (int)Math.Round(Progress * 360, MidpointRounding.AwayFromZero);
-//        // Drawing code goes here
-//        canvas.StrokeColor = Color.FromRgba("F34F1C");
-//        canvas.StrokeSize = 4;
-//        Debug.WriteLine($"The rect width is {dirtyRect.Width} and height is {dirtyRect.Height}");
-//        canvas.DrawArc(5, 5, (dirtyRect.Width - 10), (dirtyRect.Height - 10), 90, endAngle, false, false);
-//    }
-//}
