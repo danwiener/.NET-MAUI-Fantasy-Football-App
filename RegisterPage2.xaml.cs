@@ -68,57 +68,8 @@ public partial class RegisterPage2 : ContentPage
     {
         SemanticScreenReader.Announce(GeneratePasswordBtn.Text);
 
-        //Label PasswordLengthLabel = new Label
-        //{
-        //    FontFamily = "OpenSansRegular",
-        //    TextColor = Color.FromArgb("#438696"),
-        //    FontSize = 16,
-        //    LineBreakMode = LineBreakMode.WordWrap,
-        //    Text = "How long would you like your password",
-        //    HorizontalOptions = LayoutOptions.Center,
-        //    Margin = new Thickness(5, 0, 0, 0)
-        //};
-        //Label PasswordLengthLabel2 = new Label
-        //{
-        //    FontFamily = "OpenSansRegular",
-        //    TextColor = Color.FromArgb("#438696"),
-        //    FontSize = 16,
-        //    LineBreakMode = LineBreakMode.WordWrap,
-        //    Text = "to be (between 8-16 characters)",
-        //    HorizontalOptions = LayoutOptions.Center,
-        //    Margin = new Thickness(5, 0, 0, 0)
-        //};
+        PasswordLengthLabel.IsVisible = true;
 
-        //HorizontalStackLayout HorizontalStack = new HorizontalStackLayout
-        //{
-        //    HorizontalOptions = LayoutOptions.Center
-        //};
-
-        //Grid PasswordLengthInputGrid = new Grid
-        //{
-        //    WidthRequest = 50,
-        //    HorizontalOptions = LayoutOptions.Center,
-        //    Margin = new Thickness(5, 0, 0, 0)
-        //};
-
-
-        //Frame PasswordLengthFrame = new Frame
-        //{
-        //    BorderColor = Color.FromArgb("#978d83"),
-        //    BackgroundColor = Color.FromArgb("#317773")
-
-        //};
-        //PasswordLengthEntry = new Entry
-        //{
-        //    BackgroundColor = Color.FromArgb("#eeeeee"),
-        //    TextColor = Color.FromArgb("#438696"),
-        //    HorizontalTextAlignment = TextAlignment.Start,
-        //    VerticalTextAlignment = TextAlignment.Center,
-        //    MaxLength = 2
-        //};
-
-        //PasswordLengthInputGrid.Add(PasswordLengthFrame);
-        //PasswordLengthInputGrid.Add(PasswordLengthEntry);
 
         //EnterPasswordLengthBtn = new Button
         //{
