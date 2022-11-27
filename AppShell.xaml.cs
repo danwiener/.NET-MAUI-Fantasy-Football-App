@@ -5,10 +5,10 @@ namespace FantasyFootballMAUI;
 
 public partial class AppShell : Shell
 {
-    string email;
-	public AppShell(string email)
+    //string email;
+	public AppShell()
 	{
-        this.email= email;
+        //this.email= email;
 		InitializeComponent();
 	} // End constructor
 
@@ -17,6 +17,6 @@ public partial class AppShell : Shell
         base.OnAppearing();
 
 
-        await DisplayAlert("Congratulations", $"{email} logged in successfully", "Ok");
+        //await DisplayAlert("Congratulations", $"{email} logged in successfully", "Ok");
     } // End method
 }

@@ -53,52 +53,52 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="FreeAgentsPage.xaml.cs">
+	  <Compile Update="Views\FreeAgentsPage.xaml.cs">
 	    <DependentUpon>FreeAgentsPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="LeaguesPage.xaml.cs">
-	    <DependentUpon>LeaguesPage.xaml</DependentUpon>
+	  <Compile Update="Views\LeaguesBelongedTo.xaml.cs">
+	    <DependentUpon>LeaguesBelongedTo.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="LoginPage.xaml.cs">
+	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="RegisterPage2.xaml.cs">
-	    <DependentUpon>RegisterPage2.xaml</DependentUpon>
+	  <Compile Update="Views\RegisterPage.xaml.cs">
+	    <DependentUpon>RegisterPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="TeamsPage.xaml.cs">
+	  <Compile Update="Views\TeamsPage.xaml.cs">
 	    <DependentUpon>TeamsPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="WeatherForecastPage.xaml.cs">
+	  <Compile Update="Views\WeatherForecastPage.xaml.cs">
 	    <DependentUpon>WeatherForecastPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="FreeAgentsPage.xaml">
+	  <MauiXaml Update="Views\FreeAgentsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="HomePage.xaml">
+	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LeaguesPage.xaml">
+	  <MauiXaml Update="Views\LeaguesBelongedTo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LoginPage2.xaml">
+	  <MauiXaml Update="Views\LoginPage2.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="NFL Teams.xaml">
+	  <MauiXaml Update="Views\NFL Teams.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="OpeningPage.xaml">
+	  <MauiXaml Update="Views\OpeningPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RegisterPage2.xaml">
+	  <MauiXaml Update="Views\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="TeamsPage.xaml">
+	  <MauiXaml Update="Views\TeamsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="WeatherForecastPage.xaml">
+	  <MauiXaml Update="Views\WeatherForecastPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

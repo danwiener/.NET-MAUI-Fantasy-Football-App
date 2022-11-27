@@ -1,8 +1,9 @@
+
 using System.Text;
 
 namespace FantasyFootballMAUI;
 
-public partial class RegisterPage2 : ContentPage
+public partial class RegisterPage : ContentPage
 {
     // UI components
 
@@ -24,15 +25,15 @@ public partial class RegisterPage2 : ContentPage
     private DateTime _startTime;
 
     // Constructor
-    public RegisterPage2()
+    public RegisterPage()
 	{
 		InitializeComponent();
-    }
+    } // End constructor
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-    }
+    } // End method
 
     // Button event handlers
     private async void OnAccountBtnClicked(object sender, EventArgs e)
@@ -54,8 +55,8 @@ public partial class RegisterPage2 : ContentPage
         PasswordLengthLabel.IsVisible = true;
         PasswordLengthLabel2.IsVisible = true;
         PLFrame.IsVisible = true;
-        PasswordLengthEntry.IsVisible= true;
-        PasswordLengthEntry.Focus();
+        //PasswordLengthEditor.IsVisible= true;
+        PasswordLengthEditor.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
         b1.IsVisible = true;
@@ -74,7 +75,7 @@ public partial class RegisterPage2 : ContentPage
 
         try
         {
-            _passwordLength = Int32.Parse(PasswordLengthEntry.Text);
+            _passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
             if (_passwordLength < 8 || _passwordLength > 16)
             {
@@ -108,7 +109,7 @@ public partial class RegisterPage2 : ContentPage
         } // End try
         catch (FormatException fe)
         {
-            await DisplayAlert("Invalid entry", "Please enter a valid password between 8 and 16 characters in length", "OK");
+            await DisplayAlert("Invalid entry", "Please enter a valid password length between 8 and 16", "OK");
         }
     } // End method
 
@@ -116,7 +117,7 @@ public partial class RegisterPage2 : ContentPage
     {
         try
         {
-            _passwordLength = Int32.Parse(PasswordLengthEntry.Text);
+            _passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
             if (_passwordLength < 8 || _passwordLength > 16)
             {
@@ -146,7 +147,7 @@ public partial class RegisterPage2 : ContentPage
 
                 _password = new StringBuilder();
 
-                _passwordLength = Int32.Parse(PasswordLengthEntry.Text);
+                _passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
             Start:
                 if (UpperCaseCheckBox.IsChecked == true && LowerCaseCheckBox.IsChecked == false && IncludeNumbersCheckBox.IsChecked == false && IncludeSymbolsCheckBox.IsChecked == false)
@@ -777,7 +778,7 @@ public partial class RegisterPage2 : ContentPage
         }
         catch (FormatException fe) 
         {
-            await DisplayAlert("Invalid entry", "Please enter a valid password between 8 and 16 characters in length", "OK");
+            await DisplayAlert("Invalid entry", "Please enter a valid password length between 8 and 16", "OK");
 
         }
     } // End method

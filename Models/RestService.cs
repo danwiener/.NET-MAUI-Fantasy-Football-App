@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FantasyFootballMAUI
+namespace FantasyFootballMAUI.Models
 {
     public class NewUser
     {
@@ -31,8 +31,8 @@ namespace FantasyFootballMAUI
 
         public NewLogin(string email, string password)
         {
-            this.email=email;
-            this.password=password;
+            this.email = email;
+            this.password = password;
         }
     }
 }
