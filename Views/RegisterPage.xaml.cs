@@ -10,15 +10,17 @@ public partial class RegisterPage : ContentPage
     // Data components
 
     CancellationTokenSource _cancellationTokenSource = new();
+	CancellationTokenSource _cancellationTokenSource2ForWindowsColors = new();
 
-    //private readonly ProgressArc _progressArc;
+	//private readonly ProgressArc _progressArc;
 
-    // Data fields
+	// Data fields
 
-    private int _passwordLength;
+	private int _passwordLength;
     private int _duration = 6000;
+	private int _duration2ForWindowsColors = 18000;
 
-    private string _symbols = "!/#$%&\\()*+,-./:;<=>?@[]_{|}~";
+	private string _symbols = "!/#$%&\\()*+,-./:;<=>?@[]_{|}~";
 
     private StringBuilder _password;
 
@@ -772,7 +774,9 @@ public partial class RegisterPage : ContentPage
 
                 _startTime = DateTime.Now;
                 _cancellationTokenSource = new CancellationTokenSource();
-                UpdateArc();
+				_cancellationTokenSource2ForWindowsColors = new CancellationTokenSource();
+				UpdateArc();
+                //SpinColors();
 
             }
         }
@@ -792,17 +796,17 @@ public partial class RegisterPage : ContentPage
             int secondsRemaining = (int)(_duration - elapsedTime.TotalMilliseconds) / 1000;
 
             GoButton.Text = $"{secondsRemaining}";
-            M1.RotationX += 3;
-            M1.RotationY -= 3;
-            M2.RotationX -= 2;
-            M2.RotationY += 4;
-            M3.RotationX += 4;
-            M3.RotationY += 2;
-            M4.RotationX -= 5;
-            M4.RotationY += 1;
 
+			M1.RotationX += 3;
+			M1.RotationY -= 3;
+			M2.RotationX -= 2;
+			M2.RotationY += 4;
+			M3.RotationX += 4;
+			M3.RotationY += 2;
+			M4.RotationX -= 5;
+			M4.RotationY += 1;
 
-            if (secondsRemaining == 0)
+			if (secondsRemaining == 0)
             {
                 _cancellationTokenSource.Cancel();
             }
@@ -823,5 +827,30 @@ public partial class RegisterPage : ContentPage
         GoButton.Clicked += OnGoButtonClicked;
         return;
     } // End method
+
+ //   private async void SpinColors()
+ //   {
+ //       while (!_cancellationTokenSource2ForWindowsColors.IsCancellationRequested)
+ //       {
+ //           var elapsedTime = (DateTime.Now - _startTime);
+ //           int secondsRemaining = (int)(_duration2ForWindowsColors - elapsedTime.TotalMilliseconds) / 1000;
+
+	//		M1.RotationX += 3;
+	//		M1.RotationY -= 3;
+	//		M2.RotationX -= 2;
+	//		M2.RotationY += 4;
+	//		M3.RotationX += 4;
+	//		M3.RotationY += 2;
+	//		M4.RotationX -= 5;
+	//		M4.RotationY += 1;
+
+	//		if (secondsRemaining == 0)
+	//		{
+	//			_cancellationTokenSource2ForWindowsColors.Cancel();
+	//		}
+
+	//		await Task.Delay(500);
+	//	}
+	//} // End method
 
 } // End class
