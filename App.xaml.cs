@@ -34,7 +34,6 @@ public partial class App : Application
 			var appshell = new AppShell();
 			//appshell.WidthRequest = 600;
 			//appshell.HeightRequest = 500;
-
 			MainPage = appshell;
 	} // End constructor
 }

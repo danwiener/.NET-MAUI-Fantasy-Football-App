@@ -7,7 +7,7 @@
     <Color x:Key="DashboardBackground">#233b66</Color>
     <Color x:Key="PrimaryText">#438696</Color>
     <Color x:Key="FormBackground">#eeeeee</Color>
-    
+
 
 
     <Style TargetType="ActivityIndicator">

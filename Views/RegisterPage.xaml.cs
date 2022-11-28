@@ -767,6 +767,8 @@ public partial class RegisterPage : ContentPage
                         }
                     }
                     GeneratingRandomLabel.IsVisible = true;
+                    OpeningDashesLabel.IsVisible = true;
+                    ClosingDashesLabel.IsVisible= true;
                     goto Start;
                 }
                 PasswordEntry.Text = $"{_password.ToString()}";
@@ -797,16 +799,16 @@ public partial class RegisterPage : ContentPage
 
             GoButton.Text = $"{secondsRemaining}";
 
-			//M1.RotationX += 3;
-			//M1.RotationY -= 3;
-			//M2.RotationX -= 2;
-			//M2.RotationY += 4;
-			//M3.RotationX += 4;
-			//M3.RotationY += 2;
-			//M4.RotationX -= 5;
-			//M4.RotationY += 1;
+            M1.RotationX += 3;
+            M1.RotationY -= 3;
+            M2.RotationX -= 2;
+            M2.RotationY += 4;
+            M3.RotationX += 4;
+            M3.RotationY += 2;
+            M4.RotationX -= 5;
+            M4.RotationY += 1;
 
-			if (secondsRemaining == 0)
+            if (secondsRemaining == 0)
             {
                 _cancellationTokenSource.Cancel();
             }
@@ -820,6 +822,8 @@ public partial class RegisterPage : ContentPage
         IncludeSymbolsCheckBox.IsChecked = false;
 
         GeneratingRandomLabel.IsVisible = false; // Hide generating random label
+        OpeningDashesLabel.IsVisible = false;
+        ClosingDashesLabel.IsVisible= false;
 
         PasswordEntry.IsPassword = true; // Conceal password
         PasswordConfirmEntry.IsPassword = true; // Conceal password
