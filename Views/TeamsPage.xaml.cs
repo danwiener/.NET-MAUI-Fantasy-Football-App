@@ -1,8 +1,8 @@
 namespace FantasyFootballMAUI;
 
-public partial class Teams : ContentPage
+public partial class TeamsPage : ContentPage
 {
-	public Teams()
+	public TeamsPage()
 	{
 		InitializeComponent();
 	}

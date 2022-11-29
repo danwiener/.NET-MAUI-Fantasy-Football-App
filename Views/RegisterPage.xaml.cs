@@ -1,5 +1,6 @@
 
 using System.Text;
+using FantasyFootballMAUI.Models;
 
 namespace FantasyFootballMAUI;
 
@@ -47,10 +48,36 @@ public partial class RegisterPage : ContentPage
         string password = PasswordEntry.Text;
         string password_confirm = PasswordConfirmEntry.Text;
 
-        Navigation.PushAsync(new LoginPage2(user_name, name, email, password, password_confirm));
+
+		NewUser nu = new NewUser(user_name, name, email, password, password_confirm);
+		await RegisterNewUserAsync(nu);
+		await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+        
     } // End method
 
-    private void OnPasswordBtnClicked(object sender, EventArgs e)
+	public async Task RegisterNewUserAsync(NewUser nu)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nu);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var url = "http://localhost:8000/api/register"; // access the register endpoint to register new user
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(url, data);
+
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Congratulations", $"{nu.email} registered successfully, please sign in", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
+	} // End method
+
+	private void OnPasswordBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(GeneratePasswordBtn.Text);
 
