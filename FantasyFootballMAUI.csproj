@@ -91,9 +91,6 @@
 	  <MauiXaml Update="Views\LeaguesBelongedTo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoginPage2.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\NFL Teams.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
