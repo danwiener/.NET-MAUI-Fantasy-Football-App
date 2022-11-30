@@ -88,8 +88,16 @@ public partial class RegisterPage : ContentPage
         PasswordLengthEditor.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
-        Grid.SetRow(alreadyhaveGrid, 0);
+        MicroRow1.Height = 196;
+        MicroRow2.Height = 196;
+        b3.IsVisible = true;
+        b4.IsVisible = true;
+        Grid.SetRow(alreadyhaveGrid, 9);
         Grid.SetRowSpan(alreadyhaveGrid, 1);
+        Grid.SetRow(b1, 9);
+        Grid.SetRow(b2, 9);
+        Grid.SetRowSpan(b1, 1);
+        Grid.SetRowSpan(b2, 1);
 
         InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
 
@@ -124,7 +132,9 @@ public partial class RegisterPage : ContentPage
 
         try
         {
-            _passwordLength = Int32.Parse(PasswordLengthEditor.Text);
+			Grid.SetRow(alreadyhaveGrid, 0);
+            M5.IsVisible = true;
+			_passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
             if (_passwordLength < 8 || _passwordLength > 16)
             {
