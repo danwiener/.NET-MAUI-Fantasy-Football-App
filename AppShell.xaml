@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:FantasyFootballMAUI"
     Shell.FlyoutBehavior="Flyout"
     FlyoutBackgroundColor="#de6b28"
-    BackgroundColor="#438696" >
+    BackgroundColor="#6588A6" >
 
     <ShellContent
         Title="Welcome : Fantasy Football"

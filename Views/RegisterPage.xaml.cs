@@ -88,17 +88,37 @@ public partial class RegisterPage : ContentPage
         PasswordLengthEditor.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
-        b1.IsVisible = true;
-        b2.IsVisible = true;
-        b3.IsVisible = true;
-        b4.IsVisible = true;
+        Grid.SetRow(alreadyhaveGrid, 0);
+        Grid.SetRowSpan(alreadyhaveGrid, 1);
 
         InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
 
         GeneratePasswordBtn.Clicked -= OnPasswordBtnClicked;
     } // End method
 
-    private async void OnInvisibleEnterPasswordLengthButtonClickedAsync(object sender, EventArgs e)
+    private async void OnSignInButtonClicked(object sender, EventArgs e)
+    {
+		await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+	} // End method
+
+
+	private void OnShowPasswordBtnClicked(object sender, EventArgs e)
+    {
+        if (PasswordEntry.IsPassword && PasswordConfirmEntry.IsPassword)
+        {
+            PasswordEntry.IsPassword = false;
+            PasswordConfirmEntry.IsPassword = false;
+		}
+        else
+        {
+            PasswordEntry.IsPassword = true;
+            PasswordConfirmEntry.IsPassword = true;
+        }
+
+    }
+
+
+	private async void OnInvisibleEnterPasswordLengthButtonClickedAsync(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(EnterPasswordLengthButton.Text);
 

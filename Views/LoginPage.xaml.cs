@@ -64,4 +64,28 @@ public partial class LoginPage : ContentPage
             await DisplayAlert("Error", $"Please try again", "Ok");
         }
     } // End method
+
+    // Go to register page
+    private async void OnSignUpButtonClicked(object sender, EventArgs e)
+    {
+		await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+	} // End method
+
+	private void OnForgotPasswordButtonClicked(object sender, EventArgs e)
+    {
+
+    }
+
+	// Show passsword
+	private void OnShowPasswordBtnClicked(object sender, EventArgs e)
+    {
+        if (PasswordEntry.IsPassword)
+        {
+			PasswordEntry.IsPassword = false;
+		}
+        else
+        {
+            PasswordEntry.IsPassword = true;
+        }
+    } // End method
 }

@@ -53,6 +53,9 @@
 	  <None Remove="Resources\Images\forgotpassword.png" />
 	  <None Remove="Resources\Images\name.png" />
 	  <None Remove="Resources\Images\password.png" />
+	  <None Remove="Resources\Images\showpassword.png" />
+	  <None Remove="Resources\Images\signin.png" />
+	  <None Remove="Resources\Images\signup.png" />
 	  <None Remove="Resources\Images\user.png" />
 	</ItemGroup>
 
