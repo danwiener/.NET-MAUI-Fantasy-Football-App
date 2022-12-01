@@ -8,6 +8,25 @@
     FlyoutBackgroundColor="#0d0000"
     BackgroundColor="#6588A6" >
 
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="0.2*, 0.8*" BackgroundColor="#d9d5d2">
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       HorizontalOptions="StartAndExpand"
+                       HorizontalTextAlignment="Start"
+                       TextColor="#023e73"
+                       FontSize="16"
+                       Padding="5">
+                    <Label.Shadow>
+                        <Shadow Brush="#26658c" Offset="5,5" Radius="10" Opacity="0.8">
+                        </Shadow>
+                    </Label.Shadow>
+                    
+                </Label>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
     <ShellContent
         x:Name="WelcomePage"
         Title="Welcome"

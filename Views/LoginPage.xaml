@@ -60,7 +60,6 @@
                 Margin="5,0,2.5,0"
                 Grid.Column="0"
                 Grid.Row="0">
-                
             </Label>
 
             <BoxView Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Color="#26658C" Opacity=".1"/>

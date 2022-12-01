@@ -28,9 +28,8 @@ public partial class LoginPage : ContentPage
 
         NewLogin newlogin = new NewLogin(email, password);
         await LoginUserAsync(newlogin);
-        await Task.Delay(2000);
-        await Shell.Current.GoToAsync(nameof(HomePage));
 
+		await Shell.Current.GoToAsync($"{nameof(HomePage)}");
 	} // End method
 
 

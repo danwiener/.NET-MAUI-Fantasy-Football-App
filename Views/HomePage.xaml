@@ -4,10 +4,44 @@
              x:Class="FantasyFootballMAUI.HomePage"
                           BackgroundColor="#D9D5D2"
              Title="Home">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid x:Name="HomeGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".05*"/>
+            <ColumnDefinition Width=".9*"/>
+            <ColumnDefinition Width=".05*"/>
+        </Grid.ColumnDefinitions>
+
+        <BoxView Grid.Column="0" Grid.Row="1" Color="#26658C" Opacity=".1" ZIndex="2"/>
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".34*"/>
+                <ColumnDefinition Width=".66*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Text=""
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="28"
+                TextDecorations="Underline"
+                FontAttributes="Bold"
+                TextColor="#26658C"
+                FontAutoScalingEnabled="True"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="End"
+                VerticalTextAlignment="Center"
+                Margin="5,0,2.5,0"
+                Grid.Column="0"
+                Grid.Row="0">
+            </Label>
+
+        </Grid>
+    </Grid>
 </ContentPage>
