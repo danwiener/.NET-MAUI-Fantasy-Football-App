@@ -11,9 +11,9 @@ namespace FantasyFootballMAUI;
 public partial class LoginPage : ContentPage
 {
     bool success;
-    //string user_name;
-    //string name;
-    //string email;
+    string user_name;
+    string name;
+    string email;
 
     public LoginPage()
     {
@@ -28,7 +28,8 @@ public partial class LoginPage : ContentPage
 
         NewLogin newlogin = new NewLogin(email, password);
         await LoginUserAsync(newlogin);
-		await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+        await Task.Delay(2000);
+        await Shell.Current.GoToAsync(nameof(HomePage));
 
 	} // End method
 
@@ -66,19 +67,19 @@ public partial class LoginPage : ContentPage
         var response2 = await client.GetAsync(newUrl);
 
         var result2 = await response2.Content.ReadAsStringAsync();
-        //user_name = JObject.Parse(result2)["user_name"].ToString(); // receive user_name of user logged in
-        //name = JObject.Parse(result2)["name"].ToString();
-        //email = JObject.Parse(result2)["email"].ToString();
+        user_name = JObject.Parse(result2)["user_name"].ToString(); // receive user_name of user logged in
+        name = JObject.Parse(result2)["name"].ToString();
+        email = JObject.Parse(result2)["email"].ToString();
 
         if (response2.IsSuccessStatusCode)
         {
-            await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
-            success = true;
+			success = false;
+			await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
         }
         else
         {
-            await DisplayAlert("Error", $"Please try again", "Ok");
-            success= false;
+			success = false;
+			await DisplayAlert("Error", $"Please try again", "Ok");
         }
     } // End method
 
