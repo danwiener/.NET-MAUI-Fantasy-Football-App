@@ -13,6 +13,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(OpeningPage), typeof(OpeningPage));
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+		Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
+		Routing.RegisterRoute(nameof(ResetPasswordPage), typeof(ResetPasswordPage));
 
 	} // End constructor
 

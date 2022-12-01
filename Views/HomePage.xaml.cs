@@ -1,3 +1,5 @@
+
+
 namespace FantasyFootballMAUI;
 
 public partial class HomePage : ContentPage

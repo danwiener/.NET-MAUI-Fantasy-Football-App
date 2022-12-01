@@ -5,23 +5,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:FantasyFootballMAUI"
     Shell.FlyoutBehavior="Flyout"
-    FlyoutBackgroundColor="#de6b28"
+    FlyoutBackgroundColor="#0d0000"
     BackgroundColor="#6588A6" >
 
     <ShellContent
-        Title="Welcome : Fantasy Football"
+        x:Name="WelcomePage"
+        Title="Welcome"
         ContentTemplate="{DataTemplate local:OpeningPage}"
         Route="OpeningPage"/>
 
     <ShellContent
+        x:Name="SignInPage"
         Title="Sign In"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage"/>
 
     <ShellContent
+        x:Name="SignUpPage"
         Title="Sign Up"
         ContentTemplate="{DataTemplate local:RegisterPage}"
         Route="RegisterPage"/>
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:HomePage}"
+        Route="HomePage"/>
 
 
 

@@ -10,6 +10,11 @@ namespace FantasyFootballMAUI;
 
 public partial class LoginPage : ContentPage
 {
+    bool success;
+    //string user_name;
+    //string name;
+    //string email;
+
     public LoginPage()
     {
         InitializeComponent();
@@ -19,16 +24,24 @@ public partial class LoginPage : ContentPage
         SemanticScreenReader.Announce(LoginBtn.Text);
         string email = EmailEntry.Text;
         string password = PasswordEntry.Text;
-        NewLogin newlogin = new NewLogin(email, password);
 
-        LoginUserAsync(newlogin);
-    } // End method
+
+        NewLogin newlogin = new NewLogin(email, password);
+        await LoginUserAsync(newlogin);
+		await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+
+	} // End method
 
 
     ////    Microsoft.Maui.Controls.Application.Current?.CloseWindow(Microsoft.Maui.Controls.Application.Current.MainPage.Window);
 
+    private async void OnForgotPasswordBtnClicked(object sender, EventArgs e)
+    {
+		await Shell.Current.GoToAsync($"{nameof(ForgotPasswordPage)}");
+	}
 
-    public async Task LoginUserAsync(NewLogin nl)
+
+	public async Task LoginUserAsync(NewLogin nl)
     {
         var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nl);
         var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -53,15 +66,19 @@ public partial class LoginPage : ContentPage
         var response2 = await client.GetAsync(newUrl);
 
         var result2 = await response2.Content.ReadAsStringAsync();
+        //user_name = JObject.Parse(result2)["user_name"].ToString(); // receive user_name of user logged in
+        //name = JObject.Parse(result2)["name"].ToString();
+        //email = JObject.Parse(result2)["email"].ToString();
 
         if (response2.IsSuccessStatusCode)
         {
-            //Microsoft.Maui.Controls.Application.Current.MainPage = new AppShell();
             await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
+            success = true;
         }
         else
         {
             await DisplayAlert("Error", $"Please try again", "Ok");
+            success= false;
         }
     } // End method
 

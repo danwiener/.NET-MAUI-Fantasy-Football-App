@@ -35,4 +35,31 @@ namespace FantasyFootballMAUI.Models
             this.password = password;
         }
     }
+
+    public class ForgotPassword
+    {
+        public string email;
+
+        public ForgotPassword(string email)
+        {
+            this.email = email;
+        }
+    }
+
+    public class ResetPassword
+    {
+        public string token;
+
+        public string password;
+
+        public string password_confirm;
+
+
+        public ResetPassword(string token, string password, string password_confirm)
+        {
+            this.token = token;
+            this.password = password;
+            this.password_confirm = password_confirm;
+        }
+    }
 }

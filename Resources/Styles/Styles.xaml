@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Color x:Key="DashboardBackground">#233b66</Color>
-    <Color x:Key="PrimaryText">#438696</Color>
-    <Color x:Key="FormBackground">#eeeeee</Color>
+    <Color x:Key="Primary">#d9d5d2</Color>
+    <Color x:Key="Button">#eeeeee</Color>
 
 
 
