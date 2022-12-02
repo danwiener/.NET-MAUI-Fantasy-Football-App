@@ -1,7 +1,5 @@
 using FantasyFootballMAUI;
-using FantasyFootballMAUI.Helper;
 using FantasyFootballMAUI.Models;
-using FantasyFootballMAUI.ViewModels;
 using Newtonsoft.Json.Linq;
 using System.Text;
 
@@ -11,15 +9,17 @@ namespace FantasyFootballMAUI;
 [QueryProperty(nameof(GetUserId), "userid")]
 public partial class HomePage : ContentPage
 {
-	private string _userId;
+	private UserDTO _userdto;
 	private string username;
 	private string name;
 	private string email;
 
-	private string GetUserId
+	public UserDTO GetUserId
 	{
-		get => _userId;
-		set { _userId = value.ToString(); }
+		get => _userdto;
+		set { _userdto = value;
+			OnPropertyChanged();
+		}
 	}
 	public string Username { get => username; set => username = value; }
 	public string Name { get => name; set => name = value; }
@@ -28,18 +28,18 @@ public partial class HomePage : ContentPage
 	public HomePage()
 	{
 		InitializeComponent();
+		BindingContext = this;
 	}
 
 	protected override async void OnAppearing()
 	{
 		base.OnAppearing();
-		page.Title = $"{GetUserId}";
-		//int.TryParse(userId, out int UserId);
-		//UserIdId id = new UserIdId(UserId);
 
-		//await getUserEmailAndUserName(id);
+		int.TryParse(GetUserId.UserId.ToString(), out int UserId);
 
-		//page.Title = $"Signed in as: {Username} ({Email})"; 
+		await getUserEmailAndUserName(UserId);
+
+		LoginLabel.Text = $"Signed in as: {Username} ({Email})";
 	} // End method
 
 

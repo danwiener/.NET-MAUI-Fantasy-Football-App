@@ -5,8 +5,6 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using FantasyFootballMAUI.Models;
 using Microsoft.Maui.ApplicationModel.Communication;
-using FantasyFootballMAUI.ViewModels;
-using FantasyFootballMAUI.Helper;
 
 namespace FantasyFootballMAUI;
 
@@ -32,10 +30,12 @@ public partial class LoginPage : ContentPage
         NewLogin newlogin = new NewLogin(email, password);
         await LoginUserAsync(newlogin);
 
-		await Shell.Current.GoToAsync($"{nameof(HomePage)}", true, new Dictionary<string, object>
+        UserDTO dto = new UserDTO(int.Parse(userId));
+        var navParam = new Dictionary<string, object>()
         {
-            { "userid", userId }
-        });
+            {"userid", dto }
+        };
+        await Shell.Current.GoToAsync($"{nameof(HomePage)}", navParam);
 	} // End method
 
 

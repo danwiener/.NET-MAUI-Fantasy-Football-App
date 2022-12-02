@@ -1,8 +1,6 @@
 ﻿
-using FantasyFootballMAUI.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace FantasyFootballMAUI;
 
