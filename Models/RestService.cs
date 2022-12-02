@@ -44,7 +44,7 @@ namespace FantasyFootballMAUI.Models
         {
             this.email = email;
         }
-    }
+    } // End class
 
     public class ResetPassword
     {
@@ -60,6 +60,16 @@ namespace FantasyFootballMAUI.Models
             this.token = token;
             this.password = password;
             this.password_confirm = password_confirm;
+        }
+    } // End class
+
+    public class UserDTO
+    {
+        public int UserId;
+
+        public UserDTO(int UserId)
+        {
+            this.UserId = UserId;
         }
     }
 }

@@ -16,7 +16,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
 		Routing.RegisterRoute(nameof(ResetPasswordPage), typeof(ResetPasswordPage));
 		Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-
 	} // End constructor
 
     protected async override void OnAppearing()

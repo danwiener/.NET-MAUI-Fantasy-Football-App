@@ -4,7 +4,6 @@
              x:Class="FantasyFootballMAUI.LoginPage"
              BackgroundColor="#D9D5D2"
              Title="Welcome : Fantasy Football">
-
     <Grid x:Name="SignInGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

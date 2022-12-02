@@ -73,7 +73,7 @@ public partial class RegisterPage : ContentPage
 		}
 		else
 		{
-			await DisplayAlert("Not successful", "Please try again", "Ok");
+			await DisplayAlert("Not successful or account with email address already exists", "Please try again", "Ok");
 		}
 	} // End method
 

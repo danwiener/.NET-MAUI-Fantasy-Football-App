@@ -5,19 +5,23 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using FantasyFootballMAUI.Models;
 using Microsoft.Maui.ApplicationModel.Communication;
+using FantasyFootballMAUI.ViewModels;
+using FantasyFootballMAUI.Helper;
 
 namespace FantasyFootballMAUI;
 
 public partial class LoginPage : ContentPage
 {
     bool success;
-    string user_name;
-    string name;
-    string email;
 
-    public LoginPage()
+    private string user_Id;
+
+	public string userId { get => user_Id; set => user_Id = value; }
+
+	public LoginPage()
     {
         InitializeComponent();
+
     } // End constructor
     private async void OnLoginBtnClicked(object sender, EventArgs e)
     {
@@ -25,11 +29,13 @@ public partial class LoginPage : ContentPage
         string email = EmailEntry.Text;
         string password = PasswordEntry.Text;
 
-
         NewLogin newlogin = new NewLogin(email, password);
         await LoginUserAsync(newlogin);
 
-		await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+		await Shell.Current.GoToAsync($"{nameof(HomePage)}", true, new Dictionary<string, object>
+        {
+            { "userid", userId }
+        });
 	} // End method
 
 
@@ -66,9 +72,7 @@ public partial class LoginPage : ContentPage
         var response2 = await client.GetAsync(newUrl);
 
         var result2 = await response2.Content.ReadAsStringAsync();
-        user_name = JObject.Parse(result2)["user_name"].ToString(); // receive user_name of user logged in
-        name = JObject.Parse(result2)["name"].ToString();
-        email = JObject.Parse(result2)["email"].ToString();
+        userId = JObject.Parse(result2)["UserId"].ToString(); // receive user id of user logged in
 
         if (response2.IsSuccessStatusCode)
         {

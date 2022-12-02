@@ -4,7 +4,7 @@ namespace FantasyFootballMAUI;
 
 public partial class App : Application
 {
-	public App()
+	public App(LoginPage lp)
 	{
 		InitializeComponent();
 		var width = 1920;

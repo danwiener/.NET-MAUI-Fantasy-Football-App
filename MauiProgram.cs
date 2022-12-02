@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using FantasyFootballMAUI.ViewModels;
+using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FantasyFootballMAUI;
 
@@ -17,11 +20,13 @@ public static class MauiProgram
                 fonts.AddFont("Sitka.ttc", "Sitka");
             });
 
-            
+
         //#if DEBUG
         //        builder.Logging.AddDebug();
         //#endif
 
+
+        var app = builder.Build();
         return builder.Build();
     }
 }
