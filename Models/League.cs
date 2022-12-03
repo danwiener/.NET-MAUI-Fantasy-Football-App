@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace FantasyFootballMAUI.Models
+{
+
+	public class League
+	{
+		[JsonPropertyName("leagueid")]
+		public int LeagueId { get; set; }
+
+		[JsonPropertyName("leaguename")]
+		public string LeagueName { get; set; } = default!;
+
+		[JsonPropertyName("maxteams")]
+		public int MaxTeams { get; set; } = default!;
+
+		[JsonPropertyName("creator")]
+		public int Creator { get; set; } = default!; // user id goes here
+
+		public League(int id, string name, int maxteams, int creator)
+		{
+			LeagueId = id;
+			LeagueName = name;
+			MaxTeams = maxteams;
+			Creator = creator;
+		}
+	}
+}

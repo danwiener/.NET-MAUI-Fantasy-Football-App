@@ -72,4 +72,5 @@ namespace FantasyFootballMAUI.Models
             this.UserId = UserId;
         }
     }
+
 }
