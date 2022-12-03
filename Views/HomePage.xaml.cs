@@ -19,10 +19,12 @@ public partial class HomePage : ContentPage
 	private string name;
 	private string email;
 	ObservableCollection<League> belongedTo;
+	ObservableCollection<User> creators;
 
 	User user;
 
-	public UserDTO GetUserId
+	// UserId logged in as
+	public UserDTO GetUserId 
 	{
 		get => _userdto;
 		set { _userdto = value;
@@ -39,6 +41,13 @@ public partial class HomePage : ContentPage
 			OnPropertyChanged();
 		}
 	}
+	public ObservableCollection<User> Creators { get => creators; 
+		set
+		{
+			creators = value;
+			OnPropertyChanged();
+		} 
+	}
 
 	public HomePage()
 	{
@@ -50,11 +59,14 @@ public partial class HomePage : ContentPage
 	{
 		base.OnAppearing();
 		BelongedTo = new ObservableCollection<League>();
-		LeaguesBelongedToView.ItemsSource = BelongedTo;
+		Creators = new ObservableCollection<User>();
+
+		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
+
 		int.TryParse(GetUserId.UserId.ToString(), out int UserId);
 		await getUserEmailAndUserName(UserId);
 
-		HomeLabel.Text = $"Signed in as: {user.Username} ({user.Email})";
+		Title = $"Signed in as: {user.Username} ({user.Email})";
 	} // End method
 
 
@@ -102,7 +114,28 @@ public partial class HomePage : ContentPage
 				int maxteams = int.Parse(JObject.Parse(result3)["maxteams"].ToString());
 				int creatorId = int.Parse(JObject.Parse(result3)["creator"].ToString());
 				League league = new League(leagueId, leaguename, maxteams, creatorId);
+				league.CreatedByCurrentUser = creatorId == GetUserId.UserId;
 				BelongedTo.Add(league);
+
+				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+				using var client2 = new HttpClient();
+
+				client2.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
+				var response4 = await client2.GetAsync(Url4);
+				var result4 = await response4.Content.ReadAsStringAsync();
+
+				client2.DefaultRequestHeaders.Remove("UsernameEmail");
+
+				int userID = int.Parse(JObject.Parse(result4)["UserId"].ToString());
+				string username = JObject.Parse(result4)["user_name"].ToString();
+				string name = JObject.Parse(result4)["name"].ToString();
+				string email = JObject.Parse(result4)["email"].ToString();
+				User user = new User(userID, username, name, email);
+				Creators.Add(user);
+
+
+				league.CreatorName = user.Name; // Merge name and username from user into league for collection view binding purposes
+				league.CreatorUsername = user.Username;
 			}
 		}
 	}

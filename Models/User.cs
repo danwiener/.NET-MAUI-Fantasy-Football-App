@@ -20,6 +20,7 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("name")]
 		public string Name { get; set; } = default!;
 
+		[JsonPropertyName("email")]
 		public string Email { get; set; } = default!;
 
 

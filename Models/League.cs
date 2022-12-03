@@ -22,6 +22,12 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("creator")]
 		public int Creator { get; set; } = default!; // user id goes here
 
+		public string CreatorUsername { get; set; } = default!;
+
+		public string CreatorName { get; set; } = default!;
+
+		public bool? CreatedByCurrentUser { get; set; } = false;
+
 		public League(int id, string name, int maxteams, int creator)
 		{
 			LeagueId = id;
