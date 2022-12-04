@@ -48,6 +48,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Aloevera-OVoWO.ttf" />
+	  <None Remove="Resources\Fonts\Poppins-Medium.ttf" />
+	  <None Remove="Resources\Fonts\Poppins-Thin.ttf" />
 	  <None Remove="Resources\Images\counter.png" />
 	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\forgotpassword.png" />

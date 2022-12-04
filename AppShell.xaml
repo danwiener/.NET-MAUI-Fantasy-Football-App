@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:FantasyFootballMAUI"
     Shell.FlyoutBehavior="Flyout"
     FlyoutBackgroundColor="#6588A6"
-    BackgroundColor="#6588A6" >
+    BackgroundColor="White" >
 
     <Shell.ItemTemplate>
         <DataTemplate>

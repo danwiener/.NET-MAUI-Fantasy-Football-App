@@ -16,6 +16,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("Sitka.ttc", "Sitka");
+                fonts.AddFont("Aloevera-OVoWO.ttf", "Aloevera");
+                fonts.AddFont("Poppins-Medium.ttf", "Poppins");
+                fonts.AddFont("Poppins-Thin.ttf", "PT");
             });
 
 
