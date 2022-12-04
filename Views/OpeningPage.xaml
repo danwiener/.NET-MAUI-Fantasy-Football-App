@@ -30,9 +30,7 @@
                 <Button Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="1" BackgroundColor="Transparent" ZIndex="8" Clicked="OnLoginBtnClicked" BorderColor="Transparent" BorderWidth="0"/>
                 <BoxView Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="1" Color="#023e73" Opacity=".3" CornerRadius="300, 300, 0, 0" RotationX="35">
                     <BoxView.Shadow>
-                        <Shadow Brush="#26658c" Offset="20,20" Radius="40" Opacity="0.8">
-
-                        </Shadow>
+                        <Shadow Brush="#26658c" Offset="20,20" Radius="40" Opacity="0.8"/>
                     </BoxView.Shadow>
                 </BoxView>
                 <Button Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" BackgroundColor="Transparent" ZIndex="8" Clicked="OnRegisterBtnClicked" BorderColor="Transparent" BorderWidth="0"/>

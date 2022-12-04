@@ -10,6 +10,7 @@ namespace FantasyFootballMAUI.Models
 
 	public class League
 	{
+		public Image Image { get; set; }
 		[JsonPropertyName("leagueid")]
 		public int LeagueId { get; set; }
 
@@ -26,7 +27,7 @@ namespace FantasyFootballMAUI.Models
 
 		public string CreatorName { get; set; } = default!;
 
-		public bool? CreatedByCurrentUser { get; set; } = false;
+		public bool CreatedByCurrentUser { get; set; } = default!;
 
 		public League(int id, string name, int maxteams, int creator)
 		{

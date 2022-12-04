@@ -88,8 +88,8 @@ public partial class RegisterPage : ContentPage
         PasswordLengthEditor.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
-        MicroRow1.Height = 196;
-        MicroRow2.Height = 196;
+        //MicroRow1.Height = 196;
+        //MicroRow2.Height = 196;
         b3.IsVisible = true;
         b4.IsVisible = true;
         Grid.SetRow(alreadyhaveGrid, 9);
@@ -133,7 +133,7 @@ public partial class RegisterPage : ContentPage
         try
         {
 			Grid.SetRow(alreadyhaveGrid, 0);
-            M5.IsVisible = true;
+            //M5.IsVisible = true;
 			_passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
             if (_passwordLength < 8 || _passwordLength > 16)
@@ -856,14 +856,6 @@ public partial class RegisterPage : ContentPage
 
             GoButton.Text = $"{secondsRemaining}";
 
-            M1.RotationX += 3;
-            M1.RotationY -= 3;
-            M2.RotationX -= 2;
-            M2.RotationY += 4;
-            M3.RotationX += 4;
-            M3.RotationY += 2;
-            M4.RotationX -= 5;
-            M4.RotationY += 1;
 
             if (secondsRemaining == 0)
             {

@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-
 namespace FantasyFootballMAUI;
 
 [QueryProperty(nameof(GetUserId), "userid")]
@@ -66,7 +65,8 @@ public partial class HomePage : ContentPage
 		int.TryParse(GetUserId.UserId.ToString(), out int UserId);
 		await getUserEmailAndUserName(UserId);
 
-		Title = $"Signed in as: {user.Username} ({user.Email})";
+		Title = "Home";
+		UsernameLabel.Text = $"Signed in as: {user.Username} ({user.Email})";
 	} // End method
 
 
@@ -103,12 +103,11 @@ public partial class HomePage : ContentPage
 
 			for (int i = 0; i < leagueids.Count(); i++)
 			{
-				client.DefaultRequestHeaders.Remove("LeagueIdHeader");
 				client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{leagueids[i]}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
 				var response3 = await client.GetAsync(Url3);
 				var result3 = await response3.Content.ReadAsStringAsync();
 
-
+				client.DefaultRequestHeaders.Remove("LeagueIdHeader");
 				int leagueId = int.Parse(JObject.Parse(result3)["LeagueId"].ToString());
 				string leaguename = JObject.Parse(result3)["leaguename"].ToString();
 				int maxteams = int.Parse(JObject.Parse(result3)["maxteams"].ToString());
@@ -118,13 +117,12 @@ public partial class HomePage : ContentPage
 				BelongedTo.Add(league);
 
 				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
-				using var client2 = new HttpClient();
 
-				client2.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
-				var response4 = await client2.GetAsync(Url4);
+				client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
+				var response4 = await client.GetAsync(Url4);
 				var result4 = await response4.Content.ReadAsStringAsync();
 
-				client2.DefaultRequestHeaders.Remove("UsernameEmail");
+				client.DefaultRequestHeaders.Remove("UsernameEmail");
 
 				int userID = int.Parse(JObject.Parse(result4)["UserId"].ToString());
 				string username = JObject.Parse(result4)["user_name"].ToString();
@@ -138,6 +136,29 @@ public partial class HomePage : ContentPage
 				league.CreatorUsername = user.Username;
 			}
 		}
+		int j = 1;
+		string fmt = "000";
+		for (int i = 0; i < belongedTo.Count(); i++)
+		{
+			string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
+			belongedTo[i].Image = new Image()
+			{
+				Source = ImageSource.FromFile($"image_part_{withLeadingZeroes}.jpg")
+			};
+			if (j < 60)
+			{
+				j++;
+			}
+			else
+			{
+				j = 1;
+			}
+		}
+	}
+
+	private void LeaguesBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+
 	}
 
 	//private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

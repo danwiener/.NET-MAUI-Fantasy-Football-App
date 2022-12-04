@@ -185,7 +185,7 @@
 
 
             <!--Microsoft colors-->
-            <Grid Grid.Column="1" Grid.Row="5"  ZIndex="1">
+            <!--<Grid Grid.Column="1" Grid.Row="5"  ZIndex="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="88"/>
                     <RowDefinition Height="88"/>
@@ -198,7 +198,7 @@
                 <BoxView x:Name="M2" Grid.Row="0" Grid.Column="1" Color="#7fbc00" Opacity=".1"  ZIndex="3" />
                 <BoxView x:Name="M3" Grid.Row="1" Grid.Column="0" Color="#01a6f0" Opacity=".1" ZIndex="3"/>
                 <BoxView x:Name="M4" Grid.Row="1" Grid.Column="1" Color="#ffba01" Opacity=".1"  ZIndex="3"/>
-            </Grid>
+            </Grid>-->
         </Grid>
 
         <BoxView Color="#eeeeee" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand"
