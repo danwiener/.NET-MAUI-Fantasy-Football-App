@@ -21,7 +21,13 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
 
     } // End constructor
-    private async void OnLoginBtnClicked(object sender, EventArgs e)
+
+    protected async override void OnAppearing()
+    {
+        Task scaleTitle = Task.Factory.StartNew(async() => { await TitleLabel.ScaleTo(3, 1000); });
+		//Task scaleLoginBtn = Task.Factory.StartNew(async () => { await LoginBtn.ScaleTo(1, 500); }); // To scale sign in button
+    } // End method
+		private async void OnLoginBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(LoginBtn.Text);
         string email = EmailEntry.Text;

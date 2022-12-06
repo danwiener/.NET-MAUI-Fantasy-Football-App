@@ -24,14 +24,10 @@ public partial class OpeningPage : ContentPage
 		Task rotateRightGrid = Task.Factory.StartNew(async () => { await RightGrid.RotateYTo(-35, 600); });
 
 		await Task.Delay(1000);
-		Task rotateFootball = Task.Factory.StartNew(async () => { await LoginGrid.RotateXTo(75, 1900); });
-		await Task.Delay(1900);
-		Task rotateFootball2 = Task.Factory.StartNew(async () => { await LoginGrid.RotateXTo(85, 900); });
+		Task rotateFootball = Task.Factory.StartNew(async () => { await LoginGrid.RotateXTo(80, 1900); });
 
 		Task rotateLeftButton2 = Task.Factory.StartNew(async () => { await LeftButtonGrid.RotateYTo(35, 600); });
 
-		//await Task.Delay(700);
-		//Task rotateFootball2 = Task.Factory.StartNew(async () => { await LoginGrid.RotateXTo(85, 800); });
 	} // End method
 
 	private void OnLoginBtnClicked(object sender, EventArgs e)

@@ -22,7 +22,7 @@
 
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" RowDefinitions=".5*,.5*">
-            <Label x:Name="TitleLabel" Text="SIGN IN" FontSize="52" FontAttributes="Bold" FontFamily="PT" FontAutoScalingEnabled="True" TextColor="#6568A6" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Scale="3">
+            <Label x:Name="TitleLabel" Text="WELCOME BACK" FontSize="32" FontAttributes="Bold" FontFamily="PT" FontAutoScalingEnabled="True" TextColor="#737373" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Scale="6">
                 <Label.Shadow>
                     <Shadow Brush="#737373" Offset="0,20" Radius="20" Opacity="1.2"/>
                 </Label.Shadow>
@@ -48,8 +48,8 @@
 
             <!--First Column-->
 
-            <Label FontAttributes="Bold" Grid.Column="0" Grid.Row="1" FontFamily="OpenSansRegular" TextColor="#f2f2f2" FontSize="16" Text="EMAIL ADDRESS" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End" LineBreakMode="WordWrap"/>
-            <Label FontAttributes="Bold" Grid.Column="0" Grid.Row="2" FontFamily="OpenSansRegular" TextColor="#f2f2f2" FontSize="16" Text="PASSWORD" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End" LineBreakMode="WordWrap"/>
+            <!--<Label FontAttributes="Bold" Grid.Column="0" Grid.Row="1" FontFamily="OpenSansRegular" TextColor="#f2f2f2" FontSize="16" Text="EMAIL ADDRESS" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End" LineBreakMode="WordWrap"/>-->
+            <!--<Label FontAttributes="Bold" Grid.Column="0" Grid.Row="2" FontFamily="OpenSansRegular" TextColor="#f2f2f2" FontSize="16" Text="PASSWORD" Margin="5, 0, 2.5, 0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End" LineBreakMode="WordWrap"/>-->
 
             <BoxView Grid.Column="0" Grid.Row="4" Grid.RowSpan="1" Grid.ColumnSpan="2" Color="Transparent" Opacity="1" CornerRadius="0,0,10,0" />
 
@@ -145,10 +145,7 @@
                     </Grid>
                 </Grid>
             </Frame>
-
-
-
-
+            
             <Button 
                         x:Name="LoginBtn"
                         Text="SIGN IN"
@@ -160,7 +157,8 @@
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand" 
                         Grid.Row="3"
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        Scale="1">
             </Button>
 
 
