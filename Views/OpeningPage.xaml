@@ -19,7 +19,7 @@
         </Grid>-->
 
 
-        <Grid x:Name="LoginGrid" ColumnDefinitions=".13*,.15*, .25*,.25*,.15*,.13*" RowDefinitions=".1*,.8*,.1*" Grid.RowSpan="2" ZIndex="3" RotationX="30">
+        <Grid x:Name="LoginGrid" ColumnDefinitions=".13*,.15*, .25*,.25*,.15*,.13*" RowDefinitions=".1*,.8*,.1*" Grid.RowSpan="2" ZIndex="3" RotationX="90">
             <Grid Grid.Row="1" Grid.ColumnSpan="6" ColumnDefinitions=".1*,.15*, .25*,.25*,.15*,.1*" RowDefinitions=".8*,*" ZIndex="3">
 
 
@@ -58,6 +58,7 @@
                             <Shadow Brush="black" Offset="1,1" Radius="2" Opacity="1.2"/>
                         </Label.Shadow>-->
                     </Label>
+                    
                 </Grid>
             </Grid>
 
@@ -80,6 +81,62 @@
             </BoxView>
         </Grid>
 
+
+
+
+
+
+
+        <Grid x:Name="RightButtonGrid" Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="7">
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*">
+                <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" ZIndex="5">
+                    <Button
+                        x:Name="RegisterBtn"
+                        Text="SIGN UP"
+                        SemanticProperties.Hint="Navigates to register page"
+                        Clicked="OnRegisterBtnClicked"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        TextColor="Transparent"
+                        FontSize="32"
+                        Grid.Column="1"
+                        Grid.RowSpan="1"
+                        Grid.Row="1"
+                        CornerRadius="40"
+                        VerticalOptions="Center"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand" 
+                        Grid.ColumnSpan="2"
+                        ZIndex="7"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="LeftButtonGrid" Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="7">
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*">
+                <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" ZIndex="5">
+                    <Button 
+                        x:Name="LoginBtn"
+                        Text="SIGN IN"
+                        SemanticProperties.Hint="Navigates to login page"
+                        Clicked="OnLoginBtnClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="Transparent"
+                        CornerRadius="40"
+                        FontSize="32"
+                        Grid.Column="1"
+                        Grid.RowSpan="1"
+                        Grid.Row="1"
+                        FontAttributes="Bold"
+                        BorderColor="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Grid.ColumnSpan="2"
+                        ZIndex="4"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        
         <Grid Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="1">
 
             <Grid x:Name="LeftGrid" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2" >
@@ -96,6 +153,7 @@
                         </BoxView.Shadow>
                     </BoxView>
                 </Grid>
+
             </Grid>
             <Grid x:Name="RightGrid" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".02*,.91*,.07*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2" >
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
@@ -208,64 +266,16 @@
                 </BoxView>
             </Grid>-->
 
-            <!--<Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" RowDefinitions=".25*,.25*,.25*,.25*" ZIndex="7">
-                <HorizontalStackLayout Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand">
-                    <ImageButton Source="signin.png" VerticalOptions="CenterAndExpand" WidthRequest="75" HeightRequest="75" Clicked="OnLoginBtnClicked">
-                        <ImageButton.Shadow>
-                            <Shadow Brush="#6588a6" Offset="20,20" Radius="40" Opacity="0.8">
-                            </Shadow>
-                        </ImageButton.Shadow>
-                    </ImageButton>
-                    <Button 
-                        x:Name="LoginBtn"
-                        Text="SIGN IN"
-                        SemanticProperties.Hint="Navigates to login page"
-                        Clicked="OnLoginBtnClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="#D9D5D2"
-                        CornerRadius="50"
-                        FontSize="32"
-                        RotationX="35"
-                        Grid.Column="2"
-                        Grid.RowSpan="2"
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        BorderColor="Transparent"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        Grid.ColumnSpan="2"
-                        ZIndex="7"/>
 
 
-                </HorizontalStackLayout>
 
-
-                <HorizontalStackLayout Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand">
+                <!--<HorizontalStackLayout Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand">
                     <ImageButton Source="signup.png" VerticalOptions="CenterAndExpand" WidthRequest="75" HeightRequest="75" Clicked="OnRegisterBtnClicked">
                         <ImageButton.Shadow>
                             <Shadow Brush="#d9d5d2" Offset="20,20" Radius="40" Opacity="0.8">
                             </Shadow>
                         </ImageButton.Shadow>
                     </ImageButton>
-                    <Button
-                        x:Name="RegisterBtn"
-                        Text="SIGN UP"
-                        SemanticProperties.Hint="Navigates to register page"
-                        Clicked="OnRegisterBtnClicked"
-                        BackgroundColor="Transparent"
-                        BorderColor="Transparent"
-                        TextColor="#D9D5D2"
-                        FontSize="32"
-                        Grid.Column="2"
-                        RotationX="-35"
-                        Grid.RowSpan="2"
-                        Grid.Row="2"
-                        CornerRadius="50"
-                        VerticalOptions="Center"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand" 
-                        Grid.ColumnSpan="2"
-                        ZIndex="7"/>
                 </HorizontalStackLayout>
 
             </Grid>-->
