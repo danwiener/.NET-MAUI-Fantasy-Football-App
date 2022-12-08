@@ -11,6 +11,11 @@ public partial class ForgotPasswordPage : ContentPage
 		InitializeComponent();
 	}
 
+	protected async override void OnAppearing()
+	{
+		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(3, 1000); });
+	} // End method
+
 	private async void OnGoBackButtonClicked(object sender, EventArgs e)
 	{
 		await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
@@ -32,7 +37,6 @@ public partial class ForgotPasswordPage : ContentPage
 	{
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
 		var url = "http://localhost:8000/api/forgot"; // access the forgot endpoint to generate a reset token and send password reset email
 		using var client = new HttpClient();
 

@@ -67,9 +67,14 @@ public partial class HomePage : ContentPage
 
 		Title = "Home";
 		UsernameLabel.Text = $"Signed in as: {user.Username} ({user.Email})";
+
+		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel1.ScaleTo(1, 1000); });
+		Task scaleTitle2 = Task.Factory.StartNew(async () => { await TitleLabel2.ScaleTo(1, 1000); });
+
+
 	} // End method
 
-
+	int j = 1;
 	public async Task getUserEmailAndUserName(int userId)
 	{
 		var Url = "http://localhost:8000/api/getuser";
@@ -114,6 +119,19 @@ public partial class HomePage : ContentPage
 				int creatorId = int.Parse(JObject.Parse(result3)["creator"].ToString());
 				League league = new League(leagueId, leaguename, maxteams, creatorId);
 				league.CreatedByCurrentUser = creatorId == GetUserId.UserId;
+
+				string fmt = "000";
+				string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
+				league.ImageSource = $"image_part_{withLeadingZeroes}.jpg";
+				if (j < 60)
+				{
+					j++;
+				}
+				else
+				{
+					j = 1;
+				}
+
 				BelongedTo.Add(league);
 
 				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
@@ -136,24 +154,23 @@ public partial class HomePage : ContentPage
 				league.CreatorUsername = user.Username;
 			}
 		}
-		int j = 1;
-		string fmt = "000";
-		for (int i = 0; i < belongedTo.Count(); i++)
-		{
-			string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
-			belongedTo[i].Image = new Image()
-			{
-				Source = ImageSource.FromFile($"image_part_{withLeadingZeroes}.jpg")
-			};
-			if (j < 60)
-			{
-				j++;
-			}
-			else
-			{
-				j = 1;
-			}
-		}
+		//int j = 1;
+		//string fmt = "000";
+		//for (int i = 0; i < belongedTo.Count(); i++)
+		//{
+		//	int j = 1;
+		//	string fmt = "000";
+		//	string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
+		//	belongedTo[i].ImageSource = $"image_part_{withLeadingZeroes}.jpg";
+		//	if (j < 60)
+		//	{
+		//		j++;
+		//	}
+		//	else
+		//	{
+		//		j = 1;
+		//	}
+		//}
 	}
 
 	private void LeaguesBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -21,9 +21,6 @@ public partial class App : Application
 			appWindow.MoveAndResize(new Windows.Graphics.RectInt32((1920 / 2) - width / 2, (1200 / 2) - height / 2, width, height));
 #endif
 		});
-			Routing.RegisterRoute("OpeningPage", typeof(OpeningPage));
-			Routing.RegisterRoute("LoginPage", typeof(LoginPage));
-			Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
 
 			//var navPage = new NavigationPage(new RegisterPage());
 			//navPage.BarBackgroundColor = Color.FromArgb("eeeeee");

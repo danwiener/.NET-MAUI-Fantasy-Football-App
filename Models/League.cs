@@ -10,7 +10,7 @@ namespace FantasyFootballMAUI.Models
 
 	public class League
 	{
-		public Image Image { get; set; }
+		public String ImageSource { get; set; } = default!;
 		[JsonPropertyName("leagueid")]
 		public int LeagueId { get; set; }
 

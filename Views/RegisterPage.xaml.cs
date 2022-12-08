@@ -36,10 +36,12 @@ public partial class RegisterPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-    } // End method
 
-    // Button event handlers
-    private async void OnAccountBtnClicked(object sender, EventArgs e)
+		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(3, 1000); });
+	} // End method
+
+	// Button event handlers
+	private async void OnAccountBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(AccountBtn.Text);
         string user_name = UsernameEntry.Text;
@@ -88,16 +90,10 @@ public partial class RegisterPage : ContentPage
         PasswordLengthEditor.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
-        //MicroRow1.Height = 196;
-        //MicroRow2.Height = 196;
-        b3.IsVisible = true;
-        b4.IsVisible = true;
+
         Grid.SetRow(alreadyhaveGrid, 9);
         Grid.SetRowSpan(alreadyhaveGrid, 1);
-        Grid.SetRow(b1, 9);
-        Grid.SetRow(b2, 9);
-        Grid.SetRowSpan(b1, 1);
-        Grid.SetRowSpan(b2, 1);
+
 
         InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
 
@@ -126,17 +122,15 @@ public partial class RegisterPage : ContentPage
     }
 
 
-	private async void OnInvisibleEnterPasswordLengthButtonClickedAsync(object sender, EventArgs e)
+    private async void OnInvisibleEnterPasswordLengthButtonClickedAsync(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(EnterPasswordLengthButton.Text);
 
         try
         {
-			Grid.SetRow(alreadyhaveGrid, 0);
-            //M5.IsVisible = true;
-			_passwordLength = Int32.Parse(PasswordLengthEditor.Text);
+            _passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
-            if (_passwordLength < 8 || _passwordLength > 16)
+            if (_passwordLength < 8 || _passwordLength > 16 || PasswordLengthEditor.Text.Length == 0)
             {
                 await DisplayAlert("Invalid entry", "Please enter a length between 8 and 16", "OK");
             }
@@ -154,7 +148,6 @@ public partial class RegisterPage : ContentPage
                 IncludeSymbolsLabel.IsVisible = true;
                 IncludeSymbolsCheckBox.IsVisible = true;
                 GoButton.IsVisible = true;
-                MicrosoftGrid.IsVisible = true;
                 //b5.IsVisible = true;
 
                 GoButton.Clicked += OnGoButtonClicked;
