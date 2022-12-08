@@ -16,7 +16,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="#6568A6"/>
+                                        Value="#6588a6"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -27,9 +27,9 @@
 
     <Grid x:Name="HomeGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".8*"/>
-            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".16*"/>
+            <RowDefinition Height=".68*"/>
+            <RowDefinition Height=".16*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".05*"/>
@@ -42,7 +42,7 @@
             <BoxView Color="Black" Grid.Row="1"/>
         </Grid>
 
-        <Label x:Name="UsernameLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" TextColor="#0d0000"/>
+        <Label x:Name="UsernameLabel" Grid.Row="0" FontAttributes="Bold" FontFamily="PT" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0d0000" CharacterSpacing="2" />
 
 
         <Label x:Name="HomeLabel" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="14" FontAttributes="Bold" TextColor="#26658C"/>
@@ -72,13 +72,13 @@
             </Label>
 
 
-            <CollectionView x:Name="LeaguesBelongedToCollectionView" Grid.Column="0" Grid.Row="1" WidthRequest="380" HorizontalOptions="StartAndExpand" SelectionMode="Multiple" SelectionChanged="LeaguesBelongedToCollectionView_SelectionChanged" ZIndex="5" EmptyView="No Data Available">
+            <CollectionView x:Name="LeaguesBelongedToCollectionView" Grid.Column="0" Grid.Row="1" WidthRequest="380" HorizontalOptions="StartAndExpand" SelectionMode="Single" SelectionChanged="LeaguesBelongedToCollectionView_SelectionChanged" ZIndex="5" VerticalOptions="Center" EmptyView="No Data Available">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="1"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10">
+                        <Grid Padding="10" VerticalOptions="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="44"/>
                                         <RowDefinition Height="44"/>
@@ -89,17 +89,37 @@
                                         <ColumnDefinition Width="150"/>
                                     </Grid.ColumnDefinitions>
 
-                            <BoxView Color="#6588a6" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10"/>
+
+                            <Button
+                                x:Name="DeselectButton"
+                                Clicked="OnDeselectClicked"
+                                BackgroundColor="Transparent"
+                                ZIndex="15"
+                                Grid.Row="0" Grid.RowSpan="2"
+                                Grid.Column="0" Grid.ColumnSpan="3">
+                            </Button>
+
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,10" Radius="10" Opacity="1.2"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,-1" Radius="5" Opacity="1.2"/>
+                                </BoxView.Shadow>
+                            </BoxView>
 
                             <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="League Name" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="20"/>
+                                <Label Text="League Name" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="18"/>
                                 <Label 
                                 Text="{Binding LeagueName}"
-                                TextColor="Black"
-                                    Margin="5,0,0,0"
+                                TextColor="White"
+                                Margin="10,0,0,0"
                                 FontSize="18"
                                 FontAttributes="Bold"
-                                    TextDecorations="Underline"
+                                TextDecorations="Underline"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="CenterAndExpand"
                                 Grid.ColumnSpan="1"
@@ -111,8 +131,8 @@
                             <Image x:Name="LeagueIcon" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="60" WidthRequest="60" Source="{Binding ImageSource}"/>
 
                             <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Margin="5, 0, 2.5, 0" Text="I Am Commissioner" LineBreakMode="TailTruncation" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                <CheckBox BackgroundColor="White" Color="White" IsEnabled="True" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
+                                <Label Margin="5, 0, 2.5, 0" Text="I Am Commissioner" LineBreakMode="TailTruncation" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="Black" IsEnabled="True" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
 
                             </HorizontalStackLayout>
                         </Grid>

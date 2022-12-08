@@ -1,7 +1,6 @@
 
 using FantasyFootballMAUI;
 using FantasyFootballMAUI.Models;
-using FantasyFootballMAUI.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
@@ -117,8 +116,7 @@ public partial class HomePage : ContentPage
 				string leaguename = JObject.Parse(result3)["leaguename"].ToString();
 				int maxteams = int.Parse(JObject.Parse(result3)["maxteams"].ToString());
 				int creatorId = int.Parse(JObject.Parse(result3)["creator"].ToString());
-				League league = new League(leagueId, leaguename, maxteams, creatorId);
-				league.CreatedByCurrentUser = creatorId == GetUserId.UserId;
+				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
 
 				string fmt = "000";
 				string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
@@ -133,7 +131,6 @@ public partial class HomePage : ContentPage
 				}
 
 				BelongedTo.Add(league);
-
 				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
 
 				client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
@@ -175,7 +172,19 @@ public partial class HomePage : ContentPage
 
 	private void LeaguesBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
+		
+	}
 
+	private void OnDeselectClicked(object sender, EventArgs e)
+	{
+		if (LeaguesBelongedToCollectionView.SelectedItem != null)
+		{
+			LeaguesBelongedToCollectionView.SelectedItem = null;
+		}
+		else
+		{
+			LeaguesBelongedToCollectionView.SelectedItem = this;
+		}
 	}
 
 	//private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

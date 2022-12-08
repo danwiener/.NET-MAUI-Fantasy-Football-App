@@ -29,12 +29,13 @@ namespace FantasyFootballMAUI.Models
 
 		public bool CreatedByCurrentUser { get; set; } = default!;
 
-		public League(int id, string name, int maxteams, int creator)
+		public League(int id, string name, int maxteams, int creator, bool createdbycurrentuser)
 		{
 			LeagueId = id;
 			LeagueName = name;
 			MaxTeams = maxteams;
 			Creator = creator;
+			CreatedByCurrentUser= createdbycurrentuser;
 		}
 	}
 }

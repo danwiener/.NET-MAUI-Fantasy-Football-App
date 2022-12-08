@@ -27,6 +27,7 @@ public partial class LoginPage : ContentPage
         Task scaleTitle = Task.Factory.StartNew(async() => { await TitleLabel.ScaleTo(3, 1000); });
 		//Task scaleLoginBtn = Task.Factory.StartNew(async () => { await LoginBtn.ScaleTo(1, 500); }); // To scale sign in button
     } // End method
+
 		private async void OnLoginBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(LoginBtn.Text);
@@ -55,41 +56,41 @@ public partial class LoginPage : ContentPage
 
 	public async Task LoginUserAsync(NewLogin nl)
     {
-        var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nl);
-        var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nl);
+            var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-        var url = "http://localhost:8000/api/login"; // access the login endpoint to receive access token from authorization server
-        using var client = new HttpClient();
+            var url = "http://localhost:8000/api/login"; // access the login endpoint to receive access token from authorization server
+            using var client = new HttpClient();
 
-        var response = await client.PostAsync(url, data);
+            var response = await client.PostAsync(url, data);
 
-        if (!response.IsSuccessStatusCode)
-        {
-            await DisplayAlert("Error", "Invalid credentials - Try again", "Ok");
-        }
+            if (!response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Error", "Invalid credentials - Try again", "Ok");
+            }
 
-        var result = await response.Content.ReadAsStringAsync(); // receive the access token
-        string accessToken = JObject.Parse(result)["token"].ToString(); // parse access token to string
+            var result = await response.Content.ReadAsStringAsync(); // receive the access token
+            string accessToken = JObject.Parse(result)["token"].ToString(); // parse access token to string
 
-        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}"); // add to Authorization header to send back to API to request access to resource server/protected data
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}"); // add to Authorization header to send back to API to request access to resource server/protected data
 
-        var newUrl = "http://localhost:8000/api/user"; // get request to user endpoint to receive protected user information and log user in
+            var newUrl = "http://localhost:8000/api/user"; // get request to user endpoint to receive protected user information and log user in
 
-        var response2 = await client.GetAsync(newUrl);
+            var response2 = await client.GetAsync(newUrl);
 
-        var result2 = await response2.Content.ReadAsStringAsync();
-        userId = JObject.Parse(result2)["UserId"].ToString(); // receive user id of user logged in
+            var result2 = await response2.Content.ReadAsStringAsync();
+            userId = JObject.Parse(result2)["UserId"].ToString(); // receive user id of user logged in
 
-        if (response2.IsSuccessStatusCode)
-        {
-			success = false;
-			await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
-        }
-        else
-        {
-			success = false;
-			await DisplayAlert("Error", $"Please try again", "Ok");
-        }
+            if (response2.IsSuccessStatusCode)
+            {
+                success = false;
+                await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
+            }
+            else
+            {
+                success = false;
+                await DisplayAlert("Error", $"Please try again", "Ok");
+            }
     } // End method
 
     // Go to register page
