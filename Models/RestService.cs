@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FantasyFootballMAUI.Models
@@ -70,6 +72,18 @@ namespace FantasyFootballMAUI.Models
         public UserDTO(int UserId)
         {
             this.UserId = UserId;
+        }
+    }
+
+    public class DeleteLeagueDTO
+    {
+        public int leagueid;
+        public string leaguename;
+
+		public DeleteLeagueDTO(int leagueid, string leaguename)
+        {
+            this.leagueid = leagueid;
+            this.leaguename = leaguename;
         }
     }
 

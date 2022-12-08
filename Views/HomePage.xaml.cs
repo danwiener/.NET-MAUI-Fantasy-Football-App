@@ -18,6 +18,7 @@ public partial class HomePage : ContentPage
 	private string email;
 	ObservableCollection<League> belongedTo;
 	ObservableCollection<User> creators;
+	ObservableCollection<League> currentlySelected;
 
 	User user;
 
@@ -39,6 +40,16 @@ public partial class HomePage : ContentPage
 			OnPropertyChanged();
 		}
 	}
+
+	public ObservableCollection<League> CurrentlySelected
+	{
+		get => currentlySelected;
+		set
+		{
+			currentlySelected = value;
+			OnPropertyChanged();
+		}
+	}
 	public ObservableCollection<User> Creators { get => creators; 
 		set
 		{
@@ -46,6 +57,7 @@ public partial class HomePage : ContentPage
 			OnPropertyChanged();
 		} 
 	}
+
 
 	public HomePage()
 	{
@@ -151,41 +163,129 @@ public partial class HomePage : ContentPage
 				league.CreatorUsername = user.Username;
 			}
 		}
-		//int j = 1;
-		//string fmt = "000";
-		//for (int i = 0; i < belongedTo.Count(); i++)
-		//{
-		//	int j = 1;
-		//	string fmt = "000";
-		//	string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
-		//	belongedTo[i].ImageSource = $"image_part_{withLeadingZeroes}.jpg";
-		//	if (j < 60)
-		//	{
-		//		j++;
-		//	}
-		//	else
-		//	{
-		//		j = 1;
-		//	}
-		//}
 	}
 
+	//Event handlers
 	private void LeaguesBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		
+		ObservableCollection<League> currentlySelected = new ObservableCollection<League>();
+		currentlySelected.Add(e.CurrentSelection.FirstOrDefault() as League);
+
+		CurrentlySelected = currentlySelected;
+
+		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
+
 	}
 
-	private void OnDeselectClicked(object sender, EventArgs e)
+	private void OnViewLeagueClicked(object sender, EventArgs e)
 	{
+		LeaguesBelongedToGrid.IsVisible= false;
+		LeaguesBelongedToCollectionView.IsEnabled = false;
+
+		CurrentLeagueCollectionViewGrid.IsVisible = true;
+		CurrentLeagueCollectionView.IsEnabled = true;
+
+		ViewLeagueBtn.IsVisible= false;
+		GoBackBtn.IsVisible = true;
+		TitleLabel1.Text = "LEAGUE INFO";
+
+	}
+
+	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
+	{
+		DeleteLeagueDTO dto;
 		if (LeaguesBelongedToCollectionView.SelectedItem != null)
 		{
-			LeaguesBelongedToCollectionView.SelectedItem = null;
+			League league = LeaguesBelongedToCollectionView.SelectedItem as League;
+			dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
+			await DeleteLeague(dto);
+			foreach (League item in BelongedTo)
+			{
+				if (item.LeagueId == dto.leagueid)
+				{
+					BelongedTo.Remove(item);
+					break;
+				}
+			}
+		}
+		else if (CurrentlySelected is not null) 
+		{
+			League league = CurrentlySelected[0];
+			dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
+			await DeleteLeague(dto);
+			foreach (League item in BelongedTo)
+			{
+				if (item.LeagueId == dto.leagueid)
+				{
+					BelongedTo.Remove(item);
+					break;
+				}
+			}
+		}
+
+		if (CurrentLeagueCollectionView.IsVisible)
+		{
+			LeaguesBelongedToGrid.IsVisible = true;
+			LeaguesBelongedToCollectionView.IsEnabled = true;
+
+			CurrentLeagueCollectionViewGrid.IsVisible = false;
+			CurrentLeagueCollectionView.IsEnabled = false;
+
+			CurrentlySelected.RemoveAt(0);
+
+			GoBackBtn.IsVisible = false;
+			ViewLeagueBtn.IsVisible = true;
+
+			TitleLabel1.Text = "LEAGUES BELONGED TO";
+		}
+
+	}
+
+	public async Task DeleteLeague(DeleteLeagueDTO dto)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var url = "http://localhost:8000/api/deleteleague"; // access the register endpoint to register new user
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(url, data);
+
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"{dto.leaguename} has been deleted", "Ok");
 		}
 		else
 		{
-			LeaguesBelongedToCollectionView.SelectedItem = this;
+			await DisplayAlert("Not successful", "Please try again", "Ok");
 		}
+	} // End method
+
+	private void OnJoinOtherClicked(object sender, EventArgs e)
+	{
+
 	}
+
+	private void OnGoBackClicked(object sender, EventArgs e)
+	{
+		LeaguesBelongedToGrid.IsVisible = true;
+		LeaguesBelongedToCollectionView.IsEnabled = true;
+
+		CurrentLeagueCollectionViewGrid.IsVisible = false;
+		CurrentLeagueCollectionView.IsEnabled = false;
+
+		CurrentlySelected.RemoveAt(0);
+
+		GoBackBtn.IsVisible= false;
+		ViewLeagueBtn.IsVisible = true;
+
+		TitleLabel1.Text = "LEAGUES BELONGED TO";
+	}
+	
+
+
 
 	//private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	//{
