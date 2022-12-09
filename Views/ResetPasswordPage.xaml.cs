@@ -12,6 +12,11 @@ public partial class ResetPasswordPage : ContentPage
 		InitializeComponent();
 	}
 
+	protected async override void OnAppearing()
+	{
+		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(3, 1000); });
+	} // End method
+
 	private async void OnResetPasswordBtnClicked(object sender, EventArgs e)
 	{
 		string token = ResetCodeEntry.Text.ToString();

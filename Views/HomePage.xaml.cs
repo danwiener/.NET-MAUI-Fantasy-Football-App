@@ -17,8 +17,11 @@ public partial class HomePage : ContentPage
 	private string name;
 	private string email;
 	ObservableCollection<League> belongedTo;
+	ObservableCollection<League> globalLeagues;
 	ObservableCollection<User> creators;
+	ObservableCollection<User> globalleaguecreators;
 	ObservableCollection<League> currentlySelected;
+	private bool globalHasBeenSelected = false;
 
 	User user;
 
@@ -41,6 +44,16 @@ public partial class HomePage : ContentPage
 		}
 	}
 
+	public ObservableCollection<League> GlobalLeagues
+	{
+		get => globalLeagues;
+		set
+		{
+			globalLeagues = value;
+			OnPropertyChanged();
+		}
+	}
+
 	public ObservableCollection<League> CurrentlySelected
 	{
 		get => currentlySelected;
@@ -50,12 +63,23 @@ public partial class HomePage : ContentPage
 			OnPropertyChanged();
 		}
 	}
+
 	public ObservableCollection<User> Creators { get => creators; 
 		set
 		{
 			creators = value;
 			OnPropertyChanged();
 		} 
+	}
+
+	public ObservableCollection<User> GlobalLeagueCreators
+	{
+		get => globalleaguecreators;
+		set
+		{
+			globalleaguecreators = value;
+			OnPropertyChanged();
+		}
 	}
 
 
@@ -70,11 +94,14 @@ public partial class HomePage : ContentPage
 		base.OnAppearing();
 		BelongedTo = new ObservableCollection<League>();
 		Creators = new ObservableCollection<User>();
+		GlobalLeagues = new ObservableCollection<League>();
+		GlobalLeagueCreators= new ObservableCollection<User>();
 
 		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
 
 		int.TryParse(GetUserId.UserId.ToString(), out int UserId);
 		await getUserEmailAndUserName(UserId);
+		await GetGlobalLeagues();
 
 		Title = "Home";
 		UsernameLabel.Text = $"Signed in as: {user.Username} ({user.Email})";
@@ -175,12 +202,32 @@ public partial class HomePage : ContentPage
 
 		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
 
-	}
+	} // End method
+
+	private void GlobalLeaguesCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		ObservableCollection<League> currentlySelected = new ObservableCollection<League>();
+		currentlySelected.Add(e.CurrentSelection.FirstOrDefault() as League);
+		CurrentlySelected = currentlySelected;
+		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
+
+	} // End method
 
 	private void OnViewLeagueClicked(object sender, EventArgs e)
 	{
-		LeaguesBelongedToGrid.IsVisible= false;
-		LeaguesBelongedToCollectionView.IsEnabled = false;
+		if (LeaguesBelongedToGrid.IsVisible)
+		{
+			LeaguesBelongedToGrid.IsVisible = false;
+			LeaguesBelongedToCollectionView.IsEnabled = false;
+		}
+		if (GlobalLeaguesGrid.IsVisible)
+		{
+			GlobalLeaguesGrid.IsVisible = false;
+			GlobalLeaguesCollectionView.IsEnabled = false;
+			GoBackBtn2.IsVisible = false;
+			JoinLeagueBtn.IsVisible = false;
+			CreateLeagueBtn.IsVisible = false;
+		}
 
 		CurrentLeagueCollectionViewGrid.IsVisible = true;
 		CurrentLeagueCollectionView.IsEnabled = true;
@@ -194,34 +241,41 @@ public partial class HomePage : ContentPage
 	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
 	{
 		DeleteLeagueDTO dto;
-		if (LeaguesBelongedToCollectionView.SelectedItem != null)
+
+		if (LeaguesBelongedToGrid.IsVisible)
 		{
-			League league = LeaguesBelongedToCollectionView.SelectedItem as League;
-			dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
-			await DeleteLeague(dto);
-			foreach (League item in BelongedTo)
+			if (LeaguesBelongedToCollectionView.SelectedItem != null)
 			{
-				if (item.LeagueId == dto.leagueid)
+				League league = LeaguesBelongedToCollectionView.SelectedItem as League;
+				dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
+				await DeleteLeague(dto);
+				foreach (League item in BelongedTo)
 				{
-					BelongedTo.Remove(item);
-					break;
+					if (item.LeagueId == dto.leagueid)
+					{
+						BelongedTo.Remove(item);
+						break;
+					}
 				}
 			}
-		}
-		else if (CurrentlySelected is not null) 
-		{
-			League league = CurrentlySelected[0];
-			dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
-			await DeleteLeague(dto);
-			foreach (League item in BelongedTo)
+			else if (CurrentlySelected is not null)
 			{
-				if (item.LeagueId == dto.leagueid)
+				League league = CurrentlySelected[0];
+				dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
+				await DeleteLeague(dto);
+				foreach (League item in BelongedTo)
 				{
-					BelongedTo.Remove(item);
-					break;
+					if (item.LeagueId == dto.leagueid)
+					{
+						BelongedTo.Remove(item);
+						GlobalLeagues.Remove(item);
+						break;
+					}
 				}
+				CurrentlySelected.RemoveAt(0);
 			}
 		}
+		
 
 		if (CurrentLeagueCollectionView.IsVisible)
 		{
@@ -263,27 +317,154 @@ public partial class HomePage : ContentPage
 		}
 	} // End method
 
-	private void OnJoinOtherClicked(object sender, EventArgs e)
+	private async void OnJoinOtherClicked(object sender, EventArgs e)
+	{
+		LeaguesBelongedToGrid.IsVisible = false;
+		LeaguesBelongedToCollectionView.IsEnabled = false;
+
+		GlobalLeaguesCollectionView.ItemsSource = GlobalLeagues;
+		GlobalLeaguesGrid.IsVisible = true;
+		GlobalLeaguesCollectionView.IsEnabled = true;
+
+		OrLabel.IsVisible= false;
+		JoinCreateBtn.IsVisible = false;
+
+		JoinLeagueBtn.IsVisible = true;
+		CreateLeagueBtn.IsVisible = true;
+		GoBackBtn2.IsVisible = true;
+
+		globalHasBeenSelected = true;
+
+
+		TitleLabel1.Text = "GLOBAL LEAGUES";
+	}
+
+	public async Task GetGlobalLeagues()
+	{
+		var Url = "http://localhost:8000/api/getgloballeagueids";
+		using var client = new HttpClient();
+
+		var response = await client.GetAsync(Url);
+		var result = await response.Content.ReadAsStringAsync();
+
+		int[]? leagueids = (int[])JObject.Parse(result)["leaguesbelongedto"].ToObject<int[]>();
+		if (leagueids is null)
+		{
+			await DisplayAlert("No leagues created", "Be the first, create one now!", "Ok");
+		}
+		else
+		{
+			var Url2 = "http://localhost:8000/api/getleagues";
+			for (int i = 0; i < leagueids.Count(); i++)
+			{
+				client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{leagueids[i]}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+				var response2 = await client.GetAsync(Url2);
+				var result2 = await response2.Content.ReadAsStringAsync();
+
+				client.DefaultRequestHeaders.Remove("LeagueIdHeader");
+				int leagueId = int.Parse(JObject.Parse(result2)["LeagueId"].ToString());
+				string leaguename = JObject.Parse(result2)["leaguename"].ToString();
+				int maxteams = int.Parse(JObject.Parse(result2)["maxteams"].ToString());
+				int creatorId = int.Parse(JObject.Parse(result2)["creator"].ToString());
+				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
+
+				string fmt = "000";
+				string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
+				league.ImageSource = $"image_part_{withLeadingZeroes}.jpg";
+				if (j < 60)
+				{
+					j++;
+				}
+				else
+				{
+					j = 1;
+				}
+
+				GlobalLeagues.Add(league);
+				var Url3 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+
+				client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
+				var response3 = await client.GetAsync(Url3);
+				var result3 = await response3.Content.ReadAsStringAsync();
+
+				client.DefaultRequestHeaders.Remove("UsernameEmail");
+
+				int userID = int.Parse(JObject.Parse(result3)["UserId"].ToString());
+				string username = JObject.Parse(result3)["user_name"].ToString();
+				string name = JObject.Parse(result3)["name"].ToString();
+				string email = JObject.Parse(result3)["email"].ToString();
+				User user = new User(userID, username, name, email);
+				GlobalLeagueCreators.Add(user);
+
+
+				league.CreatorName = user.Name; // Merge name and username from user into league for collection view binding purposes
+				league.CreatorUsername = user.Username;
+			}
+		}
+	}
+
+	private void OnJoinLeagueClicked(object sender, EventArgs e)
+	{
+
+	}
+
+	private void OnCreateLeagueClicked(object sender, EventArgs e)
 	{
 
 	}
 
 	private void OnGoBackClicked(object sender, EventArgs e)
 	{
-		LeaguesBelongedToGrid.IsVisible = true;
-		LeaguesBelongedToCollectionView.IsEnabled = true;
+		if (!globalHasBeenSelected)
+		{
+			LeaguesBelongedToGrid.IsVisible = true;
+			LeaguesBelongedToCollectionView.IsEnabled = true;
+			TitleLabel1.Text = "LEAGUES BELONGED TO";
+		}
+		else if (globalHasBeenSelected)
+		{
+			GlobalLeaguesGrid.IsVisible = true;
+			GlobalLeaguesCollectionView.IsEnabled = true;
+			GoBackBtn2.IsVisible = true;
+			TitleLabel1.Text = "GLOBAL LEAGUES";
+			JoinLeagueBtn.IsVisible = true;
+			CreateLeagueBtn.IsVisible = true;
+		}
 
 		CurrentLeagueCollectionViewGrid.IsVisible = false;
 		CurrentLeagueCollectionView.IsEnabled = false;
 
-		CurrentlySelected.RemoveAt(0);
+		if (CurrentlySelected is not null)
+		{
+			CurrentlySelected.RemoveAt(0);
+		}
 
 		GoBackBtn.IsVisible= false;
 		ViewLeagueBtn.IsVisible = true;
 
+	} // End method
+
+	private void OnGoBack2Clicked(object sender, EventArgs e)
+	{
+		LeaguesBelongedToGrid.IsVisible = true;
+		LeaguesBelongedToCollectionView.IsEnabled = true;
+
+		GlobalLeaguesGrid.IsVisible = false;
+		GlobalLeaguesCollectionView.IsEnabled = false;
+
+		GoBackBtn2.IsVisible= false;
+
+		JoinLeagueBtn.IsVisible= false;
+		CreateLeagueBtn.IsVisible= false;
+
+		globalHasBeenSelected = false;
+		OrLabel.IsVisible = true;
+		JoinCreateBtn.IsVisible = true;
+
 		TitleLabel1.Text = "LEAGUES BELONGED TO";
-	}
-	
+
+	} // End method
+
 
 
 

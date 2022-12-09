@@ -27,7 +27,6 @@
                     <Shadow Brush="#737373" Offset="0,20" Radius="20" Opacity="1.2"/>
                 </Label.Shadow>
             </Label>
-
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" ZIndex="1" VerticalOptions="Center">

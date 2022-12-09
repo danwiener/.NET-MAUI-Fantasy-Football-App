@@ -81,7 +81,7 @@
                     </Grid.ColumnDefinitions>
                     <HorizontalStackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="End">
                         <Label x:Name="UpperCaseLabel" IsVisible="false" FontFamily="OpenSansRegular" TextColor="White" FontSize="14" FontAutoScalingEnabled="True" Text="Include uppercase letters" Margin="0,0,0,0" />
-                        <CheckBox x:Name="UpperCaseCheckBox" IsVisible="false" BackgroundColor="Red" Color="#a6a6a6" Margin="5,0,0,0"/>
+                        <CheckBox x:Name="UpperCaseCheckBox" IsVisible="false" BackgroundColor="#a6a6a6" Color="#a6a6a6" Margin="5,0,0,0"/>
                         <Label x:Name="LowerCaseLabel" IsVisible="false" FontFamily="OpenSansRegular" TextColor="White" FontSize="14" FontAutoScalingEnabled="True" Text="Include lowercase letters" Margin="2.5,0,0,0" LineBreakMode="WordWrap" />
                         <CheckBox x:Name="LowerCaseCheckBox" IsVisible="false" Color="#a6a6a6" Margin="5,0,0,0"/>
                         <Label x:Name="IncludeNumbersLabel" IsVisible="false" FontFamily="OpenSansRegular" TextColor="White" FontSize="14" FontAutoScalingEnabled="True" Text="Include numbers" Margin="2.5,0,0,0" LineBreakMode="WordWrap"/>
