@@ -21,6 +21,7 @@ public partial class HomePage : ContentPage
 	ObservableCollection<User> creators;
 	ObservableCollection<User> globalleaguecreators;
 	ObservableCollection<League> currentlySelected;
+	ObservableCollection<LeagueRules> leagueRules;
 	private bool globalHasBeenSelected = false;
 
 	User user;
@@ -60,6 +61,16 @@ public partial class HomePage : ContentPage
 		set
 		{
 			currentlySelected = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public ObservableCollection<LeagueRules> CurrentLeagueRules
+	{
+		get => leagueRules;
+		set
+		{
+			leagueRules = value;
 			OnPropertyChanged();
 		}
 	}
@@ -586,10 +597,12 @@ public partial class HomePage : ContentPage
 	} // End method
 
 	// Retrieve league rules for selected league
-	private void OnViewEditRulesClicked(object sender, EventArgs e)
+	private async void OnViewEditRulesClicked(object sender, EventArgs e)
 	{
 		League league = CurrentLeagueCollectionView.SelectedItem as League;
 		int id = league.LeagueId;
+
+		await GetRules(id);
 	} // End method
 
 	public async Task GetRules(int leagueid)
@@ -601,7 +614,60 @@ public partial class HomePage : ContentPage
 		var response = await client.GetAsync(Url);
 		var result = await response.Content.ReadAsStringAsync();
 
+		int qbcount = int.Parse(JObject.Parse(result)["qbcount"].ToString()); // extract league rules from http response
+		int rbcount = int.Parse(JObject.Parse(result)["rbcount"].ToString()); // extract league rules from http response
+		int wrcount = int.Parse(JObject.Parse(result)["wrcount"].ToString()); // extract league rules from http response
+		int tecount = int.Parse(JObject.Parse(result)["tecount"].ToString()); // extract league rules from http response
+		int defensecount = int.Parse(JObject.Parse(result)["defensecount"].ToString()); // extract league rules from http response
+		int kcount = int.Parse(JObject.Parse(result)["kcount"].ToString()); // extract league rules from http response
+		int passingtdpoints = int.Parse(JObject.Parse(result)["passingtdpoints"].ToString()); // extract league rules from http response
+		double ppc = Convert.ToDouble(JObject.Parse(result)["ppc"].ToString()); // extract league rules from http response
+		double ppi = int.Parse(JObject.Parse(result)["ppi"].ToString()); // extract league rules from http response
+		int PPTwentyFiveYdsPass = int.Parse(JObject.Parse(result)["pptwentyfivepass"].ToString()); // extract league rules from http response
+		int fortyyardpassbonus = int.Parse(JObject.Parse(result)["fortyyardpassbonus"].ToString()); // extract league rules from http response
+		int sixtyyardpassbonus = int.Parse(JObject.Parse(result)["sixtyyardpassbonus"].ToString()); // extract league rules from http response
+		int threehundredyardpassbonus = int.Parse(JObject.Parse(result)["threehundredyardpassbonus"].ToString()); // extract league rules from http response
+		int fivehundredyardpassbonus = int.Parse(JObject.Parse(result)["fivehundredyardpassbonus"].ToString()); // extract league rules from http response
+		int rushingtdpoints = int.Parse(JObject.Parse(result)["rushingtdpoints"].ToString()); // extract league rules from http response
+		int receivingtdpoints = int.Parse(JObject.Parse(result)["receivingtdpoints"].ToString()); // extract league rules from http response
+		int pptenrush = int.Parse(JObject.Parse(result)["pptenrush"].ToString()); // extract league rules from http response
+		int fortyyardrushreceivingbonus = int.Parse(JObject.Parse(result)["fortyyardrushreceivingbonus"].ToString()); // extract league rules from http response
+		int sixtyyardrushreceivingbonus = int.Parse(JObject.Parse(result)["sixtyyardrushreceivingbonus"].ToString()); // extract league rules from http response
+		int onehundredyardrushreceivingbonus = int.Parse(JObject.Parse(result)["onehundredyardrushreceivingbonus"].ToString()); // extract league rules from http response
+		int twohundredyardrushreceivingbonus = int.Parse(JObject.Parse(result)["twohundredyardrushreceivingbonus"].ToString()); // extract league rules from http response
+		double ppr = Convert.ToDouble(JObject.Parse(result)["ppr"].ToString()); // extract league rules from http response
+		int twopointconversion = int.Parse(JObject.Parse(result)["twopointconversion"].ToString()); // extract league rules from http response
+		int interceptionoffense = int.Parse(JObject.Parse(result)["interceptionoffense"].ToString()); // extract league rules from http response
+		int fumbleoffense = int.Parse(JObject.Parse(result)["fumbleoffense"].ToString()); // extract league rules from http response
+		int safetyoffense = int.Parse(JObject.Parse(result)["safetyoffense"].ToString()); // extract league rules from http response
+		int sackdefense = int.Parse(JObject.Parse(result)["sackdefense"].ToString()); // extract league rules from http response
+		int tackledefense = int.Parse(JObject.Parse(result)["tackledefense"].ToString()); // extract league rules from http response
+		int fgpuntblock = int.Parse(JObject.Parse(result)["fgpuntblock"].ToString()); // extract league rules from http response
+		int interceptiondefense = int.Parse(JObject.Parse(result)["interceptiondefense"].ToString()); // extract league rules from http response
+		int fumbledefense = int.Parse(JObject.Parse(result)["fumbledefense"].ToString()); // extract league rules from http response
+		int safetydefense = int.Parse(JObject.Parse(result)["safetydefense"].ToString()); // extract league rules from http response
+		int inttd = int.Parse(JObject.Parse(result)["inttd"].ToString()); // extract league rules from http response
+		int fumbletd = int.Parse(JObject.Parse(result)["fumbletd"].ToString()); // extract league rules from http response
+		int returntd = int.Parse(JObject.Parse(result)["returntd"].ToString()); // extract league rules from http response
+		int fgtentotwenty = int.Parse(JObject.Parse(result)["fgtentotwenty"].ToString()); // extract league rules from http response
+		int fgmissedten = int.Parse(JObject.Parse(result)["fgmissedten"].ToString()); // extract league rules from http response
+		int fgtwentytothirty = int.Parse(JObject.Parse(result)["fgtwentytothirty"].ToString()); // extract league rules from http response
+		int fgmissedtwenty = int.Parse(JObject.Parse(result)["fgmissedtwenty"].ToString()); // extract league rules from http response
+		int fgthirtytoforty = int.Parse(JObject.Parse(result)["fgthirtytoforty"].ToString()); // extract league rules from http response
+		int fgmissedthirty = int.Parse(JObject.Parse(result)["fgmissedthirty"].ToString()); // extract league rules from http response
+		int fgfortytofifty = int.Parse(JObject.Parse(result)["fgfortytofifty"].ToString()); // extract league rules from http response
+		int fgmissedforty = int.Parse(JObject.Parse(result)["fgmissedforty"].ToString()); // extract league rules from http response
+		int fgfiftytosixty = int.Parse(JObject.Parse(result)["fgfiftytosixty"].ToString()); // extract league rules from http response
+		int fgmissedfifty = int.Parse(JObject.Parse(result)["fgmissedfifty"].ToString()); // extract league rules from http response
+		int fgsixtyplus = int.Parse(JObject.Parse(result)["fgsixtyplus"].ToString()); // extract league rules from http response
+		int fgmissedsixty = int.Parse(JObject.Parse(result)["fgmissedsixty"].ToString()); // extract league rules from http response
+		int xpmade = int.Parse(JObject.Parse(result)["xpmade"].ToString()); // extract league rules from http response
+		int xpmissed = int.Parse(JObject.Parse(result)["xpmissed"].ToString()); // extract league rules from http response
+		LeagueRules leaguerules = new LeagueRules(qbcount, rbcount, wrcount, tecount, kcount, xpmade, passingtdpoints, ppc, ppi, fgmissedtwenty, fortyyardpassbonus, sixtyyardpassbonus, threehundredyardpassbonus, fivehundredyardpassbonus, rushingtdpoints, receivingtdpoints, pptenrush, fortyyardrushreceivingbonus, sixtyyardrushreceivingbonus, onehundredyardrushreceivingbonus, twohundredyardrushreceivingbonus, ppr, twopointconversion, interceptionoffense, fumbleoffense, safetyoffense, sackdefense, tackledefense, fgpuntblock, interceptiondefense, fumbledefense, safetydefense, inttd, fumbletd, returntd, fgtentotwenty, fgmissedten, fgtwentytothirty, fgmissedthirty, fgthirtytoforty, fgmissedsixty, fgfortytofifty, fgmissedforty, fgfiftytosixty, fgmissedfifty, fgsixtyplus, xpmissed);
 
+		ObservableCollection<LeagueRules> currentLeagueRules = new ObservableCollection<LeagueRules>();
+		currentLeagueRules.Add(leaguerules);
+		CurrentLeagueRules = currentLeagueRules;
 	}
 
 

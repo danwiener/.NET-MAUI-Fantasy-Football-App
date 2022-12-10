@@ -9,6 +9,9 @@ namespace FantasyFootballMAUI.Models
 {
 	public class LeagueRules
 	{
+		[JsonPropertyName("maxteams")]
+		public int MaxTeams { get; set; } = default!;
+
 		[JsonPropertyName("qbcount")]
 		public int QbCount { get; set; } = default!;
 
@@ -156,8 +159,9 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("xpmissed")]
 		public int XpMissed { get; set; } = default!;
 
-		public LeagueRules(int qbCount = 3, int rbCount = 4, int wrCount = 5, int teCount = 3, int dCount = 2, int kCount = 2, int passingTDPoints = 4, double pPC = 0.3, double pPI = -0.1, int ptspertwentyfive = 1, int fortyYardPassBonus = 2, int sixtyYardPassBonus = 3, int threeHundredYardPassBonus = 3, int fiveHundredYardPassBonus = 5, int rushingTDPoints = 6, int receivingTDPoints = 6, int pptenrush = 1, int fortyYardRushReceivingBonus = 3, int sixtyYardRushReceivingBonus = 4, int oneHundredYardRushReceivingBonus = 3, int twoHundredYardRushReceivingBonus = 5, double pPR = 0.5, int twoPointConversion = 1, int interceptionOffense = -1, int fumbleOffense = -1, int safetyOffense = -1, int sackDefense = 1, int tackleDefense = 0, int fgPuntBlock = 1, int interceptionDefense = 2, int fumbleDefense = 2, int safetyDefense = 2, int intTd = 6, int fumbleTd = 6, int returnTd = 6, int fgTenToTwenty = 3, int fgMissedTen = -4, int fgTwentyToThirty = 3, int fgMissedTwenty = -3, int fgThirtyToForty = 3, int fgMissedThirty = -2, int fgFortyToFifty = 4, int fgMissedforty = -1, int fgFiftyToSixty = 5, int fgMissedFifty = -1, int fgSixtyPlus = 6, int fgMissedSixty = -1, int xpMade = 1, int xpMissed = -2)
+		public LeagueRules(int maxteams = 12, int qbCount = 3, int rbCount = 4, int wrCount = 5, int teCount = 3, int dCount = 2, int kCount = 2, int passingTDPoints = 4, double pPC = 0.3, double pPI = -0.1, int ptspertwentyfive = 1, int fortyYardPassBonus = 2, int sixtyYardPassBonus = 3, int threeHundredYardPassBonus = 3, int fiveHundredYardPassBonus = 5, int rushingTDPoints = 6, int receivingTDPoints = 6, int pptenrush = 1, int fortyYardRushReceivingBonus = 3, int sixtyYardRushReceivingBonus = 4, int oneHundredYardRushReceivingBonus = 3, int twoHundredYardRushReceivingBonus = 5, double pPR = 0.5, int twoPointConversion = 1, int interceptionOffense = -1, int fumbleOffense = -1, int safetyOffense = -1, int sackDefense = 1, int tackleDefense = 0, int fgPuntBlock = 1, int interceptionDefense = 2, int fumbleDefense = 2, int safetyDefense = 2, int intTd = 6, int fumbleTd = 6, int returnTd = 6, int fgTenToTwenty = 3, int fgMissedTen = -4, int fgTwentyToThirty = 3, int fgMissedTwenty = -3, int fgThirtyToForty = 3, int fgMissedThirty = -2, int fgFortyToFifty = 4, int fgMissedforty = -1, int fgFiftyToSixty = 5, int fgMissedFifty = -1, int fgSixtyPlus = 6, int fgMissedSixty = -1, int xpMade = 1, int xpMissed = -2)
 		{
+			MaxTeams = maxteams;
 			QbCount = qbCount;
 			RbCount = rbCount;
 			WrCount = wrCount;
