@@ -213,25 +213,48 @@ public partial class HomePage : ContentPage
 
 	} // End method
 
-	private void OnViewLeagueClicked(object sender, EventArgs e)
+	private async void OnViewLeagueClicked(object sender, EventArgs e)
 	{
 		if (LeaguesBelongedToGrid.IsVisible)
 		{
+			if (LeaguesBelongedToCollectionView.SelectedItem == null)
+			{
+				await DisplayAlert("No league selected", "Please select a league to view", "Ok");
+				return;
+			}
+			CurrentLeagueCollectionViewGrid.IsVisible = true;
+			CurrentLeagueCollectionView.IsEnabled = true;
+			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
+
+
+
 			LeaguesBelongedToGrid.IsVisible = false;
 			LeaguesBelongedToCollectionView.IsEnabled = false;
+			globalHasBeenSelected = false;
+
+			OrLabel.IsVisible= false;
+			JoinCreateBtn.IsVisible= false;
 		}
-		if (GlobalLeaguesGrid.IsVisible)
+		else if (GlobalLeaguesGrid.IsVisible)
 		{
+			if (GlobalLeaguesCollectionView.SelectedItem == null)
+			{
+				await DisplayAlert("No league selected", "Please select a league to view", "Ok");
+				return;
+			}
+			CurrentLeagueCollectionViewGrid.IsVisible = true;
+			CurrentLeagueCollectionView.IsEnabled = true;
+			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
 			GlobalLeaguesGrid.IsVisible = false;
 			GlobalLeaguesCollectionView.IsEnabled = false;
 			GoBackBtn2.IsVisible = false;
 			JoinLeagueBtn.IsVisible = false;
 			CreateLeagueBtn.IsVisible = false;
+			globalHasBeenSelected = true;
 		}
 
-		CurrentLeagueCollectionViewGrid.IsVisible = true;
-		CurrentLeagueCollectionView.IsEnabled = true;
-
+		JoinLeagueBtn.IsVisible = true;
+		RulesBtn.IsVisible = true;
 		ViewLeagueBtn.IsVisible= false;
 		GoBackBtn.IsVisible = true;
 		TitleLabel1.Text = "LEAGUE INFO";
@@ -240,10 +263,20 @@ public partial class HomePage : ContentPage
 
 	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
 	{
-		DeleteLeagueDTO dto;
+		if (!CurrentlySelected[0].CreatedByCurrentUser)
+		{
+			await DisplayAlert("Not league owner", "You may only delete leagues that you created", "Ok");
+			return;
+		}
 
+		DeleteLeagueDTO dto;
 		if (LeaguesBelongedToGrid.IsVisible)
 		{
+			if (LeaguesBelongedToCollectionView.SelectedItem == null)
+			{
+				await DisplayAlert("No league selected", "Please select a league to delete", "Ok");
+				return;
+			}
 			if (LeaguesBelongedToCollectionView.SelectedItem != null)
 			{
 				League league = LeaguesBelongedToCollectionView.SelectedItem as League;
@@ -257,10 +290,26 @@ public partial class HomePage : ContentPage
 						break;
 					}
 				}
+				foreach (League item in GlobalLeagues)
+				{
+					if (item.LeagueId == dto.leagueid)
+					{
+						GlobalLeagues.Remove(item);
+						break;
+					}
+				}
 			}
-			else if (CurrentlySelected is not null)
+		}
+		else if (GlobalLeaguesGrid.IsVisible)
+		{
+			if (GlobalLeaguesCollectionView.SelectedItem == null)
 			{
-				League league = CurrentlySelected[0];
+				await DisplayAlert("No league selected", "Please select a league to delete", "Ok");
+				return;
+			}
+			if (GlobalLeaguesCollectionView.SelectedItem != null)
+			{
+				League league = GlobalLeaguesCollectionView.SelectedItem as League;
 				dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
 				await DeleteLeague(dto);
 				foreach (League item in BelongedTo)
@@ -268,30 +317,78 @@ public partial class HomePage : ContentPage
 					if (item.LeagueId == dto.leagueid)
 					{
 						BelongedTo.Remove(item);
+						break;
+					}
+				}
+				foreach (League item in GlobalLeagues)
+				{
+					if (item.LeagueId == dto.leagueid)
+					{
 						GlobalLeagues.Remove(item);
 						break;
 					}
 				}
-				CurrentlySelected.RemoveAt(0);
 			}
 		}
-		
-
-		if (CurrentLeagueCollectionView.IsVisible)
+		else if (CurrentLeagueCollectionViewGrid.IsVisible)
 		{
-			LeaguesBelongedToGrid.IsVisible = true;
-			LeaguesBelongedToCollectionView.IsEnabled = true;
-
-			CurrentLeagueCollectionViewGrid.IsVisible = false;
-			CurrentLeagueCollectionView.IsEnabled = false;
-
-			CurrentlySelected.RemoveAt(0);
-
-			GoBackBtn.IsVisible = false;
-			ViewLeagueBtn.IsVisible = true;
-
-			TitleLabel1.Text = "LEAGUES BELONGED TO";
+			if (CurrentLeagueCollectionView.SelectedItem != null)
+			{
+				League league = CurrentLeagueCollectionView.SelectedItem as League;
+				dto = new DeleteLeagueDTO(league.LeagueId, league.LeagueName);
+				await DeleteLeague(dto);
+				foreach (League item in BelongedTo)
+				{
+					if (item.LeagueId == dto.leagueid)
+					{
+						BelongedTo.Remove(item);
+						break;
+					}
+				}
+				foreach (League item in GlobalLeagues)
+				{
+					if (item.LeagueId == dto.leagueid)
+					{
+						GlobalLeagues.Remove(item);
+						break;
+					}
+				}
+				if (globalHasBeenSelected)
+				{
+					GlobalLeaguesGrid.IsVisible = true;
+					GlobalLeaguesCollectionView.IsEnabled = true;
+				}
+				else
+				{
+					LeaguesBelongedToGrid.IsVisible = true;
+					LeaguesBelongedToCollectionView.IsEnabled = true;
+				}
+			}
 		}
+
+
+		CurrentLeagueCollectionViewGrid.IsVisible = false;
+		CurrentLeagueCollectionView.IsEnabled = false;
+
+		if (CurrentlySelected != null)
+		{
+			CurrentlySelected.RemoveAt(0);
+		}
+		else
+		{
+			await DisplayAlert("No league selected", "Please select a league to delete", "Ok");
+			return;
+		}
+		LeaguesBelongedToCollectionView.SelectedItem = null;
+		CurrentLeagueCollectionView.SelectedItem= null;
+		GlobalLeaguesCollectionView.SelectedItem= null;
+			
+
+		GoBackBtn.IsVisible = false;
+		RulesBtn.IsVisible = false;
+		ViewLeagueBtn.IsVisible = true;
+
+		TitleLabel1.Text = "LEAGUES BELONGED TO";
 
 	}
 
@@ -319,6 +416,15 @@ public partial class HomePage : ContentPage
 
 	private async void OnJoinOtherClicked(object sender, EventArgs e)
 	{
+
+		if (CurrentlySelected is not null)
+		{
+			CurrentlySelected.Clear();
+		}
+		LeaguesBelongedToCollectionView.SelectedItem = null; // Clear selected items which were causing bug with delete functionality
+		CurrentLeagueCollectionView.SelectedItem = null;
+		GlobalLeaguesCollectionView.SelectedItem = null;
+
 		LeaguesBelongedToGrid.IsVisible = false;
 		LeaguesBelongedToCollectionView.IsEnabled = false;
 
@@ -329,7 +435,6 @@ public partial class HomePage : ContentPage
 		OrLabel.IsVisible= false;
 		JoinCreateBtn.IsVisible = false;
 
-		JoinLeagueBtn.IsVisible = true;
 		CreateLeagueBtn.IsVisible = true;
 		GoBackBtn2.IsVisible = true;
 
@@ -417,28 +522,39 @@ public partial class HomePage : ContentPage
 	{
 		if (!globalHasBeenSelected)
 		{
+			CurrentLeagueCollectionViewGrid.IsVisible = false;
+			CurrentLeagueCollectionView.IsEnabled = false;
+
 			LeaguesBelongedToGrid.IsVisible = true;
 			LeaguesBelongedToCollectionView.IsEnabled = true;
 			TitleLabel1.Text = "LEAGUES BELONGED TO";
+
+			LeaguesBelongedToCollectionView.SelectedItem= null;
+
+			OrLabel.IsVisible = true;
+			JoinCreateBtn.IsVisible = true;
 		}
 		else if (globalHasBeenSelected)
 		{
+			CurrentLeagueCollectionViewGrid.IsVisible = false;
+			CurrentLeagueCollectionView.IsEnabled = false;
+
 			GlobalLeaguesGrid.IsVisible = true;
 			GlobalLeaguesCollectionView.IsEnabled = true;
 			GoBackBtn2.IsVisible = true;
 			TitleLabel1.Text = "GLOBAL LEAGUES";
-			JoinLeagueBtn.IsVisible = true;
 			CreateLeagueBtn.IsVisible = true;
+
+			GlobalLeaguesCollectionView.SelectedItem = null;
 		}
 
-		CurrentLeagueCollectionViewGrid.IsVisible = false;
-		CurrentLeagueCollectionView.IsEnabled = false;
 
 		if (CurrentlySelected is not null)
 		{
-			CurrentlySelected.RemoveAt(0);
+			CurrentlySelected.Clear();
 		}
-
+		JoinLeagueBtn.IsVisible = false;
+		RulesBtn.IsVisible = false;
 		GoBackBtn.IsVisible= false;
 		ViewLeagueBtn.IsVisible = true;
 
@@ -446,6 +562,10 @@ public partial class HomePage : ContentPage
 
 	private void OnGoBack2Clicked(object sender, EventArgs e)
 	{
+		LeaguesBelongedToCollectionView.SelectedItem = null; // Clear selected items which were causing bug with delete functionality
+		CurrentLeagueCollectionView.SelectedItem = null;
+		GlobalLeaguesCollectionView.SelectedItem = null;
+
 		LeaguesBelongedToGrid.IsVisible = true;
 		LeaguesBelongedToCollectionView.IsEnabled = true;
 
@@ -465,18 +585,28 @@ public partial class HomePage : ContentPage
 
 	} // End method
 
+	// Retrieve league rules for selected league
+	private void OnViewEditRulesClicked(object sender, EventArgs e)
+	{
+		League league = CurrentLeagueCollectionView.SelectedItem as League;
+		int id = league.LeagueId;
+	} // End method
+
+	public async Task GetRules(int leagueid)
+	{
+		var Url = "http://localhost:8000/api/getleaguerules";
+		using var client = new HttpClient();
+		client.DefaultRequestHeaders.Add("LeagueIdForRulesHeader", $"{leagueid}");
+
+		var response = await client.GetAsync(Url);
+		var result = await response.Content.ReadAsStringAsync();
+
+		int[]? leagueids = (int[])JObject.Parse(result)["leaguesbelongedto"].ToObject<int[]>();
+		if (leagueids is null)
+		{
+			await DisplayAlert("No leagues created", "Be the first, create one now!", "Ok");
+		}
+	}
 
 
-
-	//private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-	//{
-	//	var league = e.CurrentSelection.FirstOrDefault() as League;
-	//	if (league == null)
-	//	{
-	//		return;
-	//	}
-
-	//	((CollectionView)sender).SelectedItem = null;
-
-	//}
-} // End method
+} // End class

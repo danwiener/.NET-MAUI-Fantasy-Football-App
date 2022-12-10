@@ -63,21 +63,21 @@
             </Label>
         </Grid>
 
-        <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" ColumnDefinitions=".25*, .25*,.5*" VerticalOptions="End" Margin="0,0,0,-5">
-            <Button Text="GO BACK"  x:Name="GoBackBtn2"  Grid.Column="1" IsVisible="false" Clicked="OnGoBack2Clicked" HeightRequest="44" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="End" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="2.5, 0, 2.5, 0"/>
-        </Grid>
-
 
         <Grid Grid.Column="1" Grid.Row="3" ColumnDefinitions=".5*,.5*" Margin="0,5,0,0" HorizontalOptions="Start">
             <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Center" Margin="7.5,0,0,0">
                 <Button Text="VIEW LEAGUE" x:Name="ViewLeagueBtn" Clicked="OnViewLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="0, 0, 0, 0"/>
                 <Button Text="GO BACK" x:Name="GoBackBtn" IsVisible="false" Clicked="OnGoBackClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="0, 0, 0, 0"/>
 
-                <Button Text="DELETE LEAGUE" Padding="-5" Clicked="OnDeleteLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 2.5, 0"/>
-                <Button Text="JOIN LEAGUE" x:Name="JoinLeagueBtn" IsVisible="false" Clicked="OnJoinLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="0, 0, 0, 0"/>
-                <Button x:Name="CreateLeagueBtn" IsVisible="False" Text="CREATE LEAGUE" Padding="-5" Clicked="OnCreateLeagueClicked" HeightRequest="44" WidthRequest="87.5" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 2.5, 0"/>
+                <Button Text="DELETE LEAGUE" Padding="-5" Clicked="OnDeleteLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
 
-                <Label x:Name="OrLabel" FontSize="20" Text="OR"  TextColor="#6588a6" Margin="3.75, 0, 3.75, 0" WidthRequest="30" VerticalOptions="Center"/>
+                <Button Text="JOIN LEAGUE" x:Name="JoinLeagueBtn" IsVisible="false" Clicked="OnJoinLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="2.5, 0, 0, 0"/>
+                <Button Text="VIEW/EDIT RULES" x:Name="RulesBtn" IsVisible="false" Padding="-5" Clicked="OnViewEditRulesClicked" HeightRequest="44" WidthRequest="87.5" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
+
+                <Button x:Name="CreateLeagueBtn" IsVisible="False" Text="CREATE LEAGUE" Clicked="OnCreateLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
+                <Button Text="GO BACK"  x:Name="GoBackBtn2"  IsVisible="false" Clicked="OnGoBack2Clicked" HeightRequest="44" WidthRequest="87.5" VerticalOptions="Center" HorizontalOptions="End" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="2.5, 0, 2.5, 0"/>
+
+                <Label x:Name="OrLabel" FontSize="20" Text="OR"  TextColor="#6588a6" Margin="6.25, 0, 3.75, 0" WidthRequest="30" VerticalOptions="Center"/>
                 <Button x:Name="JoinCreateBtn" Text="JOIN/CREATE OTHER LEAGUE" Clicked="OnJoinOtherClicked"  HeightRequest="44" WidthRequest="140" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
             </HorizontalStackLayout>
         </Grid>
@@ -145,7 +145,7 @@
 
                             <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                                 <Label Margin="5, 0, 2.5, 0" Text="I Am Commissioner" LineBreakMode="TailTruncation" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
-                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="True" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
 
                             </HorizontalStackLayout>
                         </Grid>
@@ -214,11 +214,9 @@
 
 
                             <Image x:Name="LeagueIcon" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="60" WidthRequest="60" Source="{Binding ImageSource}"/>
-
                             <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                                 <Label Margin="5, 0, 2.5, 0" Text="I Am Commissioner" LineBreakMode="TailTruncation" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
-                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="True" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
-
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
                             </HorizontalStackLayout>
                         </Grid>
 
@@ -387,7 +385,7 @@
 
                             <HorizontalStackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                                 <Label Margin="5, 0, 2.5, 0" Text="I Am Commissioner" LineBreakMode="TailTruncation" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
-                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="True" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
                             </HorizontalStackLayout>
                         </Grid>
 

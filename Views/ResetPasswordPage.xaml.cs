@@ -26,10 +26,6 @@ public partial class ResetPasswordPage : ContentPage
 
 		ResetPasswordAsync(rp);
 
-		if (success)
-		{
-			await Shell.Current.GoToAsync($"{nameof(LoginPage)}");  
-		}
 	} // End method
 
 	// Reset user's password
@@ -53,7 +49,7 @@ public partial class ResetPasswordPage : ContentPage
 		else
 		{
 			await DisplayAlert("Success", "Your password has been reset, please sign in", "Ok");
-			success = true;
+			await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
 		}
 	}
 
