@@ -601,11 +601,7 @@ public partial class HomePage : ContentPage
 		var response = await client.GetAsync(Url);
 		var result = await response.Content.ReadAsStringAsync();
 
-		int[]? leagueids = (int[])JObject.Parse(result)["leaguesbelongedto"].ToObject<int[]>();
-		if (leagueids is null)
-		{
-			await DisplayAlert("No leagues created", "Be the first, create one now!", "Ok");
-		}
+
 	}
 
 
