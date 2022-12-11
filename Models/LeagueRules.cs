@@ -9,6 +9,7 @@ namespace FantasyFootballMAUI.Models
 {
 	public class LeagueRules
 	{
+
 		[JsonPropertyName("LeagueId")]
 		public int LeagueId { get; set; }
 
@@ -97,7 +98,7 @@ namespace FantasyFootballMAUI.Models
 		public int SackDefense { get; set; } = 1;
 
 		[JsonPropertyName("tackledefense")]
-		public int TackleDefense { get; set; } = 0;
+		public double TackleDefense { get; set; } = 0;
 
 		[JsonPropertyName("fgpuntblock")]
 		public int FgPuntBlock { get; set; } = 1;
@@ -162,9 +163,61 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("xpmissed")]
 		public int XpMissed { get; set; } = -2;
 
-		public LeagueRules(int leagueId)
+
+		public LeagueRules(int leagueId, int maxTeams, int qbCount, int rbCount, int wrCount, int teCount, int dCount, int kCount, int passingTDPoints, double pPC, double pPI, int pPTwentyFiveYdsPass, int fortyYardPassBonus, int sixtyYardPassBonus, int threeHundredYardPassBonus, int fiveHundredYardPassBonus, int rushingTDPoints, int receivingTDPoints, int pPTenRush, int fortyYardRushReceivingBonus, int sixtyYardRushReceivingBonus, int oneHundredYardRushReceivingBonus, int twoHundredYardRushReceivingBonus, double pPR, int twoPointConversion, int interceptionOffense, int fumbleOffense, int safetyOffense, int sackDefense, double tackleDefense, int fgPuntBlock, int interceptionDefense, int fumbleDefense, int safetyDefense, int intTd, int fumbleTd, int returnTd, int fgTenToTwenty, int fgMissedTen, int fgTwentyToThirty, int fgMissedTwenty, int fgThirtyToForty, int fgMissedThirty, int fgFortyToFifty, int fgMissedforty, int fgFiftyToSixty, int fgMissedFifty, int fgSixtyPlus, int fgMissedSixty, int xpMade, int xpMissed)
 		{
 			LeagueId = leagueId;
+			MaxTeams = maxTeams;
+			QbCount = qbCount;
+			RbCount = rbCount;
+			WrCount = wrCount;
+			TeCount = teCount;
+			DCount = dCount;
+			KCount = kCount;
+			PassingTDPoints = passingTDPoints;
+			PPC = pPC;
+			PPI = pPI;
+			PPTwentyFiveYdsPass = pPTwentyFiveYdsPass;
+			FortyYardPassBonus = fortyYardPassBonus;
+			SixtyYardPassBonus = sixtyYardPassBonus;
+			ThreeHundredYardPassBonus = threeHundredYardPassBonus;
+			FiveHundredYardPassBonus = fiveHundredYardPassBonus;
+			RushingTDPoints = rushingTDPoints;
+			ReceivingTDPoints = receivingTDPoints;
+			PPTenRush = pPTenRush;
+			FortyYardRushReceivingBonus = fortyYardRushReceivingBonus;
+			SixtyYardRushReceivingBonus = sixtyYardRushReceivingBonus;
+			OneHundredYardRushReceivingBonus = oneHundredYardRushReceivingBonus;
+			TwoHundredYardRushReceivingBonus = twoHundredYardRushReceivingBonus;
+			PPR = pPR;
+			TwoPointConversion = twoPointConversion;
+			InterceptionOffense = interceptionOffense;
+			FumbleOffense = fumbleOffense;
+			SafetyOffense = safetyOffense;
+			SackDefense = sackDefense;
+			TackleDefense = tackleDefense;
+			FgPuntBlock = fgPuntBlock;
+			InterceptionDefense = interceptionDefense;
+			FumbleDefense = fumbleDefense;
+			SafetyDefense = safetyDefense;
+			IntTd = intTd;
+			FumbleTd = fumbleTd;
+			ReturnTd = returnTd;
+			FgTenToTwenty = fgTenToTwenty;
+			FgMissedTen = fgMissedTen;
+			FgTwentyToThirty = fgTwentyToThirty;
+			FgMissedTwenty = fgMissedTwenty;
+			FgThirtyToForty = fgThirtyToForty;
+			FgMissedThirty = fgMissedThirty;
+			FgFortyToFifty = fgFortyToFifty;
+			FgMissedforty = fgMissedforty;
+			FgFiftyToSixty = fgFiftyToSixty;
+			FgMissedFifty = fgMissedFifty;
+			FgSixtyPlus = fgSixtyPlus;
+			FgMissedSixty = fgMissedSixty;
+			XpMade = xpMade;
+			XpMissed = xpMissed;
 		}
+
 	}
 }

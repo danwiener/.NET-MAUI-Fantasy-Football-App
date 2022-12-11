@@ -552,6 +552,8 @@ public partial class HomePage : ContentPage
 			RulesBtn.IsVisible = true;
 			EditBtn.IsVisible = false;
 			TitleLabel1.Text = "LEAGUE INFO";
+
+
 			return;
 
 		}
@@ -570,6 +572,7 @@ public partial class HomePage : ContentPage
 			OrLabel.IsVisible = true;
 			JoinCreateBtn.IsVisible = true;
 
+
 		}
 		else if (globalHasBeenSelected)
 		{
@@ -583,8 +586,8 @@ public partial class HomePage : ContentPage
 			CreateLeagueBtn.IsVisible = true;
 
 			GlobalLeaguesCollectionView.SelectedItem = null;
-		}
 
+		}
 
 		if (CurrentlySelected is not null)
 		{
@@ -640,10 +643,6 @@ public partial class HomePage : ContentPage
 		CurrentLeagueCollectionViewGrid.IsVisible = false;
 		CurrentLeagueCollectionView.IsEnabled = false;
 
-
-		LeagueRulesGrid.IsVisible= true;
-		LeagueRulesCollectionView.IsEnabled = true;
-
 		DeleteBtn.IsVisible= false;
 		JoinLeagueBtn.IsVisible= false;
 		RulesBtn.IsVisible = false;
@@ -688,7 +687,7 @@ public partial class HomePage : ContentPage
 		int fumbleoffense = int.Parse(JObject.Parse(result)["fumbleoffense"].ToString()); // extract league rules from http response
 		int safetyoffense = int.Parse(JObject.Parse(result)["safetyoffense"].ToString()); // extract league rules from http response
 		int sackdefense = int.Parse(JObject.Parse(result)["sackdefense"].ToString()); // extract league rules from http response
-		int tackledefense = int.Parse(JObject.Parse(result)["tackledefense"].ToString()); // extract league rules from http response
+		double tackledefense = Convert.ToDouble(JObject.Parse(result)["tackledefense"].ToString()); // extract league rules from http response
 		int fgpuntblock = int.Parse(JObject.Parse(result)["fgpuntblock"].ToString()); // extract league rules from http response
 		int interceptiondefense = int.Parse(JObject.Parse(result)["interceptiondefense"].ToString()); // extract league rules from http response
 		int fumbledefense = int.Parse(JObject.Parse(result)["fumbledefense"].ToString()); // extract league rules from http response
@@ -710,12 +709,17 @@ public partial class HomePage : ContentPage
 		int fgmissedsixty = int.Parse(JObject.Parse(result)["fgmissedsixty"].ToString()); // extract league rules from http response
 		int xpmade = int.Parse(JObject.Parse(result)["xpmade"].ToString()); // extract league rules from http response
 		int xpmissed = int.Parse(JObject.Parse(result)["xpmissed"].ToString()); // extract league rules from http response
-		LeagueRules leaguerules = new LeagueRules(leagueid);
+		LeagueRules leaguerules = new LeagueRules(leagueid, maxteams, qbcount, rbcount, wrcount, tecount, defensecount, kcount, passingtdpoints, ppc, ppi, PPTwentyFiveYdsPass, fortyyardpassbonus, sixtyyardpassbonus, threehundredyardpassbonus, fivehundredyardpassbonus, rushingtdpoints, receivingtdpoints, pptenrush, fortyyardrushreceivingbonus, sixtyyardrushreceivingbonus, onehundredyardrushreceivingbonus, twohundredyardrushreceivingbonus, ppr, twopointconversion, interceptionoffense, fumbleoffense, safetyoffense, sackdefense, tackledefense, fgpuntblock, interceptiondefense, fumbledefense, safetydefense, inttd, fumbletd, returntd, fgtentotwenty, fgmissedten, fgtwentytothirty, fgmissedtwenty, fgthirtytoforty, fgmissedthirty, fgfortytofifty, fgmissedforty, fgfiftytosixty, fgmissedfifty, fgsixtyplus, fgmissedsixty, xpmade, xpmissed);
 		CurrentLeagueRules.Add(leaguerules);
 	}
 
 	private void OnEditBtnClicked(object sender, EventArgs e)
 	{
+		EditLeagueRulesGrid.IsVisible = true;
+		LeagueRulesCollectionView.IsEnabled = false;
+		LeagueRulesGrid.IsVisible = false;
+
+		EditBtn.IsVisible = false;
 
 	}
 
