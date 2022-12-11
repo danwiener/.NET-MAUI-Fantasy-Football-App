@@ -107,6 +107,7 @@ public partial class HomePage : ContentPage
 		Creators = new ObservableCollection<User>();
 		GlobalLeagues = new ObservableCollection<League>();
 		GlobalLeagueCreators= new ObservableCollection<User>();
+		CurrentLeagueRules = new ObservableCollection<LeagueRules>();
 
 		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
 
@@ -368,11 +369,19 @@ public partial class HomePage : ContentPage
 				{
 					GlobalLeaguesGrid.IsVisible = true;
 					GlobalLeaguesCollectionView.IsEnabled = true;
+					CreateLeagueBtn.IsVisible = true;
+					GoBackBtn2.IsVisible = true;
+					JoinLeagueBtn.IsVisible = false;
+					TitleLabel1.Text = "GLOBAL LEAGUES";
 				}
 				else
 				{
 					LeaguesBelongedToGrid.IsVisible = true;
 					LeaguesBelongedToCollectionView.IsEnabled = true;
+					JoinLeagueBtn.IsVisible = false;
+					OrLabel.IsVisible = true;
+					JoinCreateBtn.IsVisible = true;
+					TitleLabel1.Text = "LEAGUES BELONGED TO";
 				}
 			}
 		}
@@ -399,7 +408,6 @@ public partial class HomePage : ContentPage
 		RulesBtn.IsVisible = false;
 		ViewLeagueBtn.IsVisible = true;
 
-		TitleLabel1.Text = "LEAGUES BELONGED TO";
 
 	}
 
@@ -531,8 +539,25 @@ public partial class HomePage : ContentPage
 
 	private void OnGoBackClicked(object sender, EventArgs e)
 	{
+		if (LeagueRulesGrid.IsVisible)
+		{
+			LeagueRulesGrid.IsVisible = false;
+			LeagueRulesCollectionView.IsEnabled = false;
+
+			CurrentLeagueCollectionViewGrid.IsVisible = true;
+			CurrentLeagueCollectionView.IsEnabled = true;
+
+			DeleteBtn.IsVisible = true;
+			JoinLeagueBtn.IsVisible = true;
+			RulesBtn.IsVisible = true;
+			EditBtn.IsVisible = false;
+			TitleLabel1.Text = "LEAGUE INFO";
+			return;
+
+		}
 		if (!globalHasBeenSelected)
 		{
+
 			CurrentLeagueCollectionViewGrid.IsVisible = false;
 			CurrentLeagueCollectionView.IsEnabled = false;
 
@@ -540,10 +565,11 @@ public partial class HomePage : ContentPage
 			LeaguesBelongedToCollectionView.IsEnabled = true;
 			TitleLabel1.Text = "LEAGUES BELONGED TO";
 
-			LeaguesBelongedToCollectionView.SelectedItem= null;
+			LeaguesBelongedToCollectionView.SelectedItem = null;
 
 			OrLabel.IsVisible = true;
 			JoinCreateBtn.IsVisible = true;
+
 		}
 		else if (globalHasBeenSelected)
 		{
@@ -599,10 +625,30 @@ public partial class HomePage : ContentPage
 	// Retrieve league rules for selected league
 	private async void OnViewEditRulesClicked(object sender, EventArgs e)
 	{
+		TitleLabel1.Text = "LEAGUE RULES";
 		League league = CurrentLeagueCollectionView.SelectedItem as League;
 		int id = league.LeagueId;
 
 		await GetRules(id);
+		LeagueRulesCollectionView.ItemsSource = CurrentLeagueRules;
+		ObservableCollection<LeagueRules> currentLeagueRules = new ObservableCollection<LeagueRules>();
+		CurrentLeagueRules = currentLeagueRules;
+
+		LeagueRulesGrid.IsVisible = true;
+		LeagueRulesCollectionView.IsEnabled = true;
+
+		CurrentLeagueCollectionViewGrid.IsVisible = false;
+		CurrentLeagueCollectionView.IsEnabled = false;
+
+
+		LeagueRulesGrid.IsVisible= true;
+		LeagueRulesCollectionView.IsEnabled = true;
+
+		DeleteBtn.IsVisible= false;
+		JoinLeagueBtn.IsVisible= false;
+		RulesBtn.IsVisible = false;
+		EditBtn.IsVisible = true;
+
 	} // End method
 
 	public async Task GetRules(int leagueid)
@@ -614,6 +660,7 @@ public partial class HomePage : ContentPage
 		var response = await client.GetAsync(Url);
 		var result = await response.Content.ReadAsStringAsync();
 
+		int maxteams = int.Parse(JObject.Parse(result)["maxteams"].ToString()); // extract league rules from http response
 		int qbcount = int.Parse(JObject.Parse(result)["qbcount"].ToString()); // extract league rules from http response
 		int rbcount = int.Parse(JObject.Parse(result)["rbcount"].ToString()); // extract league rules from http response
 		int wrcount = int.Parse(JObject.Parse(result)["wrcount"].ToString()); // extract league rules from http response
@@ -622,7 +669,7 @@ public partial class HomePage : ContentPage
 		int kcount = int.Parse(JObject.Parse(result)["kcount"].ToString()); // extract league rules from http response
 		int passingtdpoints = int.Parse(JObject.Parse(result)["passingtdpoints"].ToString()); // extract league rules from http response
 		double ppc = Convert.ToDouble(JObject.Parse(result)["ppc"].ToString()); // extract league rules from http response
-		double ppi = int.Parse(JObject.Parse(result)["ppi"].ToString()); // extract league rules from http response
+		double ppi = Convert.ToDouble(JObject.Parse(result)["ppi"].ToString()); // extract league rules from http response
 		int PPTwentyFiveYdsPass = int.Parse(JObject.Parse(result)["pptwentyfivepass"].ToString()); // extract league rules from http response
 		int fortyyardpassbonus = int.Parse(JObject.Parse(result)["fortyyardpassbonus"].ToString()); // extract league rules from http response
 		int sixtyyardpassbonus = int.Parse(JObject.Parse(result)["sixtyyardpassbonus"].ToString()); // extract league rules from http response
@@ -663,12 +710,15 @@ public partial class HomePage : ContentPage
 		int fgmissedsixty = int.Parse(JObject.Parse(result)["fgmissedsixty"].ToString()); // extract league rules from http response
 		int xpmade = int.Parse(JObject.Parse(result)["xpmade"].ToString()); // extract league rules from http response
 		int xpmissed = int.Parse(JObject.Parse(result)["xpmissed"].ToString()); // extract league rules from http response
-		LeagueRules leaguerules = new LeagueRules(qbcount, rbcount, wrcount, tecount, kcount, xpmade, passingtdpoints, ppc, ppi, fgmissedtwenty, fortyyardpassbonus, sixtyyardpassbonus, threehundredyardpassbonus, fivehundredyardpassbonus, rushingtdpoints, receivingtdpoints, pptenrush, fortyyardrushreceivingbonus, sixtyyardrushreceivingbonus, onehundredyardrushreceivingbonus, twohundredyardrushreceivingbonus, ppr, twopointconversion, interceptionoffense, fumbleoffense, safetyoffense, sackdefense, tackledefense, fgpuntblock, interceptiondefense, fumbledefense, safetydefense, inttd, fumbletd, returntd, fgtentotwenty, fgmissedten, fgtwentytothirty, fgmissedthirty, fgthirtytoforty, fgmissedsixty, fgfortytofifty, fgmissedforty, fgfiftytosixty, fgmissedfifty, fgsixtyplus, xpmissed);
-
-		ObservableCollection<LeagueRules> currentLeagueRules = new ObservableCollection<LeagueRules>();
-		currentLeagueRules.Add(leaguerules);
-		CurrentLeagueRules = currentLeagueRules;
+		LeagueRules leaguerules = new LeagueRules(leagueid);
+		CurrentLeagueRules.Add(leaguerules);
 	}
+
+	private void OnEditBtnClicked(object sender, EventArgs e)
+	{
+
+	}
+
 
 
 } // End class
