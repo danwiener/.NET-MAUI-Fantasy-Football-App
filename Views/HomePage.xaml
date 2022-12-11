@@ -492,12 +492,12 @@
 
                             <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
                                 <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Max # Teams" TextColor="White" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                                <Entry IsEnabled="False" BackgroundColor="White" TextColor="Black" Text="{Binding QbCount}" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
+                                <Entry IsEnabled="False" BackgroundColor="White" TextColor="Black" Text="{Binding MaxTeams}" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
                             </Grid>
 
                             <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
                                 <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="QB Limit" TextColor="White" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                                <Entry IsEnabled="False" BackgroundColor="White" TextColor="Black" Text="{Binding MaxTeams}" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
+                                <Entry IsEnabled="False" BackgroundColor="White" TextColor="Black" Text="{Binding QbCount}" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
                             </Grid>
 
 
