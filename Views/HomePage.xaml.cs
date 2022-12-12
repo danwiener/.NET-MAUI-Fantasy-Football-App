@@ -547,12 +547,31 @@ public partial class HomePage : ContentPage
 			CurrentLeagueCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
 
+			if (CurrentLeagueRules is not null)
+			{
+				CurrentLeagueRules.Clear();
+			}
+
 			DeleteBtn.IsVisible = true;
 			JoinLeagueBtn.IsVisible = true;
 			RulesBtn.IsVisible = true;
 			EditBtn.IsVisible = false;
 			TitleLabel1.Text = "LEAGUE INFO";
 
+
+			return;
+
+		}
+		if (EditLeagueRulesGrid.IsVisible)
+		{
+			EditLeagueRulesGrid.IsVisible = false;
+			EditLeagueRulesGridOuter.IsVisible = false;
+
+			LeagueRulesGrid.IsVisible = true;
+			LeagueRulesCollectionView.IsEnabled = true;
+
+			EditBtn.IsVisible = true;
+			EnterRulesBtn.IsVisible = false;
 
 			return;
 
@@ -634,8 +653,7 @@ public partial class HomePage : ContentPage
 
 		await GetRules(id);
 		LeagueRulesCollectionView.ItemsSource = CurrentLeagueRules;
-		ObservableCollection<LeagueRules> currentLeagueRules = new ObservableCollection<LeagueRules>();
-		CurrentLeagueRules = currentLeagueRules;
+
 
 		LeagueRulesGrid.IsVisible = true;
 		LeagueRulesCollectionView.IsEnabled = true;
@@ -713,14 +731,128 @@ public partial class HomePage : ContentPage
 		CurrentLeagueRules.Add(leaguerules);
 	}
 
-	private void OnEditBtnClicked(object sender, EventArgs e)
+	public async Task PostRules(LeagueRules lr)
 	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(lr);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var Url = "http://localhost:8000/api/postleaguerules";
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(Url, data);
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"Updated league rules", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
+	}
+
+		private async void OnEditBtnClicked(object sender, EventArgs e)
+	{
+		bool createdByCurrent = BelongedTo.Where(l => l.LeagueId == CurrentLeagueRules[0].LeagueId).Select(l => l.CreatedByCurrentUser).FirstOrDefault();
+		if (!createdByCurrent)
+		{
+			await DisplayAlert("Error", "You must be league commissioner to edit a league's rules", "Ok");
+			return;
+		}
+
+		EditLeagueRulesGridOuter.IsVisible = true;
 		EditLeagueRulesGrid.IsVisible = true;
 		LeagueRulesCollectionView.IsEnabled = false;
 		LeagueRulesGrid.IsVisible = false;
 
 		EditBtn.IsVisible = false;
+		EnterRulesBtn.IsVisible = true;
 
+		TitleLabel1.Text = "EDITING LEAGUE RULES";
+
+
+
+		a.Text = CurrentLeagueRules[0].MaxTeams.ToString();
+		b.Text = CurrentLeagueRules[0].QbCount.ToString();
+		c.Text = CurrentLeagueRules[0].RbCount.ToString();
+		d.Text = CurrentLeagueRules[0].WrCount.ToString();
+		ee.Text = CurrentLeagueRules[0].TeCount.ToString();
+		f.Text = CurrentLeagueRules[0].DCount.ToString();
+		g.Text = CurrentLeagueRules[0].KCount.ToString();
+		h.Text = CurrentLeagueRules[0].PassingTDPoints.ToString();
+		i.Text = CurrentLeagueRules[0].PPC.ToString();
+		jj.Text = CurrentLeagueRules[0].PPI.ToString();
+		k.Text = CurrentLeagueRules[0].PPTwentyFiveYdsPass.ToString();
+		l.Text = CurrentLeagueRules[0].FortyYardPassBonus.ToString();
+		m.Text = CurrentLeagueRules[0].SixtyYardPassBonus.ToString();
+		n.Text = CurrentLeagueRules[0].ThreeHundredYardPassBonus.ToString();
+		o.Text = CurrentLeagueRules[0].FiveHundredYardPassBonus.ToString();
+		p.Text = CurrentLeagueRules[0].RushingTDPoints.ToString();
+		q.Text = CurrentLeagueRules[0].ReceivingTDPoints.ToString();
+		r.Text = CurrentLeagueRules[0].PPTenRush.ToString();
+		s.Text = CurrentLeagueRules[0].FortyYardRushReceivingBonus.ToString();
+		t.Text = CurrentLeagueRules[0].SixtyYardRushReceivingBonus.ToString();
+		u.Text = CurrentLeagueRules[0].OneHundredYardRushReceivingBonus.ToString();
+		v.Text = CurrentLeagueRules[0].TwoHundredYardRushReceivingBonus.ToString();
+		w.Text = CurrentLeagueRules[0].PPR.ToString();
+		x.Text = CurrentLeagueRules[0].TwoPointConversion.ToString();
+		y.Text = CurrentLeagueRules[0].InterceptionOffense.ToString();
+		z.Text = CurrentLeagueRules[0].FumbleOffense.ToString();
+		aa.Text = CurrentLeagueRules[0].SafetyOffense.ToString();
+		bb.Text = CurrentLeagueRules[0].SackDefense.ToString();
+		cc.Text = CurrentLeagueRules[0].TackleDefense.ToString();
+		dd.Text = CurrentLeagueRules[0].FgPuntBlock.ToString();
+		eee.Text = CurrentLeagueRules[0].InterceptionDefense.ToString();
+		ff.Text = CurrentLeagueRules[0].FumbleDefense.ToString();
+		gg.Text = CurrentLeagueRules[0].SafetyDefense.ToString();
+		hh.Text = CurrentLeagueRules[0].IntTd.ToString();
+		ii.Text = CurrentLeagueRules[0].FumbleTd.ToString();
+		jjj.Text = CurrentLeagueRules[0].ReturnTd.ToString();
+		kk.Text = CurrentLeagueRules[0].FgTenToTwenty.ToString();
+		ll.Text = CurrentLeagueRules[0].FgMissedTen.ToString();
+		mm.Text = CurrentLeagueRules[0].FgTwentyToThirty.ToString();
+		nn.Text = CurrentLeagueRules[0].FgMissedTwenty.ToString();
+		oo.Text = CurrentLeagueRules[0].FgThirtyToForty.ToString();
+		pp.Text = CurrentLeagueRules[0].FgMissedThirty.ToString();
+		qq.Text = CurrentLeagueRules[0].FgFortyToFifty.ToString();
+		rr.Text = CurrentLeagueRules[0].FgMissedforty.ToString();
+		ss.Text = CurrentLeagueRules[0].FgFiftyToSixty.ToString();
+		tt.Text = CurrentLeagueRules[0].FgMissedFifty.ToString();
+		uu.Text = CurrentLeagueRules[0].FgSixtyPlus.ToString();
+		vv.Text = CurrentLeagueRules[0].FgMissedSixty.ToString();
+		ww.Text = CurrentLeagueRules[0].XpMade.ToString();
+		xx.Text = CurrentLeagueRules[0].XpMissed.ToString();
+
+
+	}
+
+	private async void OnEnterBtnClicked(object sender, EventArgs e)
+	{
+		try
+		{
+			LeagueRules newLeagueRules = new LeagueRules(CurrentLeagueRules[0].LeagueId, int.Parse(a.Text), int.Parse(b.Text), int.Parse(c.Text), int.Parse(d.Text), int.Parse(ee.Text), int.Parse(f.Text), int.Parse(g.Text), int.Parse(h.Text), Convert.ToDouble(i.Text), Convert.ToDouble(jj.Text), int.Parse(k.Text), int.Parse(l.Text), int.Parse(m.Text), int.Parse(n.Text), int.Parse(o.Text), int.Parse(p.Text), int.Parse(q.Text), int.Parse(r.Text), int.Parse(s.Text), int.Parse(t.Text), int.Parse(u.Text), int.Parse(v.Text), Convert.ToDouble(w.Text), int.Parse(x.Text), int.Parse(y.Text), int.Parse(z.Text), int.Parse(aa.Text), int.Parse(bb.Text), Convert.ToDouble(cc.Text), int.Parse(dd.Text), int.Parse(eee.Text), int.Parse(ff.Text), int.Parse(gg.Text), int.Parse(hh.Text), int.Parse(ii.Text), int.Parse(jjj.Text), int.Parse(kk.Text), int.Parse(ll.Text), int.Parse(mm.Text), int.Parse(nn.Text), int.Parse(oo.Text), int.Parse(pp.Text), int.Parse(qq.Text), int.Parse(rr.Text), int.Parse(ss.Text), int.Parse(tt.Text), int.Parse(uu.Text), int.Parse(vv.Text), int.Parse(ww.Text), int.Parse(xx.Text));
+			await PostRules(newLeagueRules);
+
+			CurrentLeagueRules.Clear();
+			await GetRules(newLeagueRules.LeagueId);
+			LeagueRulesCollectionView.ItemsSource = CurrentLeagueRules;
+
+
+			EditLeagueRulesGridOuter.IsVisible = false;
+			EditLeagueRulesGrid.IsVisible = false;
+			LeagueRulesCollectionView.IsEnabled = true;
+			LeagueRulesGrid.IsVisible = true;
+
+			EditBtn.IsVisible = true;
+			EnterRulesBtn.IsVisible = false;
+
+			TitleLabel1.Text = "LEAGUE RULES";
+		}
+		catch (FormatException fex)
+		{
+			await DisplayAlert("Invalid input", "One or more fields have invalid input. Please make sure you enter a valid number in every field", "Ok");
+		}
 	}
 
 
