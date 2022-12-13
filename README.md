@@ -10,9 +10,13 @@ sense of permitting users to login using Microsoft, Facebook, Google, etc. my cu
 OAuth in the colloquial sense in the not too distant future. 
 
 Technologies features used/implemented: 
+
 -.NET MAUI w/Animations and countdown timer
+
 -Entity Framework
+
 -SQL Express/SQL Server
+
 -.NET Web API custom authentication/Rresource controller
 -Fully functional password generator
 -Complex network of interdependent buttons, functions, and API requests pieced together to form cohesively functioning application
