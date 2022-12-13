@@ -17,8 +17,10 @@ public partial class HomePage : ContentPage
 	private string name;
 	private string email;
 	ObservableCollection<League> belongedTo;
+	ObservableCollection<Team> teamsBelongedTo;
 	ObservableCollection<League> globalLeagues;
 	ObservableCollection<User> creators;
+	ObservableCollection<User> teamcreators;
 	ObservableCollection<User> globalleaguecreators;
 	ObservableCollection<League> currentlySelected;
 	ObservableCollection<LeagueRules> leagueRules;
@@ -44,6 +46,7 @@ public partial class HomePage : ContentPage
 			OnPropertyChanged();
 		}
 	}
+
 
 	public ObservableCollection<League> GlobalLeagues
 	{
@@ -83,6 +86,16 @@ public partial class HomePage : ContentPage
 		} 
 	}
 
+	public ObservableCollection<User> TeamCreators
+	{
+		get => teamcreators;
+		set
+		{
+			teamcreators = value;
+			OnPropertyChanged();
+		}
+	}
+
 	public ObservableCollection<User> GlobalLeagueCreators
 	{
 		get => globalleaguecreators;
@@ -93,6 +106,15 @@ public partial class HomePage : ContentPage
 		}
 	}
 
+	public ObservableCollection<Team> TeamsBelongedTo
+	{
+		get => teamsBelongedTo;
+		set
+		{
+			teamsBelongedTo = value;
+			OnPropertyChanged();
+		}
+	}
 
 	public HomePage()
 	{
@@ -108,8 +130,10 @@ public partial class HomePage : ContentPage
 		GlobalLeagues = new ObservableCollection<League>();
 		GlobalLeagueCreators= new ObservableCollection<User>();
 		CurrentLeagueRules = new ObservableCollection<LeagueRules>();
+		TeamsBelongedTo = new ObservableCollection<Team>();
 
 		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
+		TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
 
 		int.TryParse(GetUserId.UserId.ToString(), out int UserId);
 		await getUserEmailAndUserName(UserId);
@@ -141,6 +165,7 @@ public partial class HomePage : ContentPage
 
 		user = new User(userId, Username, Name, Email);
 
+		// Get leagues
 		var Url2 = "http://localhost:8000/api/getleaguesbelongedto";
 		client.DefaultRequestHeaders.Remove("UsernameEmail");
 		client.DefaultRequestHeaders.Add("LeaguesBelongedToHeader", $"{userId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
@@ -202,6 +227,65 @@ public partial class HomePage : ContentPage
 				league.CreatorUsername = user.Username;
 			}
 		}
+
+		// Get teams
+		var Url5 = "http://localhost:8000/api/getteamsbelongedto";
+		client.DefaultRequestHeaders.Clear();
+		client.DefaultRequestHeaders.Add("TeamsBelongedToHeader", $"{userId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+		var response5 = await client.GetAsync(Url5);
+		var result5 = await response5.Content.ReadAsStringAsync();
+
+		int[]? teamids = (int[])JObject.Parse(result5)["teamsbelongedto"].ToObject<int[]>();
+
+		var Url6 = "http://localhost:8000/api/getteams";
+
+		for (int i = 0; i < teamids.Count(); i++)
+		{
+			client.DefaultRequestHeaders.Add("TeamIdHeader", $"{teamids[i]}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+			var response6 = await client.GetAsync(Url6);
+			var result6 = await response6.Content.ReadAsStringAsync();
+
+			client.DefaultRequestHeaders.Remove("TeamIdHeader");
+			int teamid = int.Parse(JObject.Parse(result6)["TeamId"].ToString());
+			string teamname = JObject.Parse(result6)["teamname"].ToString();
+			string createdondate = JObject.Parse(result6)["createdondate"].ToString();
+			int creatorId = int.Parse(JObject.Parse(result6)["creator"].ToString());
+			int leagueId = int.Parse(JObject.Parse(result6)["leagueid"].ToString());
+			Team team = new Team(teamid, teamname, createdondate, creatorId, leagueId, creatorId == GetUserId.UserId);
+
+			TeamsBelongedTo.Add(team);
+			var Url7 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+
+			client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
+			var response7 = await client.GetAsync(Url7);
+			var result7 = await response7.Content.ReadAsStringAsync();
+
+			client.DefaultRequestHeaders.Remove("UsernameEmail");
+
+			int userID = int.Parse(JObject.Parse(result7)["UserId"].ToString());
+			string username = JObject.Parse(result7)["user_name"].ToString();
+			string name = JObject.Parse(result7)["name"].ToString();
+			string email = JObject.Parse(result7)["email"].ToString();
+			User user = new User(userID, username, name, email);
+			TeamCreators.Add(user);
+
+
+			team.CreatorName = user.Name; // Merge name and username from user into league for collection view binding purposes
+			team.CreatorUsername = user.Username;
+
+			var Url8 = "http://localhost:8000/api/getleagues"; // retrieve league info associated with team
+			client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{team.League}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+			var response8 = await client.GetAsync(Url8);
+			var result8 = await response8.Content.ReadAsStringAsync();
+
+			client.DefaultRequestHeaders.Remove("LeagueIdHeader");
+
+			string leaguename = JObject.Parse(result8)["leaguename"].ToString();
+
+			team.LeagueName = leaguename;
+
+		}
+
 	}
 
 	//Event handlers
@@ -224,6 +308,11 @@ public partial class HomePage : ContentPage
 		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
 
 	} // End method
+
+	private void TeamsBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+
+	}
 
 	private async void OnViewLeagueClicked(object sender, EventArgs e)
 	{
@@ -552,6 +641,11 @@ public partial class HomePage : ContentPage
 
 	private async void OnEnterLeagueBtnClicked(object sender, EventArgs e)
 	{
+		if (int.Parse(MaxTeamsCreateLeagueEntry.Text) > 16)
+		{
+			await DisplayAlert("League cannot contain more than 16 teams", "Please enter a number less than or equal to 16", "Ok");
+			return;
+		}
 		CreateLeagueDTO league = new CreateLeagueDTO(LeagueNameEntry.Text, int.Parse(MaxTeamsCreateLeagueEntry.Text), GetUserId.UserId);
 
 		await PostLeague(league);
@@ -759,6 +853,7 @@ public partial class HomePage : ContentPage
 		var result = await response.Content.ReadAsStringAsync();
 
 		int maxteams = int.Parse(JObject.Parse(result)["maxteams"].ToString()); // extract league rules from http response
+		int maxplayers = int.Parse(JObject.Parse(result)["maxplayers"].ToString()); // extract league rules from http response
 		int qbcount = int.Parse(JObject.Parse(result)["qbcount"].ToString()); // extract league rules from http response
 		int rbcount = int.Parse(JObject.Parse(result)["rbcount"].ToString()); // extract league rules from http response
 		int wrcount = int.Parse(JObject.Parse(result)["wrcount"].ToString()); // extract league rules from http response
@@ -808,7 +903,8 @@ public partial class HomePage : ContentPage
 		int fgmissedsixty = int.Parse(JObject.Parse(result)["fgmissedsixty"].ToString()); // extract league rules from http response
 		int xpmade = int.Parse(JObject.Parse(result)["xpmade"].ToString()); // extract league rules from http response
 		int xpmissed = int.Parse(JObject.Parse(result)["xpmissed"].ToString()); // extract league rules from http response
-		LeagueRules leaguerules = new LeagueRules(leagueid, maxteams, qbcount, rbcount, wrcount, tecount, defensecount, kcount, passingtdpoints, ppc, ppi, PPTwentyFiveYdsPass, fortyyardpassbonus, sixtyyardpassbonus, threehundredyardpassbonus, fivehundredyardpassbonus, rushingtdpoints, receivingtdpoints, pptenrush, fortyyardrushreceivingbonus, sixtyyardrushreceivingbonus, onehundredyardrushreceivingbonus, twohundredyardrushreceivingbonus, ppr, twopointconversion, interceptionoffense, fumbleoffense, safetyoffense, sackdefense, tackledefense, fgpuntblock, interceptiondefense, fumbledefense, safetydefense, inttd, fumbletd, returntd, fgtentotwenty, fgmissedten, fgtwentytothirty, fgmissedtwenty, fgthirtytoforty, fgmissedthirty, fgfortytofifty, fgmissedforty, fgfiftytosixty, fgmissedfifty, fgsixtyplus, fgmissedsixty, xpmade, xpmissed);
+
+		LeagueRules leaguerules = new LeagueRules(leagueid, maxteams, maxplayers, qbcount, rbcount, wrcount, tecount, defensecount, kcount, passingtdpoints, ppc, ppi, PPTwentyFiveYdsPass, fortyyardpassbonus, sixtyyardpassbonus, threehundredyardpassbonus, fivehundredyardpassbonus, rushingtdpoints, receivingtdpoints, pptenrush, fortyyardrushreceivingbonus, sixtyyardrushreceivingbonus, onehundredyardrushreceivingbonus, twohundredyardrushreceivingbonus, ppr, twopointconversion, interceptionoffense, fumbleoffense, safetyoffense, sackdefense, tackledefense, fgpuntblock, interceptiondefense, fumbledefense, safetydefense, inttd, fumbletd, returntd, fgtentotwenty, fgmissedten, fgtwentytothirty, fgmissedtwenty, fgthirtytoforty, fgmissedthirty, fgfortytofifty, fgmissedforty, fgfiftytosixty, fgmissedfifty, fgsixtyplus, fgmissedsixty, xpmade, xpmissed);
 		CurrentLeagueRules.Add(leaguerules);
 	}
 
@@ -851,7 +947,6 @@ public partial class HomePage : ContentPage
 		EnterRulesBtn.IsVisible = true;
 
 		TitleLabel1.Text = "EDITING LEAGUE RULES";
-
 
 
 		a.Text = CurrentLeagueRules[0].MaxTeams.ToString();
@@ -904,6 +999,7 @@ public partial class HomePage : ContentPage
 		vv.Text = CurrentLeagueRules[0].FgMissedSixty.ToString();
 		ww.Text = CurrentLeagueRules[0].XpMade.ToString();
 		xx.Text = CurrentLeagueRules[0].XpMissed.ToString();
+		zz.Text = CurrentLeagueRules[0].MaxPlayers.ToString();
 
 
 	}
@@ -912,7 +1008,41 @@ public partial class HomePage : ContentPage
 	{
 		try
 		{
-			LeagueRules newLeagueRules = new LeagueRules(CurrentLeagueRules[0].LeagueId, int.Parse(a.Text), int.Parse(b.Text), int.Parse(c.Text), int.Parse(d.Text), int.Parse(ee.Text), int.Parse(f.Text), int.Parse(g.Text), int.Parse(h.Text), Convert.ToDouble(i.Text), Convert.ToDouble(jj.Text), int.Parse(k.Text), int.Parse(l.Text), int.Parse(m.Text), int.Parse(n.Text), int.Parse(o.Text), int.Parse(p.Text), int.Parse(q.Text), int.Parse(r.Text), int.Parse(s.Text), int.Parse(t.Text), int.Parse(u.Text), int.Parse(v.Text), Convert.ToDouble(w.Text), int.Parse(x.Text), int.Parse(y.Text), int.Parse(z.Text), int.Parse(aa.Text), int.Parse(bb.Text), Convert.ToDouble(cc.Text), int.Parse(dd.Text), int.Parse(eee.Text), int.Parse(ff.Text), int.Parse(gg.Text), int.Parse(hh.Text), int.Parse(ii.Text), int.Parse(jjj.Text), int.Parse(kk.Text), int.Parse(ll.Text), int.Parse(mm.Text), int.Parse(nn.Text), int.Parse(oo.Text), int.Parse(pp.Text), int.Parse(qq.Text), int.Parse(rr.Text), int.Parse(ss.Text), int.Parse(tt.Text), int.Parse(uu.Text), int.Parse(vv.Text), int.Parse(ww.Text), int.Parse(xx.Text));
+			if (int.Parse(a.Text) > 16) {
+				await DisplayAlert("Error", "League cannot contain more than 16 teams. Please lower limit", "Ok");
+				return;
+			}
+			else if (int.Parse(b.Text) > 4)
+			{
+				await DisplayAlert("Error", "League cannot contain more than 4 QBs. Please lower limit", "Ok");
+				return;
+			}
+			else if (int.Parse(c.Text) > 5)
+			{
+				await DisplayAlert("Error", "League cannot contain more than 5 RBs. Please lower limit", "Ok");
+				return;
+			}
+			else if (int.Parse(d.Text) > 6)
+			{
+				await DisplayAlert("Error", "League cannot contain more than 6 WRs. Please lower limit", "Ok");
+				return;
+			}
+			else if (int.Parse(ee.Text) > 4)
+			{
+				await DisplayAlert("Error", "League cannot contain more than 4 TEs. Please lower limit", "Ok");
+				return;
+			}
+			else if (int.Parse(f.Text) > 3)
+			{
+				await DisplayAlert("Error", "League cannot contain more than 3 Ds. Please lower limit", "Ok");
+				return;
+			}
+			else if (int.Parse(g.Text) > 3)
+			{
+				await DisplayAlert("Error", "League cannot contain more than 3 Ks. Please lower limit", "Ok");
+				return;
+			}
+			LeagueRules newLeagueRules = new LeagueRules(CurrentLeagueRules[0].LeagueId, int.Parse(a.Text), int.Parse(zz.Text), int.Parse(b.Text), int.Parse(c.Text), int.Parse(d.Text), int.Parse(ee.Text), int.Parse(f.Text), int.Parse(g.Text), int.Parse(h.Text), Convert.ToDouble(i.Text), Convert.ToDouble(jj.Text), int.Parse(k.Text), int.Parse(l.Text), int.Parse(m.Text), int.Parse(n.Text), int.Parse(o.Text), int.Parse(p.Text), int.Parse(q.Text), int.Parse(r.Text), int.Parse(s.Text), int.Parse(t.Text), int.Parse(u.Text), int.Parse(v.Text), Convert.ToDouble(w.Text), int.Parse(x.Text), int.Parse(y.Text), int.Parse(z.Text), int.Parse(aa.Text), int.Parse(bb.Text), Convert.ToDouble(cc.Text), int.Parse(dd.Text), int.Parse(eee.Text), int.Parse(ff.Text), int.Parse(gg.Text), int.Parse(hh.Text), int.Parse(ii.Text), int.Parse(jjj.Text), int.Parse(kk.Text), int.Parse(ll.Text), int.Parse(mm.Text), int.Parse(nn.Text), int.Parse(oo.Text), int.Parse(pp.Text), int.Parse(qq.Text), int.Parse(rr.Text), int.Parse(ss.Text), int.Parse(tt.Text), int.Parse(uu.Text), int.Parse(vv.Text), int.Parse(ww.Text), int.Parse(xx.Text));
 			await PostRules(newLeagueRules);
 
 			CurrentLeagueRules.Clear();

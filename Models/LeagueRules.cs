@@ -16,6 +16,9 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("maxteams")]
 		public int MaxTeams { get; set; } = 12;
 
+		[JsonPropertyName("maxplayers")]
+		public int MaxPlayers { get; set; } = 16;
+
 		[JsonPropertyName("qbcount")]
 		public int QbCount { get; set; } = 3;
 
@@ -164,10 +167,11 @@ namespace FantasyFootballMAUI.Models
 		public int XpMissed { get; set; } = -2;
 
 
-		public LeagueRules(int leagueId, int maxTeams, int qbCount, int rbCount, int wrCount, int teCount, int dCount, int kCount, int passingTDPoints, double pPC, double pPI, int pPTwentyFiveYdsPass, int fortyYardPassBonus, int sixtyYardPassBonus, int threeHundredYardPassBonus, int fiveHundredYardPassBonus, int rushingTDPoints, int receivingTDPoints, int pPTenRush, int fortyYardRushReceivingBonus, int sixtyYardRushReceivingBonus, int oneHundredYardRushReceivingBonus, int twoHundredYardRushReceivingBonus, double pPR, int twoPointConversion, int interceptionOffense, int fumbleOffense, int safetyOffense, int sackDefense, double tackleDefense, int fgPuntBlock, int interceptionDefense, int fumbleDefense, int safetyDefense, int intTd, int fumbleTd, int returnTd, int fgTenToTwenty, int fgMissedTen, int fgTwentyToThirty, int fgMissedTwenty, int fgThirtyToForty, int fgMissedThirty, int fgFortyToFifty, int fgMissedforty, int fgFiftyToSixty, int fgMissedFifty, int fgSixtyPlus, int fgMissedSixty, int xpMade, int xpMissed)
+		public LeagueRules(int leagueId, int maxTeams, int maxplayers, int qbCount, int rbCount, int wrCount, int teCount, int dCount, int kCount, int passingTDPoints, double pPC, double pPI, int pPTwentyFiveYdsPass, int fortyYardPassBonus, int sixtyYardPassBonus, int threeHundredYardPassBonus, int fiveHundredYardPassBonus, int rushingTDPoints, int receivingTDPoints, int pPTenRush, int fortyYardRushReceivingBonus, int sixtyYardRushReceivingBonus, int oneHundredYardRushReceivingBonus, int twoHundredYardRushReceivingBonus, double pPR, int twoPointConversion, int interceptionOffense, int fumbleOffense, int safetyOffense, int sackDefense, double tackleDefense, int fgPuntBlock, int interceptionDefense, int fumbleDefense, int safetyDefense, int intTd, int fumbleTd, int returnTd, int fgTenToTwenty, int fgMissedTen, int fgTwentyToThirty, int fgMissedTwenty, int fgThirtyToForty, int fgMissedThirty, int fgFortyToFifty, int fgMissedforty, int fgFiftyToSixty, int fgMissedFifty, int fgSixtyPlus, int fgMissedSixty, int xpMade, int xpMissed)
 		{
 			LeagueId = leagueId;
 			MaxTeams = maxTeams;
+			MaxPlayers = maxplayers;
 			QbCount = qbCount;
 			RbCount = rbCount;
 			WrCount = wrCount;
