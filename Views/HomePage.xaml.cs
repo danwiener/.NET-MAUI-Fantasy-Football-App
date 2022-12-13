@@ -534,7 +534,77 @@ public partial class HomePage : ContentPage
 
 	private void OnCreateLeagueClicked(object sender, EventArgs e)
 	{
+		CreateLeagueGridOuter.IsVisible = true;
+		CreateLeagueGrid.IsVisible = true;
 
+		GlobalLeaguesGrid.IsVisible = false;
+		GlobalLeaguesCollectionView.IsEnabled = false;
+
+		DeleteBtn.IsVisible = false;
+		CreateLeagueBtn.IsVisible = false;
+		GoBackBtn.IsVisible = false;
+		EnterLeagueBtn.IsVisible = true;
+		ViewLeagueBtn.IsVisible = false;
+		GoBackBtn.IsVisible = true;
+		GoBackBtn2.IsVisible = false;
+		TitleLabel1.Text = "CREATE LEAGUE";
+	}
+
+	private async void OnEnterLeagueBtnClicked(object sender, EventArgs e)
+	{
+		CreateLeagueDTO league = new CreateLeagueDTO(LeagueNameEntry.Text, int.Parse(MaxTeamsCreateLeagueEntry.Text), GetUserId.UserId);
+
+		await PostLeague(league);
+
+		CreateLeagueGridOuter.IsVisible = false;
+		CreateLeagueGrid.IsVisible = false;
+
+		GlobalLeaguesGrid.IsVisible = true;
+		GlobalLeaguesCollectionView.IsEnabled = true;
+
+		TitleLabel1.Text = "GLOBAL LEAGUES";
+
+		GlobalLeagues.Clear();
+		BelongedTo.Clear();
+
+		int.TryParse(GetUserId.UserId.ToString(), out int UserId);
+		await getUserEmailAndUserName(UserId);
+		await GetGlobalLeagues();
+
+
+		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
+		GlobalLeaguesCollectionView.ItemsSource = GlobalLeagues;
+
+		GlobalLeaguesCollectionView.SelectedItem = GlobalLeagues.Where(l => l.LeagueName == league.LeagueName).FirstOrDefault();
+
+		GoBackBtn.IsVisible = false;
+		EnterLeagueBtn.IsVisible = false;
+
+		ViewLeagueBtn.IsVisible = true;
+		DeleteBtn.IsVisible = true;
+		CreateLeagueBtn.IsVisible = true;
+		GoBackBtn2.IsVisible = true;
+	}
+
+	public async Task PostLeague(CreateLeagueDTO dto)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var Url = "http://localhost:8000/api/createleague";
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(Url, data);
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"Created league {dto.LeagueName}", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
 	}
 
 	private void OnGoBackClicked(object sender, EventArgs e)
@@ -575,6 +645,17 @@ public partial class HomePage : ContentPage
 
 			return;
 
+		}
+		if (CreateLeagueGrid.IsVisible)
+		{
+			CreateLeagueGridOuter.IsVisible = false;
+			CreateLeagueGrid.IsVisible = false;
+			GlobalLeaguesCollectionView.IsEnabled = true;
+			GlobalLeaguesGrid.IsVisible = true;
+
+			EnterLeagueBtn.IsVisible = false;
+			DeleteBtn.IsVisible = true;
+			TitleLabel1.Text = "GLOBAL LEAGUES";
 		}
 		if (!globalHasBeenSelected)
 		{
@@ -752,7 +833,7 @@ public partial class HomePage : ContentPage
 		}
 	}
 
-		private async void OnEditBtnClicked(object sender, EventArgs e)
+	private async void OnEditBtnClicked(object sender, EventArgs e)
 	{
 		bool createdByCurrent = BelongedTo.Where(l => l.LeagueId == CurrentLeagueRules[0].LeagueId).Select(l => l.CreatedByCurrentUser).FirstOrDefault();
 		if (!createdByCurrent)
@@ -837,7 +918,8 @@ public partial class HomePage : ContentPage
 			CurrentLeagueRules.Clear();
 			await GetRules(newLeagueRules.LeagueId);
 			LeagueRulesCollectionView.ItemsSource = CurrentLeagueRules;
-
+			BelongedTo.Where(l => l.LeagueId == newLeagueRules.LeagueId).FirstOrDefault().MaxTeams = newLeagueRules.MaxTeams;
+			GlobalLeagues.Where(l => l.LeagueId == newLeagueRules.LeagueId).FirstOrDefault().MaxTeams = newLeagueRules.MaxTeams;
 
 			EditLeagueRulesGridOuter.IsVisible = false;
 			EditLeagueRulesGrid.IsVisible = false;

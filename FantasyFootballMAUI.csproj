@@ -54,6 +54,8 @@
 	  <None Remove="Resources\Images\counter.png" />
 	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\forgotpassword.png" />
+	  <None Remove="Resources\Images\leaguename.png" />
+	  <None Remove="Resources\Images\maxteams.png" />
 	  <None Remove="Resources\Images\name.png" />
 	  <None Remove="Resources\Images\password.png" />
 	  <None Remove="Resources\Images\showpassword.png" />

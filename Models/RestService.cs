@@ -87,4 +87,23 @@ namespace FantasyFootballMAUI.Models
         }
     }
 
+    public class CreateLeagueDTO
+    {
+		[JsonPropertyName("leaguename")]
+		public string LeagueName { get; set; } = default!;
+
+		[JsonPropertyName("maxteams")]
+		public int MaxTeams { get; set; } = default!;
+
+		[JsonPropertyName("creator")]
+		public int Creator { get; set; } = default!;
+
+        public CreateLeagueDTO(string leagueName, int maxTeams, int creator)
+		{
+			LeagueName = leagueName;
+			MaxTeams = maxTeams;
+			Creator = creator;
+		}
+	}
+
 }
