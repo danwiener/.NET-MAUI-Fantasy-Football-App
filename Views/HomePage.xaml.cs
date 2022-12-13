@@ -131,6 +131,7 @@ public partial class HomePage : ContentPage
 		GlobalLeagueCreators= new ObservableCollection<User>();
 		CurrentLeagueRules = new ObservableCollection<LeagueRules>();
 		TeamsBelongedTo = new ObservableCollection<Team>();
+		TeamCreators = new ObservableCollection<User>();
 
 		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
 		TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
@@ -249,7 +250,7 @@ public partial class HomePage : ContentPage
 			int teamid = int.Parse(JObject.Parse(result6)["TeamId"].ToString());
 			string teamname = JObject.Parse(result6)["teamname"].ToString();
 			string createdondate = JObject.Parse(result6)["createdondate"].ToString();
-			int creatorId = int.Parse(JObject.Parse(result6)["creator"].ToString());
+			int creatorId = int.Parse(JObject.Parse(result6)["creatorid"].ToString());
 			int leagueId = int.Parse(JObject.Parse(result6)["leagueid"].ToString());
 			Team team = new Team(teamid, teamname, createdondate, creatorId, leagueId, creatorId == GetUserId.UserId);
 

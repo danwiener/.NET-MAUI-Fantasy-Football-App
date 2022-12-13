@@ -277,13 +277,13 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
                                 <BoxView.Shadow>
                                     <Shadow Brush="#f2f2f2" Offset="0,10" Radius="10" Opacity="1.2"/>
                                 </BoxView.Shadow>
                             </BoxView>
 
-                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
                                 <BoxView.Shadow>
                                     <Shadow Brush="white" Offset="0,-1" Radius="5" Opacity="1.2"/>
                                 </BoxView.Shadow>
