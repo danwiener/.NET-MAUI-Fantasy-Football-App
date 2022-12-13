@@ -19,11 +19,11 @@ Technologies features used/implemented:
 
 -Entity Framework
 
--SQL Express/SQL Server
+-SQL Express/SQL Server with many one-to-one, one-to-many, and many-to-many relationships.
 
 -.NET Web API custom authentication/Rresource controller
 
--Fully functional password generator
+-Modifiable password generator
 
 -Complex network of interdependent buttons, functions, and API requests pieced together to form cohesively functioning application
 
@@ -42,4 +42,5 @@ Technologies features used/implemented:
 -All redeemable actions sent to API controller/database with data returned in real time and updated in the client view in real time
 
 More to come... :)
+
 
