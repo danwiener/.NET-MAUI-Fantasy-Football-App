@@ -43,10 +43,10 @@ Technologies features used/implemented:
 
 More to come... :)
 
-12/14 added create list of players functionality to each league creation. I didn't reference any player or team namesakes of actual players/teams since the NFL has strict licensing rights and when I reached out to them, they informed me that each player has to approve of their namesake being used individually. 
+12/14 added players to my app (not app users, but football players). I didn't reference any player or team namesakes of actual players/teams since the NFL has strict licensing rights and when I reached out to them, they informed me that each player has to individually approve of their namesake being used. 
 
 To circumvent this, I randomly generate a list of 1248 names from a list of 1500+ first names and 120+ last names, which I uniquely assign to 238 QBs, 291 RBs, 436 WRs, 184 TEs, 99 Ks, plus 32 team defenses. 
 
-Since we don't want my API controller to generate a NEW list of player names each time a new league is created, my API checks the db for existing players. If none exist, my algorithm is employed to generate players, and otherwise, my API copies the list of 1280 existing players (per league), removes the league ID # formerly associated with each copied player, and assigns to each copied player the league ID # of the newly created league. This way players can select from a consistent, non-varying pool of players regardless of which fantasy league they play from. :)
+Since we don't want my API controller to generate a NEW list of players each time a new league is created, my API checks the db for existing players. If none exist, my algorithm deploys to generate 1280 total players, and otherwise, my API copies the list of 1280 existing players (per league), removes the league ID # formerly associated with each of those players, and assigns to each copied player the league ID # of the newly created league. This way users of my app can select from a consistent, non-varying pool of players regardless of which fantasy league they play from. Fun logic to implement. :)
 
 
