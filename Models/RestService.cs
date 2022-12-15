@@ -87,7 +87,18 @@ namespace FantasyFootballMAUI.Models
         }
     }
 
-    public class CreateLeagueDTO
+	public class DeleteTeamDTO
+	{
+		public int teamid;
+		public string teamname;
+		public DeleteTeamDTO(int teamid, string teamname)
+		{
+			this.teamid = teamid;
+            this.teamname = teamname;
+		}
+	}
+
+	public class CreateLeagueDTO
     {
 		[JsonPropertyName("leaguename")]
 		public string LeagueName { get; set; } = default!;

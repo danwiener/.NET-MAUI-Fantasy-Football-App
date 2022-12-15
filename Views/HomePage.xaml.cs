@@ -19,6 +19,8 @@ public partial class HomePage : ContentPage
 	ObservableCollection<League> belongedTo;
 	ObservableCollection<Team> teamsBelongedTo;
 	ObservableCollection<Team> teamsInLeague;
+	ObservableCollection<Team> currentlySelectedTeam;
+	ObservableCollection<Team> currentlySelectedTeamInLeague;
 	ObservableCollection<League> globalLeagues;
 	ObservableCollection<User> creators;
 	ObservableCollection<User> teamcreators;
@@ -65,6 +67,26 @@ public partial class HomePage : ContentPage
 		set
 		{
 			currentlySelected = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public ObservableCollection<Team> CurrentlySelectedTeam
+	{
+		get => currentlySelectedTeam;
+		set
+		{
+			currentlySelectedTeam = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public ObservableCollection<Team> CurrentlySelectedTeamInLeague
+	{
+		get => currentlySelectedTeamInLeague;
+		set
+		{
+			currentlySelectedTeamInLeague = value;
 			OnPropertyChanged();
 		}
 	}
@@ -144,7 +166,6 @@ public partial class HomePage : ContentPage
 		TeamsBelongedTo = new ObservableCollection<Team>();
 		TeamCreators = new ObservableCollection<User>();
 		TeamsInLeague = new ObservableCollection<Team>();
-
 
 		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
 		TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
@@ -319,11 +340,25 @@ public partial class HomePage : ContentPage
 		CurrentlySelected = currentlySelected;
 
 		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
-
-
 	} // End method
 
-	private void GlobalLeaguesCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	private void TeamsBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		ObservableCollection<Team> currentlySelectedTeam = new ObservableCollection<Team>();
+		currentlySelectedTeam.Add(e.CurrentSelection.FirstOrDefault() as Team);
+		CurrentlySelectedTeam = currentlySelectedTeam;
+
+	}
+
+	private void TeamsInLeague_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		ObservableCollection<Team> currentlySelectedTeamInLeague = new ObservableCollection<Team>();
+		currentlySelectedTeamInLeague.Add(e.CurrentSelection.FirstOrDefault() as Team);
+		CurrentlySelectedTeamInLeague = currentlySelectedTeamInLeague;
+
+	}
+
+		private void GlobalLeaguesCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
 		ObservableCollection<League> currentlySelected = new ObservableCollection<League>();
 		currentlySelected.Add(e.CurrentSelection.FirstOrDefault() as League);
@@ -332,10 +367,6 @@ public partial class HomePage : ContentPage
 
 	} // End method
 
-	private void TeamsBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-	{
-
-	}
 
 	// Get all teams associated with a league
 	public async Task GetTeamsInLeague(int leagueid)
@@ -437,6 +468,86 @@ public partial class HomePage : ContentPage
 		ViewLeagueBtn.IsVisible= false;
 		GoBackBtn.IsVisible = true;
 		TitleLabel1.Text = "LEAGUE INFO";
+
+	}
+
+
+	private async void OnDeleteTeamClicked(object sender, EventArgs e)
+	{
+		DeleteTeamDTO dto;
+		if (TeamsInLeagueGrid.IsVisible)
+		{
+			if (!CurrentlySelectedTeamInLeague[0].CreatedByCurrentUser)
+			{
+				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
+				return;
+			}
+
+			if (TeamsInLeagueCollectionView.SelectedItem == null)
+			{
+				await DisplayAlert("No team selected", "Please select a team to delete", "Ok");
+				return;
+			}
+			else
+			{
+				Team team = TeamsInLeagueCollectionView.SelectedItem as Team;
+				dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
+				await DeleteTeam(dto);
+				foreach (Team item in TeamsInLeague)
+				{
+					if (item.TeamId == dto.teamid)
+					{
+						TeamsInLeague.Remove(item);
+						break;
+					}
+				}
+				foreach (Team item in TeamsBelongedTo)
+				{
+					if (item.TeamId == dto.teamid)
+					{
+						TeamsBelongedTo.Remove(item);
+						break;
+					}
+				}
+			}
+		}
+		else if (TeamsBelongedToGrid.IsVisible)
+		{
+			if (!CurrentlySelectedTeam[0].CreatedByCurrentUser)
+			{
+				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
+				return;
+			}
+			if (TeamsBelongedToCollectionView.SelectedItem == null)
+			{
+				await DisplayAlert("No team selected", "Please select a team to delete", "Ok");
+				return;
+			}
+			else
+			{
+				Team team = TeamsInLeagueCollectionView.SelectedItem as Team;
+				dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
+				await DeleteTeam(dto);
+				foreach (Team item in TeamsInLeague)
+				{
+					if (item.TeamId == dto.teamid)
+					{
+						TeamsInLeague.Remove(item);
+						break;
+					}
+				}
+				foreach (Team item in TeamsBelongedTo)
+				{
+					if (item.TeamId == dto.teamid)
+					{
+						TeamsBelongedTo.Remove(item);
+						break;
+					}
+				}
+			}
+		}
+
+
 
 	}
 
@@ -600,6 +711,28 @@ public partial class HomePage : ContentPage
 		}
 	} // End method
 
+	public async Task DeleteTeam(DeleteTeamDTO dto)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var url = "http://localhost:8000/api/deleteteam"; // access the register endpoint to register new user
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(url, data);
+
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"{dto.teamname} has been deleted", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
+	} // End method
+
 	private async void OnJoinOtherClicked(object sender, EventArgs e)
 	{
 
@@ -708,6 +841,8 @@ public partial class HomePage : ContentPage
 	{
 
 	}
+
+
 
 	private void OnCreateLeagueClicked(object sender, EventArgs e)
 	{

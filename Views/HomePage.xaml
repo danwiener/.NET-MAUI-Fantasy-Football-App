@@ -65,7 +65,7 @@
 
 
         <Grid Grid.Column="1" Grid.Row="3" ColumnDefinitions=".5*,.5*" Margin="0,5,0,0" HorizontalOptions="Start">
-            <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Center" Margin="7.5,0,0,0">
+            <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Start" Margin="7.5,0,0,0">
                 <Button Text="VIEW LEAGUE" x:Name="ViewLeagueBtn" Clicked="OnViewLeagueClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="0, 0, 0, 0"/>
                 <Button Text="GO BACK" x:Name="GoBackBtn" IsVisible="false" Clicked="OnGoBackClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="0, 0, 0, 0"/>
 
@@ -83,13 +83,6 @@
 
                 <Label x:Name="OrLabel" FontSize="20" Text="OR"  TextColor="#6588a6" Margin="6.25, 0, 3.75, 0" WidthRequest="30" VerticalOptions="Center"/>
                 <Button x:Name="JoinCreateBtn" Text="JOIN/CREATE OTHER LEAGUE" Clicked="OnJoinOtherClicked"  HeightRequest="44" WidthRequest="140" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
-            </HorizontalStackLayout>
-
-
-            <HorizontalStackLayout Grid.Column="1" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Center" Margin="7.5,0,0,0" WidthRequest="380">
-                <Button Text="VIEW TEAM" x:Name="ViewTeamBtn" Clicked="OnViewTeamBtnClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="0, 0, 0, 0"/>
-                <Button Text="GO BACK" x:Name="GoBackViewTeamBtn" IsVisible="false" Clicked="OnGoBackViewTeamBtnClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="0, 0, 0, 0"/>
-                
             </HorizontalStackLayout>
         </Grid>
 
@@ -364,7 +357,15 @@
 
         </Grid>
 
+        <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="1" ZIndex="1" x:Name="TeamsButtonsGrid" ColumnDefinitions=".5*,.5*">
+            <HorizontalStackLayout Grid.Column="1" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Start" Margin="7.5,0,0,0" WidthRequest="380">
+                <Button Text="VIEW TEAM" x:Name="ViewTeamBtn" Clicked="OnViewTeamBtnClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="End" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="0, 0, 0, 0"/>
+                <Button Text="DELETE TEAM" x:Name="DeleteTeamBtn" Padding="-5" Clicked="OnDeleteTeamClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
 
+                <Button Text="GO BACK" x:Name="GoBackViewTeamBtn" IsVisible="false" Clicked="OnGoBackViewTeamBtnClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White"  Margin="0, 0, 0, 0"/>
+
+            </HorizontalStackLayout>
+        </Grid>
 
         <Grid Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" ZIndex="1" x:Name="TeamsInLeagueGrid" IsVisible="false">
             <Grid.RowDefinitions>
@@ -375,7 +376,7 @@
                 <ColumnDefinition Width=".5*"/>
             </Grid.ColumnDefinitions>
 
-            <CollectionView x:Name="TeamsInLeagueCollectionView" IsEnabled="False" Grid.Column="1" Grid.Row="0" WidthRequest="380" HorizontalOptions="StartAndExpand" SelectionMode="Single" SelectionChanged="TeamsBelongedToCollectionView_SelectionChanged" ZIndex="5" VerticalOptions="Center" EmptyView="No teams in league. Please create a team at this time.">
+            <CollectionView x:Name="TeamsInLeagueCollectionView" IsEnabled="False" Grid.Column="1" Grid.Row="0" WidthRequest="380" HorizontalOptions="StartAndExpand" SelectionMode="Single" SelectionChanged="TeamsInLeague_SelectionChanged" ZIndex="5" VerticalOptions="Center" EmptyView="No teams in league. Please create a team at this time.">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="1"/>
                 </CollectionView.ItemsLayout>
