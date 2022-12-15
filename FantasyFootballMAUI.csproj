@@ -73,17 +73,11 @@
 	  <Compile Update="Views\FreeAgentsPage.xaml.cs">
 	    <DependentUpon>FreeAgentsPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\LeaguesBelongedTo.xaml.cs">
-	    <DependentUpon>LeaguesBelongedTo.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\RegisterPage.xaml.cs">
 	    <DependentUpon>RegisterPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\TeamsPage.xaml.cs">
-	    <DependentUpon>TeamsPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\WeatherForecastPage.xaml.cs">
 	    <DependentUpon>WeatherForecastPage.xaml</DependentUpon>
@@ -100,12 +94,6 @@
 	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LeaguesBelongedTo.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\NFL Teams.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\OpeningPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -113,9 +101,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ResetPasswordPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\TeamsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WeatherForecastPage.xaml">

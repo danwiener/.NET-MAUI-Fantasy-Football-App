@@ -358,7 +358,7 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="1" ZIndex="1" x:Name="TeamsButtonsGrid" ColumnDefinitions=".5*,.5*">
-            <HorizontalStackLayout Grid.Column="1" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Start" Margin="7.5,0,0,0" WidthRequest="380">
+            <HorizontalStackLayout Grid.Column="1" VerticalOptions="Center" Grid.ColumnSpan="1" HorizontalOptions="Start" Margin="7.5,0,0,0">
                 <Button Text="VIEW TEAM" x:Name="ViewTeamBtn" Clicked="OnViewTeamBtnClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="End" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="0, 0, 0, 0"/>
                 <Button Text="DELETE TEAM" x:Name="DeleteTeamBtn" Padding="-5" Clicked="OnDeleteTeamClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#737373" TextColor="White" Margin="2.5, 0, 0, 0"/>
 
@@ -534,7 +534,7 @@
                                 Grid.ColumnSpan="1"
                                 ZIndex="7"/>
                             </HorizontalStackLayout>
-                            
+
                             <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                                 <Label Text="League Name" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
                                 <Label 
@@ -623,13 +623,176 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
-            
-            
-            
-
         </Grid>
 
+        <Grid x:Name="CurrentTeamCollectionViewGrid" IsVisible="false" Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+
+            <CollectionView x:Name="CurrentTeamCollectionView" IsEnabled="false" Grid.Column="1" Grid.Row="0" WidthRequest="380" HorizontalOptions="StartAndExpand" SelectionMode="None" ZIndex="5" VerticalOptions="Center" EmptyView="No Data Available">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="#f2f2f2" Offset="0,10" Radius="10" Opacity="1.2"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="white" Offset="0,-1" Radius="5" Opacity="1.2"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Team ID#" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding TeamId}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Team Name" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding TeamName}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="League" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding LeagueName}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Created On" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding CreatedOnDate}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="My Team" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding CreatedByCurrentUser}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Creator (Username)" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding CreatorUsername}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Creator (Name)" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding CreatorName}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+
+
+                            <!--<Image x:Name="LeagueIcon" Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="60" WidthRequest="60" Source="{Binding ImageSource}"/>-->
+
+                            <!--<HorizontalStackLayout Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Margin="5, 0, 2.5, 0" Text="I Am Commissioner" LineBreakMode="TailTruncation" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
+                            </HorizontalStackLayout>-->
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+
+
+        </Grid>
 
 
         <Grid x:Name="LeagueRulesGrid" IsVisible="false" Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" ZIndex="1">
