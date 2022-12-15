@@ -18,6 +18,7 @@ public partial class HomePage : ContentPage
 	private string email;
 	ObservableCollection<League> belongedTo;
 	ObservableCollection<Team> teamsBelongedTo;
+	ObservableCollection<Team> teamsInLeague;
 	ObservableCollection<League> globalLeagues;
 	ObservableCollection<User> creators;
 	ObservableCollection<User> teamcreators;
@@ -116,6 +117,16 @@ public partial class HomePage : ContentPage
 		}
 	}
 
+	public ObservableCollection<Team> TeamsInLeague
+	{
+		get => teamsInLeague;
+		set
+		{
+			teamsInLeague = value;
+			OnPropertyChanged();
+		}
+	}
+
 	public HomePage()
 	{
 		InitializeComponent();
@@ -132,6 +143,8 @@ public partial class HomePage : ContentPage
 		CurrentLeagueRules = new ObservableCollection<LeagueRules>();
 		TeamsBelongedTo = new ObservableCollection<Team>();
 		TeamCreators = new ObservableCollection<User>();
+		TeamsInLeague = new ObservableCollection<Team>();
+
 
 		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
 		TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
@@ -194,6 +207,14 @@ public partial class HomePage : ContentPage
 				int maxteams = int.Parse(JObject.Parse(result3)["maxteams"].ToString());
 				int creatorId = int.Parse(JObject.Parse(result3)["creator"].ToString());
 				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
+
+				var Url10 = "http://localhost:8000/api/getcurrentnumberteams";
+				client.DefaultRequestHeaders.Add("NumberTeamsHeader", $"{leagueId}"); // get current number of teams in league
+				var response10 = await client.GetAsync(Url10);
+				var result10 = await response10.Content.ReadAsStringAsync();
+
+				client.DefaultRequestHeaders.Remove("NumberTeamsHeader");
+				league.CurrentTeams = int.Parse(JObject.Parse(result10)["numberteams"].ToString());
 
 				string fmt = "000";
 				string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
@@ -299,6 +320,7 @@ public partial class HomePage : ContentPage
 
 		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
 
+
 	} // End method
 
 	private void GlobalLeaguesCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -315,6 +337,39 @@ public partial class HomePage : ContentPage
 
 	}
 
+	// Get all teams associated with a league
+	public async Task GetTeamsInLeague(int leagueid)
+	{
+		var Url = "http://localhost:8000/api/getteamsinleague";
+		using var client = new HttpClient();
+
+		client.DefaultRequestHeaders.Add("TeamsInLeagueHeader", $"{leagueid}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+		var response = await client.GetAsync(Url);
+		var result = await response.Content.ReadAsStringAsync();
+
+		int[]? teamids = (int[])JObject.Parse(result)["teamsbelongedto"].ToObject<int[]>();
+
+		var Url2 = "http://localhost:8000/api/getteams";
+
+		foreach (int id in teamids)
+		{
+			client.DefaultRequestHeaders.Clear();
+			client.DefaultRequestHeaders.Add("TeamIdHeader", $"{id}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+
+			var response2 = await client.GetAsync(Url2);
+			var result2 = await response2.Content.ReadAsStringAsync();
+
+			int teamid = int.Parse(JObject.Parse(result2)["TeamId"].ToString());
+			string teamname = JObject.Parse(result2)["teamname"].ToString();
+			string createdondate = JObject.Parse(result2)["createdondate"].ToString();
+			int creatorId = int.Parse(JObject.Parse(result2)["creatorid"].ToString());
+			int leagueId = int.Parse(JObject.Parse(result2)["leagueid"].ToString());
+			Team team = new Team(teamid, teamname, createdondate, creatorId, leagueId, creatorId == GetUserId.UserId);
+
+			TeamsInLeague.Add(team);
+		}
+	}
+
 	private async void OnViewLeagueClicked(object sender, EventArgs e)
 	{
 		if (LeaguesBelongedToGrid.IsVisible)
@@ -328,6 +383,16 @@ public partial class HomePage : ContentPage
 			CurrentLeagueCollectionView.IsEnabled = true;
 			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
 
+			League league = CurrentLeagueCollectionView.SelectedItem as League;
+			await GetTeamsInLeague(league.LeagueId);
+			TeamsBelongedToGrid.IsVisible = false;
+			TeamsBelongedToCollectionView.IsEnabled = false;
+
+			TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
+			TeamsInLeagueGrid.IsVisible = true;
+			TeamsInLeagueCollectionView.IsEnabled = true;
+
+			TitleLabel2.Text = "LEAGUE TEAMS";
 
 
 			LeaguesBelongedToGrid.IsVisible = false;
@@ -347,6 +412,18 @@ public partial class HomePage : ContentPage
 			CurrentLeagueCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
 			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
+
+			League league = CurrentLeagueCollectionView.SelectedItem as League;
+			await GetTeamsInLeague(league.LeagueId);
+			TeamsBelongedToGrid.IsVisible = false;
+			TeamsBelongedToCollectionView.IsEnabled = false;
+
+			TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
+			TeamsInLeagueGrid.IsVisible = true;
+			TeamsInLeagueCollectionView.IsEnabled = true;
+
+			TitleLabel2.Text = "LEAGUE TEAMS";
+
 			GlobalLeaguesGrid.IsVisible = false;
 			GlobalLeaguesCollectionView.IsEnabled = false;
 			GoBackBtn2.IsVisible = false;
@@ -622,6 +699,16 @@ public partial class HomePage : ContentPage
 
 	}
 
+	private void OnViewTeamBtnClicked(object sender, EventArgs e)
+	{
+
+	}
+
+	private void OnGoBackViewTeamBtnClicked(object sender, EventArgs e)
+	{
+
+	}
+
 	private void OnCreateLeagueClicked(object sender, EventArgs e)
 	{
 		CreateLeagueGridOuter.IsVisible = true;
@@ -723,7 +810,6 @@ public partial class HomePage : ContentPage
 			EditBtn.IsVisible = false;
 			TitleLabel1.Text = "LEAGUE INFO";
 
-
 			return;
 
 		}
@@ -767,6 +853,18 @@ public partial class HomePage : ContentPage
 			OrLabel.IsVisible = true;
 			JoinCreateBtn.IsVisible = true;
 
+			TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
+			TeamsBelongedToGrid.IsVisible = true;
+			TeamsBelongedToCollectionView.IsEnabled = true;
+
+			TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
+			TeamsInLeagueCollectionView.SelectedItem = null;
+			TeamsInLeagueGrid.IsVisible = false;
+			TeamsInLeagueCollectionView.IsEnabled = false;
+
+			TeamsInLeague.Clear();
+
+			TitleLabel2.Text = "MY TEAMS";
 
 		}
 		else if (globalHasBeenSelected)
@@ -782,6 +880,18 @@ public partial class HomePage : ContentPage
 
 			GlobalLeaguesCollectionView.SelectedItem = null;
 
+			TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
+			TeamsBelongedToGrid.IsVisible = true;
+			TeamsBelongedToCollectionView.IsEnabled = true;
+
+			TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
+			TeamsInLeagueCollectionView.SelectedItem = null;
+			TeamsInLeagueGrid.IsVisible = false;
+			TeamsInLeagueCollectionView.IsEnabled = false;
+
+			TeamsInLeague.Clear();
+
+			TitleLabel2.Text = "MY TEAMS";
 		}
 
 		if (CurrentlySelected is not null)

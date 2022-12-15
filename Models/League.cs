@@ -20,6 +20,9 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("maxteams")]
 		public int MaxTeams { get; set; } = default!;
 
+		[JsonPropertyName("currentteams")]
+		public int CurrentTeams { get; set; } = default!;
+
 		[JsonPropertyName("creator")]
 		public int Creator { get; set; } = default!; // user id goes here
 
