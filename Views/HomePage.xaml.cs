@@ -431,7 +431,8 @@ public partial class HomePage : ContentPage
 
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentTeamCollectionView.IsEnabled = true;
-			CurrentTeamCollectionView.SelectedItem = CurrentlySelectedTeam.FirstOrDefault();
+
+			CurrentTeamCollectionView.SelectedItem = TeamsInLeagueCollectionView.SelectedItem;
 
 			TeamsInLeagueGrid.IsVisible = false;
 			TeamsInLeagueCollectionView.IsEnabled = false;
@@ -518,33 +519,29 @@ public partial class HomePage : ContentPage
 		DeleteTeamDTO dto;
 		if (TeamsInLeagueGrid.IsVisible)
 		{
-			if (!CurrentlySelectedTeamInLeague[0].CreatedByCurrentUser)
+			Team team = TeamsInLeagueCollectionView.SelectedItem as Team;
+			if (!team.CreatedByCurrentUser && team is not null)
 			{
 				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
 				return;
 			}
-			else
+			dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
+			await DeleteTeam(dto);
+			foreach (Team item in TeamsInLeague)
 			{
-				Team team = TeamsInLeagueCollectionView.SelectedItem as Team;
-				dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
-				await DeleteTeam(dto);
-				foreach (Team item in TeamsInLeague)
+				if (item.TeamId == dto.teamid)
 				{
-					if (item.TeamId == dto.teamid)
-					{
-						TeamsInLeague.Remove(item);
-						break;
-					}
+					TeamsInLeague.Remove(item);
+					break;
 				}
-				foreach (Team item in TeamsBelongedTo)
+			}
+			foreach (Team item in TeamsBelongedTo)
+			{
+				if (item.TeamId == dto.teamid)
 				{
-					if (item.TeamId == dto.teamid)
-					{
-						TeamsBelongedTo.Remove(item);
-						break;
-					}
+					TeamsBelongedTo.Remove(item);
+					break;
 				}
-
 			}
 		}
 		else if (TeamsBelongedToGrid.IsVisible)
@@ -584,12 +581,12 @@ public partial class HomePage : ContentPage
 		}
 		else if (CurrentTeamCollectionViewGrid.IsVisible)
 		{
-			if (!CurrentlySelectedTeam[0].CreatedByCurrentUser || !CurrentlySelectedTeamInLeague[0].CreatedByCurrentUser)
+			Team team = CurrentTeamCollectionView.SelectedItem as Team;
+			if (!team.CreatedByCurrentUser && team is not null)
 			{
 				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
 				return;
 			}
-			Team team = CurrentTeamCollectionView.SelectedItem as Team;
 			dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
 			await DeleteTeam(dto);
 			foreach (Team item in TeamsInLeague)
@@ -612,18 +609,12 @@ public partial class HomePage : ContentPage
 			CurrentTeamCollectionViewGrid.IsVisible = false;
 			CurrentTeamCollectionView.IsEnabled = false;
 
-			if (LeaguesBelongedToGrid.IsVisible)
+			if (LeaguesBelongedToGrid.IsVisible || GlobalLeaguesGrid.IsVisible)
 			{
 				TeamsBelongedToGrid.IsVisible = true;
 				TeamsBelongedToCollectionView.IsEnabled = true;
 
-				GoBackTeamBtn.IsVisible = false;
-				ViewTeamBtn.IsVisible = true;
-			}
-			if (GlobalLeaguesGrid.IsVisible)
-			{
-				TeamsInLeagueGrid.IsVisible = true;
-				TeamsInLeagueCollectionView.IsEnabled = true;
+				TitleLabel2.Text = "MY TEAMS";
 
 				GoBackTeamBtn.IsVisible = false;
 				ViewTeamBtn.IsVisible = true;
@@ -635,8 +626,14 @@ public partial class HomePage : ContentPage
 				TeamsInLeagueCollectionView.IsEnabled = true;
 			}
 		}
-		CurrentlySelectedTeam.Clear();
-		CurrentlySelectedTeamInLeague.Clear();
+		if (CurrentlySelectedTeam is not null)
+		{
+			CurrentlySelectedTeam.Clear();
+		}
+		if (CurrentlySelectedTeamInLeague is not null)
+		{
+			CurrentlySelectedTeamInLeague.Clear();
+		}
 		CurrentTeamCollectionView.SelectedItem = null;
 		TeamsInLeagueCollectionView.SelectedItem = null;
 		TeamsBelongedToCollectionView.SelectedItem = null;
