@@ -405,7 +405,7 @@ public partial class HomePage : ContentPage
 
 	private async void OnViewTeamBtnClicked(object sender, EventArgs e)
 	{
-		if (TeamsBelongedToGrid.IsVisible)
+		if (LeaguesBelongedToGrid.IsVisible || GlobalLeaguesGrid.IsVisible)
 		{
 			if (TeamsBelongedToCollectionView.SelectedItem == null)
 			{
@@ -421,7 +421,7 @@ public partial class HomePage : ContentPage
 			TeamsBelongedToCollectionView.IsEnabled = false;
 		}
 
-		if (TeamsInLeagueGrid.IsVisible)
+		if (CurrentLeagueCollectionViewGrid.IsVisible)
 		{
 			if (TeamsInLeagueCollectionView.SelectedItem == null)
 			{
@@ -437,7 +437,6 @@ public partial class HomePage : ContentPage
 			TeamsInLeagueCollectionView.IsEnabled = false;
 		}
 
-		Team team = CurrentTeamCollectionView.SelectedItem as Team;
 		TitleLabel2.Text = $"TEAM INFO";
 		ViewTeamBtn.IsVisible = false;
 		GoBackTeamBtn.IsVisible = true;
@@ -521,15 +520,9 @@ public partial class HomePage : ContentPage
 		{
 			if (!CurrentlySelectedTeamInLeague[0].CreatedByCurrentUser)
 			{
-				if (TeamsInLeagueCollectionView.SelectedItem == null)
-				{
-					await DisplayAlert("No team selected", "Please select a team to delete", "Ok");
-					return;
-				}
 				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
 				return;
 			}
-
 			else
 			{
 				Team team = TeamsInLeagueCollectionView.SelectedItem as Team;
@@ -551,6 +544,7 @@ public partial class HomePage : ContentPage
 						break;
 					}
 				}
+
 			}
 		}
 		else if (TeamsBelongedToGrid.IsVisible)
@@ -590,7 +584,7 @@ public partial class HomePage : ContentPage
 		}
 		else if (CurrentTeamCollectionViewGrid.IsVisible)
 		{
-			if (!CurrentlySelectedTeam[0].CreatedByCurrentUser)
+			if (!CurrentlySelectedTeam[0].CreatedByCurrentUser || !CurrentlySelectedTeamInLeague[0].CreatedByCurrentUser)
 			{
 				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
 				return;
@@ -635,8 +629,17 @@ public partial class HomePage : ContentPage
 				ViewTeamBtn.IsVisible = true;
 			}
 
-			CurrentlySelectedTeam.Clear();
+			if (CurrentLeagueCollectionViewGrid.IsVisible)
+			{
+				TeamsInLeagueGrid.IsVisible = true;
+				TeamsInLeagueCollectionView.IsEnabled = true;
+			}
 		}
+		CurrentlySelectedTeam.Clear();
+		CurrentlySelectedTeamInLeague.Clear();
+		CurrentTeamCollectionView.SelectedItem = null;
+		TeamsInLeagueCollectionView.SelectedItem = null;
+		TeamsBelongedToCollectionView.SelectedItem = null;
 	}
 
 	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
@@ -924,25 +927,34 @@ public partial class HomePage : ContentPage
 	{
 		if (CurrentLeagueCollectionViewGrid.IsVisible)
 		{
-			CurrentTeamCollectionView.SelectedItem = null;
 			CurrentTeamCollectionViewGrid.IsVisible = false;
 			CurrentTeamCollectionView.IsEnabled = false;
 
 			TeamsInLeagueGrid.IsVisible = true;
 			TeamsInLeagueCollectionView.IsEnabled = true;
 			TitleLabel2.Text = "TEAMS IN LEAGUE";
+
 		}
-		if (LeaguesBelongedToCollectionView.IsVisible)
+		else
 		{
-			CurrentTeamCollectionView.SelectedItem = null;
 			CurrentTeamCollectionViewGrid.IsVisible = false;
 			CurrentTeamCollectionView.IsEnabled = false;
-
 
 			TeamsBelongedToGrid.IsVisible = true;
 			TeamsBelongedToCollectionView.IsEnabled = true;
 			TitleLabel2.Text = "MY TEAMS";
 		}
+
+		if (CurrentlySelectedTeam is not null)
+		{
+			CurrentlySelectedTeam.Clear();
+		}
+		if (CurrentlySelectedTeamInLeague is not null)
+		{
+			CurrentlySelectedTeamInLeague.Clear();
+		}
+		TeamsInLeagueCollectionView.SelectedItem = null;
+		TeamsBelongedToCollectionView.SelectedItem = null;
 
 		GoBackTeamBtn.IsVisible = false;
 		ViewTeamBtn.IsVisible = true;
