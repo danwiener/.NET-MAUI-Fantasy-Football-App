@@ -409,11 +409,8 @@ public partial class HomePage : ContentPage
 		{
 			if (TeamsBelongedToCollectionView.SelectedItem == null)
 			{
-				if (LeaguesBelongedToCollectionView.SelectedItem == null)
-				{
-					await DisplayAlert("No team selected", "Please select a team to view", "Ok");
-					return;
-				}
+				await DisplayAlert("No team selected", "Please select a team to view", "Ok");
+				return;
 			}
 
 			CurrentTeamCollectionViewGrid.IsVisible = true;
@@ -426,9 +423,24 @@ public partial class HomePage : ContentPage
 
 		if (TeamsInLeagueGrid.IsVisible)
 		{
+			if (TeamsInLeagueCollectionView.SelectedItem == null)
+			{
+				await DisplayAlert("No team selected", "Please select a team to view", "Ok");
+				return;
+			}
+
+			CurrentTeamCollectionViewGrid.IsVisible = true;
+			CurrentTeamCollectionView.IsEnabled = true;
+			CurrentTeamCollectionView.SelectedItem = CurrentlySelectedTeam.FirstOrDefault();
+
 			TeamsInLeagueGrid.IsVisible = false;
 			TeamsInLeagueCollectionView.IsEnabled = false;
 		}
+
+		Team team = CurrentTeamCollectionView.SelectedItem as Team;
+		TitleLabel2.Text = $"TEAM INFO";
+		ViewTeamBtn.IsVisible = false;
+		GoBackTeamBtn.IsVisible = true;
 	}
 
 	private async void OnViewLeagueClicked(object sender, EventArgs e)
@@ -454,7 +466,7 @@ public partial class HomePage : ContentPage
 			TeamsInLeagueCollectionView.IsEnabled = true;
 
 			TitleLabel2.Text = "LEAGUE TEAMS";
-
+			TitleLabel1.Text = "LEAGUE INFO";
 
 			LeaguesBelongedToGrid.IsVisible = false;
 			LeaguesBelongedToCollectionView.IsEnabled = false;
@@ -484,7 +496,7 @@ public partial class HomePage : ContentPage
 			TeamsInLeagueCollectionView.IsEnabled = true;
 
 			TitleLabel2.Text = "LEAGUE TEAMS";
-
+			TitleLabel1.Text = "LEAGUE INFO";
 			GlobalLeaguesGrid.IsVisible = false;
 			GlobalLeaguesCollectionView.IsEnabled = false;
 			GoBackBtn2.IsVisible = false;
@@ -497,7 +509,7 @@ public partial class HomePage : ContentPage
 		RulesBtn.IsVisible = true;
 		ViewLeagueBtn.IsVisible= false;
 		GoBackBtn.IsVisible = true;
-		TitleLabel1.Text = "LEAGUE INFO";
+
 
 	}
 
@@ -576,9 +588,55 @@ public partial class HomePage : ContentPage
 				}
 			}
 		}
+		else if (CurrentTeamCollectionViewGrid.IsVisible)
+		{
+			if (!CurrentlySelectedTeam[0].CreatedByCurrentUser)
+			{
+				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
+				return;
+			}
+			Team team = CurrentTeamCollectionView.SelectedItem as Team;
+			dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
+			await DeleteTeam(dto);
+			foreach (Team item in TeamsInLeague)
+			{
+				if (item.TeamId == dto.teamid)
+				{
+					TeamsInLeague.Remove(item);
+					break;
+				}
+			}
+			foreach (Team item in TeamsBelongedTo)
+			{
+				if (item.TeamId == dto.teamid)
+				{
+					TeamsBelongedTo.Remove(item);
+					break;
+				}
+			}
 
+			CurrentTeamCollectionViewGrid.IsVisible = false;
+			CurrentTeamCollectionView.IsEnabled = false;
 
+			if (LeaguesBelongedToGrid.IsVisible)
+			{
+				TeamsBelongedToGrid.IsVisible = true;
+				TeamsBelongedToCollectionView.IsEnabled = true;
 
+				GoBackTeamBtn.IsVisible = false;
+				ViewTeamBtn.IsVisible = true;
+			}
+			if (GlobalLeaguesGrid.IsVisible)
+			{
+				TeamsInLeagueGrid.IsVisible = true;
+				TeamsInLeagueCollectionView.IsEnabled = true;
+
+				GoBackTeamBtn.IsVisible = false;
+				ViewTeamBtn.IsVisible = true;
+			}
+
+			CurrentlySelectedTeam.Clear();
+		}
 	}
 
 	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
@@ -862,11 +920,33 @@ public partial class HomePage : ContentPage
 
 	}
 
-	private void OnGoBackViewTeamBtnClicked(object sender, EventArgs e)
+	private void OnGoBackTeamClicked(object sender, EventArgs e)
 	{
+		if (CurrentLeagueCollectionViewGrid.IsVisible)
+		{
+			CurrentTeamCollectionView.SelectedItem = null;
+			CurrentTeamCollectionViewGrid.IsVisible = false;
+			CurrentTeamCollectionView.IsEnabled = false;
 
+			TeamsInLeagueGrid.IsVisible = true;
+			TeamsInLeagueCollectionView.IsEnabled = true;
+			TitleLabel2.Text = "TEAMS IN LEAGUE";
+		}
+		if (LeaguesBelongedToCollectionView.IsVisible)
+		{
+			CurrentTeamCollectionView.SelectedItem = null;
+			CurrentTeamCollectionViewGrid.IsVisible = false;
+			CurrentTeamCollectionView.IsEnabled = false;
+
+
+			TeamsBelongedToGrid.IsVisible = true;
+			TeamsBelongedToCollectionView.IsEnabled = true;
+			TitleLabel2.Text = "MY TEAMS";
+		}
+
+		GoBackTeamBtn.IsVisible = false;
+		ViewTeamBtn.IsVisible = true;
 	}
-
 
 
 	private void OnCreateLeagueClicked(object sender, EventArgs e)
