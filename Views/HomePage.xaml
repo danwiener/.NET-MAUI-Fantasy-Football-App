@@ -476,6 +476,96 @@
 
         </Grid>
 
+        <Grid x:Name="CurrentPlayersCollectionViewGrid" IsVisible="false" Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+
+            <CollectionView x:Name="CurrentPlayersCollectionView" IsEnabled="false" SelectionMode="Single" SelectionChanged="CurrentPlayers_SelectionChanged" Grid.Column="0" Grid.Row="0" WidthRequest="380" HorizontalOptions="StartAndExpand" ZIndex="5" VerticalOptions="Center" EmptyView="No Players On Team">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="44"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="#f2f2f2" Offset="0,10" Radius="10" Opacity="1.2"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <BoxView Color="#737373" Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="10,10,10,10">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="white" Offset="0,-1" Radius="5" Opacity="1.2"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Position" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding Position}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Player Name" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding PlayerName}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Team" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="12"/>
+                                <Label 
+                                Text="{Binding Team}"
+                                TextColor="White"
+                                Margin="10,0,0,0"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Grid.ColumnSpan="1"
+                                ZIndex="7"/>
+                            </HorizontalStackLayout>
+
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
 
         <Grid x:Name="CurrentLeagueCollectionViewGrid" IsVisible="false" Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" ZIndex="1">
             <Grid.RowDefinitions>
