@@ -452,6 +452,13 @@ public partial class HomePage : ContentPage
 				await DisplayAlert("No league selected", "Please select a league to view", "Ok");
 				return;
 			}
+			if (CurrentTeamCollectionViewGrid.IsVisible)
+			{
+				CurrentTeamCollectionViewGrid.IsVisible = false;
+				CurrentTeamCollectionView.IsEnabled = false;
+				GoBackTeamBtn.IsVisible = false;
+				ViewTeamBtn.IsVisible = true;
+			}
 			CurrentLeagueCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
 			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
@@ -481,6 +488,13 @@ public partial class HomePage : ContentPage
 			{
 				await DisplayAlert("No league selected", "Please select a league to view", "Ok");
 				return;
+			}
+			if (CurrentTeamCollectionViewGrid.IsVisible)
+			{
+				CurrentTeamCollectionViewGrid.IsVisible = false;
+				CurrentTeamCollectionView.IsEnabled = false;
+				GoBackTeamBtn.IsVisible = false;
+				ViewTeamBtn.IsVisible = true;
 			}
 			CurrentLeagueCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
@@ -624,6 +638,9 @@ public partial class HomePage : ContentPage
 			{
 				TeamsInLeagueGrid.IsVisible = true;
 				TeamsInLeagueCollectionView.IsEnabled = true;
+
+				GoBackTeamBtn.IsVisible = false;
+				ViewTeamBtn.IsVisible = true;
 			}
 		}
 		if (CurrentlySelectedTeam is not null)
@@ -917,11 +934,43 @@ public partial class HomePage : ContentPage
 
 	private void OnJoinLeagueClicked(object sender, EventArgs e)
 	{
+		CreateTeamGridOuter.IsVisible = true;
+		CreateTeamGrid.IsVisible = true;
 
+		if (TeamsInLeagueGrid.IsVisible)
+		{
+			TeamsInLeagueGrid.IsVisible = false;
+			TeamsInLeagueCollectionView.IsEnabled = false;
+		}
+		if (CurrentTeamCollectionViewGrid.IsVisible)
+		{
+			CurrentTeamCollectionViewGrid.IsVisible = false;
+			CurrentTeamCollectionView.IsEnabled = false;
+		}
+		TitleLabel2.Text = "CREATE TEAM";
+
+		ViewTeamBtn.IsVisible = false;
+		GoBackTeamBtn.IsVisible = true;
+		DeleteTeamBtn.IsVisible = false;
+		EnterTeamBtn.IsVisible = true;
 	}
 
 	private void OnGoBackTeamClicked(object sender, EventArgs e)
 	{
+		if (CreateTeamGridOuter.IsVisible)
+		{
+			CreateTeamGridOuter.IsVisible = false;
+			CreateTeamGrid.IsVisible = false;
+
+			GoBackTeamBtn.IsVisible = false;
+			ViewTeamBtn.IsVisible = true;
+			EnterTeamBtn.IsVisible = false;
+			DeleteTeamBtn.IsVisible = true;
+
+			CurrentTeamCollectionViewGrid.IsVisible = true;
+			CurrentLeagueCollectionView.IsEnabled = true;
+			TitleLabel2.Text = "LEAGUE TEAMS";
+		}
 		if (CurrentLeagueCollectionViewGrid.IsVisible)
 		{
 			CurrentTeamCollectionViewGrid.IsVisible = false;
@@ -929,7 +978,7 @@ public partial class HomePage : ContentPage
 
 			TeamsInLeagueGrid.IsVisible = true;
 			TeamsInLeagueCollectionView.IsEnabled = true;
-			TitleLabel2.Text = "TEAMS IN LEAGUE";
+			TitleLabel2.Text = "LEAGUE TEAMS";
 
 		}
 		else
@@ -974,6 +1023,15 @@ public partial class HomePage : ContentPage
 		GoBackBtn.IsVisible = true;
 		GoBackBtn2.IsVisible = false;
 		TitleLabel1.Text = "CREATE LEAGUE";
+	}
+
+	private async void OnEnterTeamClicked(object sender, EventArgs e)
+	{
+		if (TeamNameEntry.Text is null)
+		{
+			await DisplayAlert("Must enter a valid team name", "Please enter a team name now", "Ok");
+			return;
+		}
 	}
 
 	private async void OnEnterLeagueBtnClicked(object sender, EventArgs e)
