@@ -21,17 +21,17 @@ Technologies features used/implemented:
 
 -SQL Express/SQL Server with many one-to-one, one-to-many, and many-to-many relationships.
 
--.NET Web API custom authentication/Rresource controller
+-.NET Web API custom authentication/Resource controller
 
 -Modifiable password generator
 
--Complex network of interdependent buttons, functions, and API requests pieced together to form cohesively functioning application
+-Complex network of interdependent buttons, functions, and API requests which cohesively form seamlessly functioning application
 
 -MailHog
 
 -Postman
 
--Forgot password capability with password reset
+-Forgot password capability with password reset email using Gmail SMTP
 
 -User registration
 
@@ -49,4 +49,4 @@ To circumvent this, I randomly generate a list of 1248 names from a list of 1500
 
 Since we don't want my API controller to generate a NEW list of players each time a new league is created, my API checks the db for existing players. If none exist, my algorithm deploys to generate 1280 total players, and otherwise, my API copies the list of 1280 existing players (per league), removes the league ID # formerly associated with each of those players, and assigns to each copied player the league ID # of the newly created league. This way users of my app can select from a consistent, non-varying pool of players regardless of which fantasy league they play from. Fun logic to implement. :)
 
-
+12/17 added SEND EMAIL capability to send password reset emails using a reset token when a user selects "Forgot My Password". Also added "Join League" functionality to my front end which already existed as an endpoint capability in my API, but is now integrated with the front end.
