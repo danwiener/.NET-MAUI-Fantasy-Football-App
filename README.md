@@ -21,17 +21,17 @@ Technologies features used/implemented:
 
 -SQL Express/SQL Server with many one-to-one, one-to-many, and many-to-many relationships.
 
--.NET Web API custom authentication/Rresource controller
+-.NET Web API custom authentication/Resource controller
 
 -Modifiable password generator
 
--Complex network of interdependent buttons, functions, and API requests pieced together to form cohesively functioning application
+-Complex network of interdependent buttons, functions, and API requests which cohesively form seamlessly functioning application
 
 -MailHog
 
 -Postman
 
--Forgot password capability with password reset
+-Forgot password capability with password reset email using Gmail SMTP
 
 -User registration
 
