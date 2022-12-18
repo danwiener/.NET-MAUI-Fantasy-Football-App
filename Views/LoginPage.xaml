@@ -50,7 +50,16 @@
             </Frame>
 
 
-
+            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="White" Padding="10">
+                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
+                    <Image Source="password.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
+                    <Grid ColumnDefinitions="*,25" RowDefinitions="*" Grid.Column="1">
+                        <Entry x:Name="PasswordEntry" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
+                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="0" Grid.Column="0" Grid.ColumnSpan="2" IsPassword="True" Placeholder="Password" PlaceholderColor="Black"/>
+                        <ImageButton x:Name="ShowPasswordButton" HeightRequest="25" WidthRequest="25" Source="showpassword.png" Grid.Column="1" Clicked="OnShowPasswordBtnClicked" ZIndex="6"/>
+                    </Grid>
+                </Grid>
+            </Frame>
 
             <Grid Grid.Row="4" Grid.Column="1" RowDefinitions="*" ColumnDefinitions=".5*, .5*">
                 <Button Text="Forgot your password?" TextColor="White" Grid.Column="0" HorizontalOptions="StartAndExpand" FontSize="12" BackgroundColor="Transparent" FontAttributes="None" BorderWidth="0" BorderColor="Transparent" Margin="0,0,0,0" Clicked="OnForgotPasswordBtnClicked"/>
@@ -62,16 +71,6 @@
 
 
 
-            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="White" Padding="10">
-                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                    <Image Source="password.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                    <Grid ColumnDefinitions="*,25" RowDefinitions="*" Grid.Column="1">
-                        <Entry x:Name="PasswordEntry" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="0" Grid.Column="0" Grid.ColumnSpan="2" IsPassword="True" Placeholder="Password" PlaceholderColor="Black"/>
-                        <ImageButton x:Name="ShowPasswordButton" HeightRequest="25" WidthRequest="25" Source="showpassword.png" Grid.Column="1" Clicked="OnShowPasswordBtnClicked" ZIndex="6"/>
-                    </Grid>
-                </Grid>
-            </Frame>
             
             <Button 
                         x:Name="LoginBtn"

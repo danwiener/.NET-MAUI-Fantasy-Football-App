@@ -35,9 +35,10 @@ namespace FantasyFootballMAUI.Models
 
 		public bool FreeAgent { get; set;}
 
-		public Player(int id, string position, string playername, string team, bool freeagent)
+		public Player(int id, int teamid, string position, string playername, string team, bool freeagent)
 		{
 			PlayerId = id;
+			TeamId = teamid;
 			Position = position;
 			PlayerName = playername;
 			Team = team;

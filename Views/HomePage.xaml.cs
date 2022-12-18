@@ -388,17 +388,17 @@ public partial class HomePage : ContentPage
 
 		CurrentlySelectedPlayer = currentlySelectedPlayer;
 
-
+		
 	}
 
 	private void CurrentPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		ObservableCollection<League> currentlySelected = new ObservableCollection<League>();
-		currentlySelected.Add(e.CurrentSelection.FirstOrDefault() as League);
+		ObservableCollection<Player> currentlySelectedPlayer = new ObservableCollection<Player>();
+		currentlySelectedPlayer.Add(e.CurrentSelection.FirstOrDefault() as Player);
+		CurrentlySelectedPlayer = currentlySelectedPlayer;
 
-		CurrentlySelected = currentlySelected;
 
-		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
+		
 	} // End method
 
 	private void TeamsBelongedToCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -451,12 +451,13 @@ public partial class HomePage : ContentPage
 			var result2 = await response2.Content.ReadAsStringAsync();
 
 			int playerid = int.Parse(JObject.Parse(result2)["PlayerId"].ToString());
+			int teamid = int.Parse(JObject.Parse(result2)["teamid"].ToString());
 			string position = JObject.Parse(result2)["position"].ToString();
 			string playername = JObject.Parse(result2)["playername"].ToString();
 			string team = JObject.Parse(result2)["team"].ToString();
-			int teamid = int.Parse(JObject.Parse(result2)["teamid"].ToString());
 
-			Player player = new Player(playerid, position, playername, team, teamid == 0);
+
+			Player player = new Player(playerid, teamid, position, playername, team, teamid == 0);
 			if (player.FreeAgent)
 			{
 				FreeAgents.Add(player);
@@ -465,8 +466,39 @@ public partial class HomePage : ContentPage
 			{
 				TeamPlayers.Add(player);
 			}
+		}
+	}
+	public async Task GetTeamPlayers(int teamid)
+	{
+		var Url = "http://localhost:8000/api/getteamplayers";
+		using var client = new HttpClient();
+
+		client.DefaultRequestHeaders.Add("TeamPlayersHeader", $"{teamid}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+		var response = await client.GetAsync(Url);
+		var result = await response.Content.ReadAsStringAsync();
+
+		int[] playerids = (int[])JObject.Parse(result)["playeridinleague"].ToObject<int[]>();
+
+		var Url2 = "http://localhost:8000/api/getplayers";
+
+		foreach (int id in playerids)
+		{
+			client.DefaultRequestHeaders.Clear();
+			client.DefaultRequestHeaders.Add("PlayerIdHeader", $"{id}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+
+			var response2 = await client.GetAsync(Url2);
+			var result2 = await response2.Content.ReadAsStringAsync();
+
+			int playerid = int.Parse(JObject.Parse(result2)["PlayerId"].ToString());
+			string position = JObject.Parse(result2)["position"].ToString();
+			string playername = JObject.Parse(result2)["playername"].ToString();
+			string team = JObject.Parse(result2)["team"].ToString();
+
+			Player player = new Player(playerid, teamid, position, playername, team, teamid == 0);
+			PlayersOnCurrentTeam.Add(player);
 
 		}
+
 	}
 
 	// Get all teams associated with a league
@@ -535,17 +567,137 @@ public partial class HomePage : ContentPage
 		GoBackTeamBtn.IsVisible = true;
 		DeleteTeamBtn.IsVisible = true;
 
+		if (CurrentlySelectedPlayer is not null)
+		{
+			CurrentlySelectedPlayer.Clear();
+		}
+		FreeAgentsCollectionView.SelectedItem = null;
+		CurrentPlayersCollectionView.SelectedItem = null;
+
 		FreeAgentsCollectionViewGrid.IsVisible = false;
 		FreeAgentsCollectionView.IsEnabled = false;
 
 		CurrentPlayersCollectionViewGrid.IsVisible = true;
 		CurrentPlayersCollectionView.IsEnabled = true;
+
+		Team team = CurrentTeamCollectionView.SelectedItem as Team;
+
+		TitleLabel1.Text = $"TEAM \"{team.TeamName.ToUpper()}\" ROSTER";
 	}
 
 	private async void OnDropPlayerClicked(object sender, EventArgs e)
 	{
+		if (CurrentPlayersCollectionView.SelectedItem == null)
+		{
+			await DisplayAlert("No player selected", "Select a player to drop now", "Ok");
+			return;
+		}
+
+
+		Player? player = CurrentPlayersCollectionView.SelectedItem as Player;
+
+		DropPlayerDTO dto = new DropPlayerDTO(player.PlayerId, player.PlayerName);
+
+		await DropPlayer(dto);
+
+		player.TeamId = 0;
+		PlayersOnCurrentTeam.Remove(player);
+		FreeAgents.Add(player);
+
+		CurrentPlayersCollectionView.ItemsSource = PlayersOnCurrentTeam;
 
 	}
+
+	public async Task DropPlayer(DropPlayerDTO dto)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var url = "http://localhost:8000/api/dropplayer"; // access the register endpoint to register new user
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(url, data);
+
+		var result = await response.Content.ReadAsStringAsync();
+
+		Team? team = CurrentTeamCollectionView.SelectedItem as Team;
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"{dto.PlayerName} has been dropped from \"{team.TeamName}\"", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
+	}
+
+		private async void OnAddPlayerClicked(object sender, EventArgs e)
+	{
+		if (FreeAgentsCollectionView.SelectedItem == null)
+		{
+			await DisplayAlert("No free agent selected", "Select a player to add now", "Ok");
+			return;
+		}
+		Team? team = CurrentTeamCollectionView.SelectedItem as Team;
+		Player? player = FreeAgentsCollectionView.SelectedItem as Player;
+
+		AddPlayerDTO dto = new AddPlayerDTO(player.PlayerId, player.PlayerName, team.TeamName, team.TeamId);
+
+		await AddPlayer(dto);
+		FreeAgents.Where(p => p.PlayerId == dto.PlayerId).FirstOrDefault().TeamId = dto.TeamId;
+		TeamPlayers.Add(FreeAgents.Where(p => p.PlayerId == dto.PlayerId).FirstOrDefault());
+		FreeAgents.Remove(FreeAgents.Where(p => p.PlayerId == dto.PlayerId).FirstOrDefault());
+
+		if (PlayersOnCurrentTeam != null)
+		{
+			PlayersOnCurrentTeam.Clear();
+		}
+		foreach (Player playerp in TeamPlayers.Where(p => p.TeamId == dto.TeamId)) 
+		{
+			PlayersOnCurrentTeam.Add(playerp);
+		}
+
+		CurrentPlayersCollectionView.ItemsSource = PlayersOnCurrentTeam;
+
+		FreeAgentsCollectionViewGrid.IsVisible = false;
+		FreeAgentsCollectionView.IsEnabled = false;
+
+		CurrentPlayersCollectionViewGrid.IsVisible = true;
+		CurrentPlayersCollectionView.IsEnabled = true;
+
+		AddBtn.IsVisible = false;
+		DropBtn.IsVisible = true;
+
+		GoBackFABtn.IsVisible = false;
+		ViewFreeAgentsBtn.IsVisible = true;
+		GoBackTeamBtn.IsVisible = true;
+		DeleteTeamBtn.IsVisible = true;
+		TitleLabel1.Text = $"TEAM \"{team.TeamName.ToUpper()}\" ROSTER";
+	}
+
+	public async Task AddPlayer(AddPlayerDTO dto)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var url = "http://localhost:8000/api/addplayer"; // access the register endpoint to register new user
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(url, data);
+
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"{dto.PlayerName} has been added to \"{dto.TeamName}\"", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
+
+	} // End method
+
 
 	private async void OnViewTeamBtnClicked(object sender, EventArgs e)
 	{
@@ -565,14 +717,8 @@ public partial class HomePage : ContentPage
 			CurrentTeamCollectionView.IsEnabled = true;
 			CurrentTeamCollectionView.SelectedItem = CurrentlySelectedTeam.FirstOrDefault();
 			Team? team = CurrentTeamCollectionView.SelectedItem as Team;
-			foreach (Player player in TeamPlayers)
-			{
-				if (player.TeamId== team.TeamId)
-				{
-					PlayersOnCurrentTeam.Add(player);
-				}
-			}
 
+			await GetTeamPlayers(team.TeamId);
 			TitleLabel1.Text = $"TEAM \"{team.TeamName.ToUpper()}\" ROSTER";
 
 			TeamsBelongedToGrid.IsVisible = false;
@@ -603,18 +749,15 @@ public partial class HomePage : ContentPage
 
 			Team? getPlayers = TeamsBelongedToCollectionView.SelectedItem as Team;
 			await GetPlayersInLeague(getPlayers.League);
+
+
+
 			globalLeaguesSelected = true;
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentTeamCollectionView.IsEnabled = true;
 			CurrentTeamCollectionView.SelectedItem = CurrentlySelectedTeam.FirstOrDefault();
 			Team? team = CurrentTeamCollectionView.SelectedItem as Team;
-			foreach (Player player in TeamPlayers)
-			{
-				if (player.TeamId == team.TeamId)
-				{
-					PlayersOnCurrentTeam.Add(player);
-				}
-			}
+			await GetTeamPlayers(team.TeamId);
 
 			TitleLabel1.Text = $"TEAM \"{team.TeamName.ToUpper()}\" ROSTER";
 
@@ -646,19 +789,14 @@ public partial class HomePage : ContentPage
 
 			Team? getPlayers = TeamsInLeagueCollectionView.SelectedItem as Team;
 			await GetPlayersInLeague(getPlayers.League);
+
 			currentLeagueHasBeenSelected = true;
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentTeamCollectionView.IsEnabled = true;
 
 			CurrentTeamCollectionView.SelectedItem = TeamsInLeagueCollectionView.SelectedItem;
 			Team? team = CurrentTeamCollectionView.SelectedItem as Team;
-			foreach (Player player in TeamPlayers)
-			{
-				if (player.TeamId == team.TeamId)
-				{
-					PlayersOnCurrentTeam.Add(player);
-				}
-			}
+			await GetTeamPlayers(team.TeamId);
 
 			TitleLabel1.Text = $"TEAM \"{team.TeamName.ToUpper()}\" ROSTER";
 
@@ -784,6 +922,10 @@ public partial class HomePage : ContentPage
 			}
 			dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
 			await DeleteTeam(dto);
+
+			FreeAgents.Clear();
+			TeamPlayers.Clear();
+			await GetPlayersInLeague(team.League);
 			foreach (Team item in TeamsInLeague)
 			{
 				if (item.TeamId == dto.teamid)
@@ -818,6 +960,10 @@ public partial class HomePage : ContentPage
 				Team team = TeamsBelongedToCollectionView.SelectedItem as Team;
 				dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
 				await DeleteTeam(dto);
+
+				FreeAgents.Clear();
+				TeamPlayers.Clear();
+				await GetPlayersInLeague(team.League);
 				foreach (Team item in TeamsInLeague)
 				{
 					if (item.TeamId == dto.teamid)
@@ -846,6 +992,11 @@ public partial class HomePage : ContentPage
 			}
 			dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
 			await DeleteTeam(dto);
+
+			FreeAgents.Clear();
+			TeamPlayers.Clear();
+			PlayersOnCurrentTeam.Clear();
+			await GetPlayersInLeague(team.League);
 			foreach (Team item in TeamsInLeague)
 			{
 				if (item.TeamId == dto.teamid)
@@ -866,24 +1017,55 @@ public partial class HomePage : ContentPage
 			CurrentTeamCollectionViewGrid.IsVisible = false;
 			CurrentTeamCollectionView.IsEnabled = false;
 
-			if (LeaguesBelongedToGrid.IsVisible || GlobalLeaguesGrid.IsVisible)
+			CurrentPlayersCollectionViewGrid.IsVisible = false;
+			CurrentPlayersCollectionView.IsEnabled = false;
+
+			if (globalHasBeenSelected)
 			{
+				GlobalLeaguesGrid.IsVisible = true;
+				GlobalLeaguesCollectionView.IsEnabled = true;
+
 				TeamsBelongedToGrid.IsVisible = true;
 				TeamsBelongedToCollectionView.IsEnabled = true;
 
-				TitleLabel2.Text = "MY TEAMS";
-
-				GoBackTeamBtn.IsVisible = false;
+				TitleLabel2.Text = "LEAGUE TEAMS";
+				TitleLabel1.Text = "GLOBAL LEAGUES";
+				globalHasBeenSelected = false;
 				ViewTeamBtn.IsVisible = true;
+				DeleteTeamBtn.IsVisible = true;
+				GoBackTeamBtn.IsVisible = false;
+
+				ViewLeagueBtn.IsVisible = true;
+				DeleteBtn.IsVisible = true;
+				CreateLeagueBtn.IsVisible = true;
+				GoBackBtn2.IsVisible = true;
+
+				ViewFreeAgentsBtn.IsVisible = false;
+				DropBtn.IsVisible = false;
 			}
 
-			if (CurrentLeagueCollectionViewGrid.IsVisible)
+			if (leaguesBelongedToSelected)
 			{
-				TeamsInLeagueGrid.IsVisible = true;
-				TeamsInLeagueCollectionView.IsEnabled = true;
+				LeaguesBelongedToGrid.IsVisible = true;
+				LeaguesBelongedToCollectionView.IsEnabled = true;
 
-				GoBackTeamBtn.IsVisible = false;
+				TeamsBelongedToGrid.IsVisible = true;
+				TeamsBelongedToCollectionView.IsEnabled = true;
+
+				TitleLabel2.Text = "LEAGUE TEAMS";
+				TitleLabel1.Text = "LEAGUES BELONGED TO";
+				leaguesBelongedToSelected = false;
 				ViewTeamBtn.IsVisible = true;
+				DeleteTeamBtn.IsVisible = true;
+				GoBackTeamBtn.IsVisible = false;
+
+				ViewLeagueBtn.IsVisible = true;
+				DeleteBtn.IsVisible = true;
+				OrLabel.IsVisible = true;
+				JoinCreateBtn.IsVisible = true;
+
+				ViewFreeAgentsBtn.IsVisible = false;
+				DropBtn.IsVisible = false;
 			}
 		}
 		if (CurrentlySelectedTeam is not null)
@@ -897,6 +1079,7 @@ public partial class HomePage : ContentPage
 		CurrentTeamCollectionView.SelectedItem = null;
 		TeamsInLeagueCollectionView.SelectedItem = null;
 		TeamsBelongedToCollectionView.SelectedItem = null;
+
 	}
 
 	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
@@ -1382,6 +1565,55 @@ public partial class HomePage : ContentPage
 		{
 			await DisplayAlert("Must enter a valid team name", "Please enter a team name now", "Ok");
 			return;
+		}
+
+		League league = CurrentLeagueCollectionView.SelectedItem as League;
+
+		CreateTeamDTO dto = new CreateTeamDTO(TeamNameEntry.Text, GetUserId.UserId, league.LeagueId);
+
+		await CreateTeam(dto);
+
+		ViewTeamBtn.IsVisible = true;
+		DeleteTeamBtn.IsVisible = true;
+
+		GoBackTeamBtn.IsVisible = false;
+		EnterTeamBtn.IsVisible = false;
+
+		CreateTeamGrid.IsVisible = false;
+		CreateTeamGridOuter.IsVisible = false;
+
+		TeamsInLeagueGrid.IsVisible = true;
+		TeamsInLeagueCollectionView.IsEnabled = true;
+
+		TitleLabel2.Text = "LEAGUE TEAMS";
+
+
+		TeamsInLeague.Clear();
+	    await getUserEmailAndUserName(GetUserId.UserId);
+		await GetTeamsInLeague(league.LeagueId);
+
+		TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
+
+	}
+
+	private async Task CreateTeam(CreateTeamDTO dto)
+	{
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var Url = "http://localhost:8000/api/createteam";
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(Url, data);
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"Created team {dto.team_name}", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
 		}
 	}
 

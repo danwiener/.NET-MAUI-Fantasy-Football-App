@@ -10,16 +10,16 @@
 
     <Grid ColumnDefinitions="1*" RowDefinitions=".5*,.5*">
 
-        <!--<Grid Grid.Row="0" RowDefinitions=".5*,.5*" ZIndex="3">
+        <Grid Grid.Row="0" RowDefinitions=".5*,.5*" ZIndex="3">
             <BoxView Color="#6568A6" Grid.Row="1" ZIndex="12"/>
-        </Grid>-->
-        <Grid Grid.Row="0" Grid.RowSpan="2" RowDefinitions=".225*,.275*,.075*,.5*" ZIndex="1">
+        </Grid>
+        <!--<Grid Grid.Row="0" Grid.RowSpan="2" RowDefinitions=".225*,.275*,.075*,.5*" ZIndex="1">
             <BoxView Color="#ffffff" Grid.Row="1" Grid.RowSpan="2" ZIndex="11">
                 <BoxView.Shadow>
                     <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
                 </BoxView.Shadow>
             </BoxView>
-        </Grid>
+        </Grid>-->
         <!--<Grid Grid.Row="0" RowDefinitions=".65*,.35*" ColumnDefinitions=".2*,.285*,.03*,.285*,.2*">
             <BoxView Color="#6568A6" Grid.Row="1" Grid.Column="2" ZIndex="12"/>
         </Grid>-->

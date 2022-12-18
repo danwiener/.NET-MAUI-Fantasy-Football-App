@@ -114,7 +114,61 @@ namespace FantasyFootballMAUI.Models
 			LeagueName = leagueName;
 			MaxTeams = maxTeams;
 			Creator = creator;
+        }
+    }
+
+    public class AddPlayerDTO
+    {
+        [JsonPropertyName("PlayerId")]
+        public int PlayerId { get; set; }
+
+        [JsonPropertyName("playername")]
+        public string PlayerName { get; set; }
+
+        [JsonPropertyName("teamname")]
+        public string TeamName { get; set; }
+
+        [JsonPropertyName("teamid")]
+        public int TeamId { get; set; } // Fantasy team player associated with
+
+        public AddPlayerDTO(int playerid, string playername, string teamname, int teamid)
+        {
+            PlayerId = playerid;
+            PlayerName = playername;
+            TeamName = teamname;
+            TeamId = teamid;
+        }
+    }
+
+    public class DropPlayerDTO
+    {
+		[JsonPropertyName("PlayerId")]
+		public int PlayerId { get; set; }
+
+        public string PlayerName { get; set; }
+
+        public DropPlayerDTO(int playerId, string playername)
+		{
+			PlayerId = playerId;
+            PlayerName = playername;
 		}
 	}
+
+    public class CreateTeamDTO
+    {
+		public string team_name { get; set; }
+
+		public int creator_id { get; set; }
+
+		public int league_id { get; set; }
+
+        public CreateTeamDTO(string teamname, int creatorid, int leagueid)
+        {
+			team_name = teamname;
+			creator_id = creatorid;
+			league_id = leagueid;
+        }
+
+    }
 
 }
