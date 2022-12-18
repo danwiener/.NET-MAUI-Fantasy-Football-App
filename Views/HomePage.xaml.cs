@@ -515,6 +515,9 @@ public partial class HomePage : ContentPage
 		CurrentPlayersCollectionViewGrid.IsVisible = false;
 		CurrentPlayersCollectionView.IsEnabled = false;
 
+		GoBackTeamBtn.IsVisible = false;
+		DeleteTeamBtn.IsVisible = false;
+
 		DropBtn.IsVisible = false;
 		AddBtn.IsVisible = true;
 
@@ -528,6 +531,15 @@ public partial class HomePage : ContentPage
 
 		AddBtn.IsVisible = false;
 		DropBtn.IsVisible = true;
+
+		GoBackTeamBtn.IsVisible = true;
+		DeleteTeamBtn.IsVisible = true;
+
+		FreeAgentsCollectionViewGrid.IsVisible = false;
+		FreeAgentsCollectionView.IsEnabled = false;
+
+		CurrentPlayersCollectionViewGrid.IsVisible = true;
+		CurrentPlayersCollectionView.IsEnabled = true;
 	}
 
 	private async void OnDropPlayerClicked(object sender, EventArgs e)
@@ -1200,6 +1212,12 @@ public partial class HomePage : ContentPage
 
 	private void OnGoBackTeamClicked(object sender, EventArgs e)
 	{
+		if (CurrentPlayersCollectionViewGrid.IsVisible)
+		{
+			CurrentPlayersCollectionViewGrid.IsVisible = false;
+			CurrentPlayersCollectionView.IsEnabled = false;
+
+		}
 		if (CreateTeamGridOuter.IsVisible)
 		{
 			CreateTeamGridOuter.IsVisible = false;
