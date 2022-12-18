@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FantasyFootballMAUI.OpeningPage"
-              BackgroundColor="White"
+              BackgroundColor="#e6e6e6"
              Title="">
 
 
@@ -10,10 +10,16 @@
 
     <Grid ColumnDefinitions="1*" RowDefinitions=".5*,.5*">
 
-        <!--<Grid Grid.Row="0" RowDefinitions=".5*,.5*">
+        <!--<Grid Grid.Row="0" RowDefinitions=".5*,.5*" ZIndex="3">
             <BoxView Color="#6568A6" Grid.Row="1" ZIndex="12"/>
-        </Grid>-->  <!--DO NOT DELETE-->
-        
+        </Grid>-->
+        <Grid Grid.Row="0" Grid.RowSpan="2" RowDefinitions=".225*,.275*,.075*,.5*" ZIndex="1">
+            <BoxView Color="#ffffff" Grid.Row="1" Grid.RowSpan="2" ZIndex="11">
+                <BoxView.Shadow>
+                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
+                </BoxView.Shadow>
+            </BoxView>
+        </Grid>
         <!--<Grid Grid.Row="0" RowDefinitions=".65*,.35*" ColumnDefinitions=".2*,.285*,.03*,.285*,.2*">
             <BoxView Color="#6568A6" Grid.Row="1" Grid.Column="2" ZIndex="12"/>
         </Grid>-->
@@ -41,32 +47,32 @@
 
             </Grid>
         </Grid>
-        <Grid Grid.Row="0" RowDefinitions=".5*,.5*">
+        <Grid Grid.Row="0" RowDefinitions=".5*,.5*" ZIndex="9">
 
-            <Label x:Name="TitleLabel" Text="Button Hook Fantasy Football" FontSize="52" FontAttributes="Bold" FontFamily="PT" FontAutoScalingEnabled="True" TextColor="#737373" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Scale="3">
-                <Label.Shadow>
-                    <Shadow Brush="#737373" Offset="0,20" Radius="20" Opacity="1.2"/>
-                </Label.Shadow>
+            <Label x:Name="TitleLabel" Text="Button Hook Fantasy Football" FontSize="52" FontAttributes="Bold" FontFamily="PT" FontAutoScalingEnabled="True" TextColor="#394a55" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Scale="3">
+                <!--<Label.Shadow>
+                    <Shadow Brush="#394a55" Offset="0,20" Radius="20" Opacity="1.2"/>
+                </Label.Shadow>-->
             </Label>
         </Grid>
         
-        <Grid Grid.RowSpan="2" RowDefinitions="0.5*,0.5*" ColumnDefinitions=".5*,.5*" ZIndex="2">
-            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2">
+        <Grid Grid.RowSpan="2" RowDefinitions="0.5*,0.5*" ColumnDefinitions=".5*,.5*" ZIndex="112">
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="112">
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
-                    <Label x:Name="SignInLabel" Text="SIGN IN" FontSize="102" FontAttributes="Bold" TextColor="#6588a6" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalTextAlignment="Center" VerticalOptions="End" ZIndex="2">
+                    <Label x:Name="SignInLabel" Text="SIGN IN" FontSize="102" FontAttributes="Bold" TextColor="#6588a6" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" FontAutoScalingEnabled="True" LineBreakMode="CharacterWrap" VerticalTextAlignment="Center" VerticalOptions="End" ZIndex="112">
                         <!--<Label.Shadow>
-                            <Shadow Brush="black" Offset="1,1" Radius="2" Opacity="1.2"/>
+                            <Shadow Brush="#d1dbe4" Offset="1,1" Radius="1" Opacity="1.2"/>
                         </Label.Shadow>-->
                     </Label>
                     
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".02*,.91*,.07*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2">
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".02*,.91*,.07*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="12">
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
-                    <Label x:Name="SignUpLabel" Text="SIGN UP" FontSize="102" FontAttributes="Bold" TextColor="White" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalTextAlignment="Center" VerticalOptions="End" ZIndex="2">
+                    <Label x:Name="SignUpLabel" Text="SIGN UP" FontSize="102" FontAttributes="Bold" TextColor="#d1dbe4" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" FontAutoScalingEnabled="True" LineBreakMode="CharacterWrap" VerticalTextAlignment="Center" VerticalOptions="End" ZIndex="2">
                         <!--<Label.Shadow>
-                            <Shadow Brush="black" Offset="1,1" Radius="2" Opacity="1.2"/>
+                            <Shadow Brush="#6588a6" Offset="1,1" Radius="1" Opacity="1.2"/>
                         </Label.Shadow>-->
                     </Label>
 
@@ -75,11 +81,11 @@
                 </Grid>
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="0" ZIndex="0">
-            <BoxView Color="Black">
+        <!--<Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ZIndex="0" ColumnDefinitions=".06*,.88*,.06*" RowDefinitions=".06*,.88*,.06*">
+            <BoxView Color="#ffffff" Grid.Row="1" Grid.Column="1">
 
             </BoxView>
-        </Grid>
+        </Grid>-->
 
 
 
@@ -87,7 +93,7 @@
 
 
 
-        <Grid x:Name="RightButtonGrid" Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="7">
+        <Grid x:Name="RightButtonGrid" Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="177">
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*">
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" ZIndex="5">
                     <Button
@@ -107,12 +113,12 @@
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand" 
                         Grid.ColumnSpan="2"
-                        ZIndex="7"/>
+                        ZIndex="177"/>
                 </Grid>
             </Grid>
         </Grid>
 
-        <Grid x:Name="LeftButtonGrid" Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="7">
+        <Grid x:Name="LeftButtonGrid" Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="177">
             <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*">
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" ZIndex="5">
                     <Button 
@@ -132,41 +138,41 @@
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="CenterAndExpand"
                         Grid.ColumnSpan="2"
-                        ZIndex="4"/>
+                        ZIndex="177"/>
                 </Grid>
             </Grid>
         </Grid>
         
-        <Grid Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="1">
+        <Grid Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="12">
 
             <Grid x:Name="LeftGrid" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2" >
 
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
-                    <BoxView Color="#a6a6a6" Grid.Column="1" Grid.Row="1" CornerRadius="40,40,40,40">
-                        <BoxView.Shadow>
-                            <Shadow Brush="#6588a6" Offset="0,100" Radius="100" Opacity="1.2"/>
-                        </BoxView.Shadow>
-                    </BoxView>
-                    <BoxView Color="#a6a6a6" Grid.Column="1" Grid.Row="1" CornerRadius="40,40,40,40">
-                        <BoxView.Shadow>
-                            <Shadow Brush="#6588a6" Offset="0,-10" Radius="50" Opacity="1.2"/>
-                        </BoxView.Shadow>
-                    </BoxView>
+                    <Frame BackgroundColor="#ffffff" BorderColor="#e9e9e9" Grid.Column="1" Grid.Row="1" CornerRadius="40" ZIndex="8"/>
                 </Grid>
 
             </Grid>
             <Grid x:Name="RightGrid" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".02*,.91*,.07*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2" >
                 <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
-                    <BoxView Color="#737373" Grid.Column="1" Grid.Row="1" CornerRadius="40,40,40,40">
-                        <BoxView.Shadow>
-                            <Shadow Brush="white" Offset="0,100" Radius="100" Opacity="1.2"/>
-                        </BoxView.Shadow>
-                    </BoxView>
-                    <BoxView Color="#737373" Grid.Column="1" Grid.Row="1" CornerRadius="40,40,40,40">
-                        <BoxView.Shadow>
-                            <Shadow Brush="#f2f2f2" Offset="0,-10" Radius="50" Opacity="1.2"/>
-                        </BoxView.Shadow>
-                    </BoxView>
+                    <Frame BackgroundColor="#ffffff" BorderColor="#e9e9e9" Grid.Column="1" Grid.Row="1" CornerRadius="40"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.RowSpan="2" RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*" ZIndex="188">
+
+            <Grid  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".07*,.91*,.02*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="188" >
+
+                <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
+                    <Button BackgroundColor="Transparent" BorderColor="Transparent" Clicked="OnLoginBtnClicked" Grid.Column="1" Grid.Row="1" CornerRadius="40" ZIndex="188"/>
+
+                </Grid>
+
+            </Grid>
+            <Grid  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ColumnDefinitions=".02*,.91*,.07*" RowDefinitions=".25*, .25*, .25*,.25*" ZIndex="2" >
+                <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1">
+                    <Button BackgroundColor="Transparent" BorderColor="Transparent" Clicked="OnRegisterBtnClicked" Grid.Column="1" Grid.Row="1" CornerRadius="40" ZIndex="188"/>
+
                 </Grid>
             </Grid>
         </Grid>

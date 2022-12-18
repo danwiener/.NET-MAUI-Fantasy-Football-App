@@ -16,23 +16,24 @@ namespace FantasyFootballMAUI.Models
 		public int PlayerId { get; set; }
 
 		[JsonPropertyName("teamid")]
-		public int? TeamId { get; set;} // Fantasy team player associated with
+		public int TeamId { get; set;} // Fantasy team player associated with
 
 		[JsonPropertyName("position")]
 		public string Position { get; set; } = default!;
 
+		public string PositionStr { get; set; }
+
 		[JsonPropertyName("playername")]
 		public string PlayerName { get; set; } = default!;
+
+		public string PlayerNameStr { get; set; }
 
 		[JsonPropertyName("team")]
 		public string Team { get; set; } = default!;
 
-		public bool FreeAgent { get => FreeAgent;
-			set
-			{
-				FreeAgent = TeamId == null;
-			}
-		}
+		public string TeamStr { get; set; }
+
+		public bool FreeAgent { get; set;}
 
 		public Player(int id, string position, string playername, string team, bool freeagent)
 		{
@@ -41,6 +42,10 @@ namespace FantasyFootballMAUI.Models
 			PlayerName = playername;
 			Team = team;
 			FreeAgent = freeagent;
+
+			PositionStr = $"Position ({Position})";
+			PlayerNameStr = $"Name ({PlayerName})";
+			TeamStr = $"Team ({Team})";
 		}
 	}
 }

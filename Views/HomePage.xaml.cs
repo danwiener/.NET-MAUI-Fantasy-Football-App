@@ -32,6 +32,9 @@ public partial class HomePage : ContentPage
 	ObservableCollection<Player> teamPlayers;
 	ObservableCollection<Player> playersOnCurrentTeam;
 	private bool globalHasBeenSelected = false;
+	private bool leaguesBelongedToSelected = false;
+	private bool globalLeaguesSelected = false;
+	private bool currentLeagueHasBeenSelected = false;
 
 	User user;
 
@@ -283,18 +286,6 @@ public partial class HomePage : ContentPage
 				client.DefaultRequestHeaders.Remove("NumberTeamsHeader");
 				league.CurrentTeams = int.Parse(JObject.Parse(result10)["numberteams"].ToString());
 
-				string fmt = "000";
-				string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
-				league.ImageSource = $"image_part_{withLeadingZeroes}.jpg";
-				if (j < 60)
-				{
-					j++;
-				}
-				else
-				{
-					j = 1;
-				}
-
 				BelongedTo.Add(league);
 				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
 
@@ -314,6 +305,8 @@ public partial class HomePage : ContentPage
 
 				league.CreatorName = user.Name; // Merge name and username from user into league for collection view binding purposes
 				league.CreatorUsername = user.Username;
+				league.CreatorUsernameStr = $"Creator Username ({league.CreatorUsername})";
+				league.CreatorNameStr = $"Creator Name ({league.CreatorName})";
 			}
 		}
 
@@ -388,6 +381,16 @@ public partial class HomePage : ContentPage
 		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
 	} // End method
 
+	private void FreeAgents_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		ObservableCollection<Player> currentlySelectedPlayer = new ObservableCollection<Player>();
+		currentlySelectedPlayer.Add(e.CurrentSelection.FirstOrDefault() as Player);
+
+		CurrentlySelectedPlayer = currentlySelectedPlayer;
+
+
+	}
+
 	private void CurrentPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
 		ObservableCollection<League> currentlySelected = new ObservableCollection<League>();
@@ -435,7 +438,7 @@ public partial class HomePage : ContentPage
 		var response = await client.GetAsync(Url);
 		var result = await response.Content.ReadAsStringAsync();
 
-		int[]? playerids = (int[])JObject.Parse(result)["playeridinleague"].ToObject<int[]>();
+		int[] playerids = (int[])JObject.Parse(result)["playeridinleague"].ToObject<int[]>();
 
 		var Url2 = "http://localhost:8000/api/getplayers";
 
@@ -451,9 +454,9 @@ public partial class HomePage : ContentPage
 			string position = JObject.Parse(result2)["position"].ToString();
 			string playername = JObject.Parse(result2)["playername"].ToString();
 			string team = JObject.Parse(result2)["team"].ToString();
-			int? teamid = int.Parse(JObject.Parse(result2)["teamid"].ToString());
+			int teamid = int.Parse(JObject.Parse(result2)["teamid"].ToString());
 
-			Player player = new Player(playerid, position, playername, team, teamid == null);
+			Player player = new Player(playerid, position, playername, team, teamid == 0);
 			if (player.FreeAgent)
 			{
 				FreeAgents.Add(player);
@@ -499,6 +502,39 @@ public partial class HomePage : ContentPage
 		}
 	}
 
+	private async void OnViewFreeAgentsClicked(object sender, EventArgs e)
+	{
+		GoBackFABtn.IsVisible = true;
+		ViewFreeAgentsBtn.IsVisible = false;
+
+		FreeAgentsCollectionView.ItemsSource = FreeAgents;
+
+		FreeAgentsCollectionViewGrid.IsVisible= true;
+		FreeAgentsCollectionView.IsEnabled = true;
+
+		CurrentPlayersCollectionViewGrid.IsVisible = false;
+		CurrentPlayersCollectionView.IsEnabled = false;
+
+		DropBtn.IsVisible = false;
+		AddBtn.IsVisible = true;
+
+		TitleLabel1.Text = "FREE AGENTS";
+	}
+
+	private async void OnGoBackFAClicked(object sender, EventArgs e)
+	{
+		GoBackFABtn.IsVisible = false;
+		ViewFreeAgentsBtn.IsVisible = true;
+
+		AddBtn.IsVisible = false;
+		DropBtn.IsVisible = true;
+	}
+
+	private async void OnDropPlayerClicked(object sender, EventArgs e)
+	{
+
+	}
+
 	private async void OnViewTeamBtnClicked(object sender, EventArgs e)
 	{
 		if (LeaguesBelongedToGrid.IsVisible)
@@ -508,6 +544,10 @@ public partial class HomePage : ContentPage
 				await DisplayAlert("No team selected", "Please select a team to view", "Ok");
 				return;
 			}
+			Team? getPlayers = TeamsBelongedToCollectionView.SelectedItem as Team;
+			await GetPlayersInLeague(getPlayers.League);
+
+			leaguesBelongedToSelected = true;
 
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentTeamCollectionView.IsEnabled = true;
@@ -532,16 +572,26 @@ public partial class HomePage : ContentPage
 			CurrentPlayersCollectionView.ItemsSource = PlayersOnCurrentTeam;
 			CurrentPlayersCollectionViewGrid.IsVisible = true;
 			CurrentPlayersCollectionView.IsEnabled = true;
+
+			ViewLeagueBtn.IsVisible = false;
+			DeleteBtn.IsVisible = false;
+			OrLabel.IsVisible = false;
+			JoinCreateBtn.IsVisible = false;
+			ViewFreeAgentsBtn.IsVisible = true;
+			DropBtn.IsVisible = true;
 		}
 
 		if (GlobalLeaguesGrid.IsVisible)
 		{
-			if (GlobalLeaguesCollectionView.SelectedItem == null)
+			if (TeamsBelongedToCollectionView.SelectedItem == null)
 			{
 				await DisplayAlert("No team selected", "Please select a team to view", "Ok");
 				return;
 			}
 
+			Team? getPlayers = TeamsBelongedToCollectionView.SelectedItem as Team;
+			await GetPlayersInLeague(getPlayers.League);
+			globalLeaguesSelected = true;
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentTeamCollectionView.IsEnabled = true;
 			CurrentTeamCollectionView.SelectedItem = CurrentlySelectedTeam.FirstOrDefault();
@@ -562,6 +612,14 @@ public partial class HomePage : ContentPage
 			CurrentPlayersCollectionView.ItemsSource = PlayersOnCurrentTeam;
 			CurrentPlayersCollectionViewGrid.IsVisible = true;
 			CurrentPlayersCollectionView.IsEnabled = true;
+
+			ViewLeagueBtn.IsVisible = false;
+			DeleteBtn.IsVisible = false;
+			CreateLeagueBtn.IsVisible = false;
+			GoBackBtn2.IsVisible = false;
+			ViewFreeAgentsBtn.IsVisible = true;
+			DropBtn.IsVisible = true;
+
 		}
 
 
@@ -574,6 +632,9 @@ public partial class HomePage : ContentPage
 				return;
 			}
 
+			Team? getPlayers = TeamsInLeagueCollectionView.SelectedItem as Team;
+			await GetPlayersInLeague(getPlayers.League);
+			currentLeagueHasBeenSelected = true;
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentTeamCollectionView.IsEnabled = true;
 
@@ -599,6 +660,13 @@ public partial class HomePage : ContentPage
 			CurrentPlayersCollectionView.ItemsSource = PlayersOnCurrentTeam;
 			CurrentPlayersCollectionViewGrid.IsVisible = true;
 			CurrentPlayersCollectionView.IsEnabled = true;
+
+			GoBackBtn.IsVisible = false;
+			DeleteBtn.IsVisible = false;
+			JoinLeagueBtn.IsVisible = false;
+			RulesBtn.IsVisible = false;
+			ViewFreeAgentsBtn.IsVisible = true;
+			DropBtn.IsVisible = true;
 		}
 
 		TitleLabel2.Text = $"TEAM INFO";
@@ -977,6 +1045,29 @@ public partial class HomePage : ContentPage
 		{
 			await DisplayAlert("Not successful", "Please try again", "Ok");
 		}
+
+		foreach (Team team in TeamsBelongedTo)
+		{
+			if (team.League == dto.leagueid)
+			{
+				TeamsBelongedTo.Remove(team);
+			}
+		}
+		foreach (Team team in TeamsInLeague)
+		{
+			if (team.League == dto.leagueid)
+			{
+				TeamsInLeague.Remove(team);
+			}
+		}
+		foreach (LeagueRules lr in CurrentLeagueRules)
+		{
+			if (lr.LeagueId == dto.leagueid)
+			{
+				CurrentLeagueRules.Remove(lr);
+			}
+		}
+
 	} // End method
 
 	public async Task DeleteTeam(DeleteTeamDTO dto)
@@ -1060,17 +1151,6 @@ public partial class HomePage : ContentPage
 				int creatorId = int.Parse(JObject.Parse(result2)["creator"].ToString());
 				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
 
-				string fmt = "000";
-				string withLeadingZeroes = j.ToString(fmt); // pad image path suffix with adjusted leading 0s
-				league.ImageSource = $"image_part_{withLeadingZeroes}.jpg";
-				if (j < 60)
-				{
-					j++;
-				}
-				else
-				{
-					j = 1;
-				}
 
 				GlobalLeagues.Add(league);
 				var Url3 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
@@ -1125,6 +1205,8 @@ public partial class HomePage : ContentPage
 			CreateTeamGridOuter.IsVisible = false;
 			CreateTeamGrid.IsVisible = false;
 
+			TeamNameEntry.Text = null;
+
 			GoBackTeamBtn.IsVisible = false;
 			ViewTeamBtn.IsVisible = true;
 			EnterTeamBtn.IsVisible = false;
@@ -1133,12 +1215,100 @@ public partial class HomePage : ContentPage
 			CurrentTeamCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
 			TitleLabel2.Text = "LEAGUE TEAMS";
+			return;
+		}
+		if (CurrentTeamCollectionViewGrid.IsVisible)
+		{
+			if (leaguesBelongedToSelected)
+			{
+
+				LeaguesBelongedToGrid.IsVisible = true;
+				LeaguesBelongedToCollectionView.IsEnabled = true;
+
+				PlayersOnCurrentTeam.Clear();
+				CurrentTeamCollectionView.SelectedItem = null;
+
+				CurrentTeamCollectionViewGrid.IsVisible = false;
+				CurrentTeamCollectionView.IsEnabled = false;
+
+				CurrentPlayersCollectionViewGrid.IsVisible = false;
+				CurrentPlayersCollectionView.IsEnabled = false;
+				CurrentPlayersCollectionView.SelectedItem = null;
+
+
+				ViewLeagueBtn.IsVisible = true;
+				DeleteBtn.IsVisible = true;
+				OrLabel.IsVisible = true;
+				JoinCreateBtn.IsVisible = true;
+				ViewFreeAgentsBtn.IsVisible = false;
+				DropBtn.IsVisible = false;
+				leaguesBelongedToSelected = false;
+
+				TitleLabel1.Text = "LEAGUES BELONGED TO";
+
+			}
+			if (globalHasBeenSelected)
+			{
+
+				GlobalLeaguesGrid.IsVisible = true;
+				GlobalLeaguesCollectionView.IsEnabled = true;
+
+				PlayersOnCurrentTeam.Clear();
+				CurrentTeamCollectionView.SelectedItem = null;
+
+				CurrentTeamCollectionViewGrid.IsVisible = false;
+				CurrentTeamCollectionView.IsEnabled = false;
+
+				CurrentPlayersCollectionViewGrid.IsVisible = false;
+				CurrentPlayersCollectionView.IsEnabled = false;
+				CurrentPlayersCollectionView.SelectedItem = null;
+
+
+				ViewLeagueBtn.IsVisible = true;
+				DeleteBtn.IsVisible = true;
+				CreateLeagueBtn.IsVisible = true;
+				GoBackBtn2.IsVisible = true;
+				ViewFreeAgentsBtn.IsVisible = false;
+				DropBtn.IsVisible = false;
+				globalLeaguesSelected = false;
+
+				TitleLabel1.Text = "GLOBAL LEAGUES";
+			}
+			if (currentLeagueHasBeenSelected)
+			{
+				CurrentLeagueCollectionViewGrid.IsVisible = true;
+				CurrentLeagueCollectionView.IsEnabled = true;
+
+				PlayersOnCurrentTeam.Clear();
+				CurrentTeamCollectionView.SelectedItem = null;
+
+				CurrentTeamCollectionViewGrid.IsVisible = false;
+				CurrentTeamCollectionView.IsEnabled = false;
+
+				CurrentPlayersCollectionViewGrid.IsVisible = false;
+				CurrentPlayersCollectionView.IsEnabled = false;
+				CurrentPlayersCollectionView.SelectedItem = null;
+
+				GoBackBtn.IsVisible = true;
+				DeleteBtn.IsVisible = true;
+				JoinLeagueBtn.IsVisible = true;
+				RulesBtn.IsVisible = true;
+				ViewFreeAgentsBtn.IsVisible = false;
+				DropBtn.IsVisible = false;
+
+				TitleLabel1.Text = "LEAGUE INFO";
+			}
+			if (PlayersOnCurrentTeam != null)
+			{
+				PlayersOnCurrentTeam.Clear();
+			}
+			if (CurrentlySelectedPlayer != null)
+			{
+				CurrentlySelectedPlayer.Clear();
+			}
 		}
 		if (CurrentLeagueCollectionViewGrid.IsVisible)
 		{
-			CurrentTeamCollectionViewGrid.IsVisible = false;
-			CurrentTeamCollectionView.IsEnabled = false;
-
 			TeamsInLeagueGrid.IsVisible = true;
 			TeamsInLeagueCollectionView.IsEnabled = true;
 			TitleLabel2.Text = "LEAGUE TEAMS";
@@ -1311,6 +1481,7 @@ public partial class HomePage : ContentPage
 
 			EditBtn.IsVisible = true;
 			EnterRulesBtn.IsVisible = false;
+			TitleLabel1.Text = "LEAGUE RULES";
 
 			return;
 
