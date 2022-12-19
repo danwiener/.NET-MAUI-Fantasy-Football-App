@@ -28,7 +28,7 @@ public partial class LoginPage : ContentPage
 		//Task scaleLoginBtn = Task.Factory.StartNew(async () => { await LoginBtn.ScaleTo(1, 500); }); // To scale sign in button
     } // End method
 
-		private async void OnLoginBtnClicked(object sender, EventArgs e)
+	private async void OnLoginBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(LoginBtn.Text);
         string email = EmailEntry.Text;
@@ -66,6 +66,7 @@ public partial class LoginPage : ContentPage
             if (!response.IsSuccessStatusCode)
             {
                 await DisplayAlert("Error", "Invalid credentials - Try again", "Ok");
+                return;
             }
 
             var result = await response.Content.ReadAsStringAsync(); // receive the access token
