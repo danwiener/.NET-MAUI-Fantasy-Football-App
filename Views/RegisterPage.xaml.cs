@@ -11,37 +11,39 @@ public partial class RegisterPage : ContentPage
     // Data components
 
     CancellationTokenSource _cancellationTokenSource = new();
-	CancellationTokenSource _cancellationTokenSource2ForWindowsColors = new();
+    CancellationTokenSource _cancellationTokenSource2ForWindowsColors = new();
 
-	//private readonly ProgressArc _progressArc;
+    //private readonly ProgressArc _progressArc;
 
-	// Data fields
+    // Data fields
 
-	private int _passwordLength;
+    private int _passwordLength;
     private int _duration = 6000;
-	private int _duration2ForWindowsColors = 18000;
+    private int _duration2ForWindowsColors = 18000;
 
-	private string _symbols = "!/#$%&\\()*+,-./:;<=>?@[]_{|}~";
+    private string _symbols = "!/#$%&\\()*+,-./:;<=>?@[]_{|}~";
 
     private StringBuilder _password;
 
     private DateTime _startTime;
 
+    private bool hasDisplayed = false;
+
     // Constructor
     public RegisterPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
     } // End constructor
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(2, 1000); });
-	} // End method
+        Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(2, 1000); });
+    } // End method
 
-	// Button event handlers
-	private async void OnAccountBtnClicked(object sender, EventArgs e)
+    // Button event handlers
+    private async void OnAccountBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(AccountBtn.Text);
         string user_name = UsernameEntry.Text;
@@ -50,69 +52,80 @@ public partial class RegisterPage : ContentPage
         string password = PasswordEntry.Text;
         string password_confirm = PasswordConfirmEntry.Text;
 
+        if (PasswordEntry.Text != PasswordConfirmEntry.Text)
+        {
+            await DisplayAlert("Error", "Passwords do not match, please try again", "Ok");
+            return;
+        }
 
-		NewUser nu = new NewUser(user_name, name, email, password, password_confirm);
-		await RegisterNewUserAsync(nu);
-		await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
-        
+        NewUser nu = new NewUser(user_name, name, email, password, password_confirm);
+        await RegisterNewUserAsync(nu);
+        await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+
     } // End method
 
-	public async Task RegisterNewUserAsync(NewUser nu)
-	{
-		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nu);
-		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+    public async Task RegisterNewUserAsync(NewUser nu)
+    {
+        var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nu);
+        var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/register"; // access the register endpoint to register new user
-		using var client = new HttpClient();
+        var url = "http://localhost:8000/api/register"; // access the register endpoint to register new user
+        using var client = new HttpClient();
 
-		var response = await client.PostAsync(url, data);
+        var response = await client.PostAsync(url, data);
 
-		var result = await response.Content.ReadAsStringAsync();
+        var result = await response.Content.ReadAsStringAsync();
 
-		if (response.IsSuccessStatusCode)
-		{
-			await DisplayAlert("Congratulations", $"{nu.email} registered successfully, please sign in", "Ok");
-		}
-		else
-		{
-			await DisplayAlert("Not successful or account with email address already exists", "Please try again", "Ok");
-		}
-	} // End method
+        if (response.IsSuccessStatusCode)
+        {
+            await DisplayAlert("Congratulations", $"{nu.email} registered successfully, please sign in", "Ok");
+        }
+        else
+        {
+            await DisplayAlert("Not successful or account with email address already exists", "Please try again", "Ok");
+        }
+    } // End method
 
-	private void OnPasswordBtnClicked(object sender, EventArgs e)
+    private async void OnPasswordBtnClicked(object sender, EventArgs e)
     {
         SemanticScreenReader.Announce(GeneratePasswordBtn.Text);
 
-        PasswordLengthLabel.IsVisible = true;
-        PasswordLengthLabel2.IsVisible = true;
-        PLFrame.IsVisible = true;
+
         //PasswordLengthEditor.IsVisible= true;
         PasswordLengthEditor.Focus();
         EnterPasswordLengthButton.IsVisible = true;
         InvisibleEnterPasswordLengthButton.IsVisible = true;
+        PasswordLengthGrid.IsVisible = true;
+
 
         Grid.SetRow(alreadyhaveGrid, 9);
         Grid.SetRowSpan(alreadyhaveGrid, 1);
-
-
-        InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
+        
+        if (!hasDisplayed)
+        {
+			await DisplayAlert("Hello", "Please enter a valid password length between 8 and 16", "Ok");
+            hasDisplayed = true;
+		}
+		InvisibleEnterPasswordLengthButton.Clicked += OnInvisibleEnterPasswordLengthButtonClickedAsync;
 
         GeneratePasswordBtn.Clicked -= OnPasswordBtnClicked;
+
+        
     } // End method
 
     private async void OnSignInButtonClicked(object sender, EventArgs e)
     {
-		await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
-	} // End method
+        await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+    } // End method
 
 
-	private void OnShowPasswordBtnClicked(object sender, EventArgs e)
+    private void OnShowPasswordBtnClicked(object sender, EventArgs e)
     {
         if (PasswordEntry.IsPassword && PasswordConfirmEntry.IsPassword)
         {
             PasswordEntry.IsPassword = false;
             PasswordConfirmEntry.IsPassword = false;
-		}
+        }
         else
         {
             PasswordEntry.IsPassword = true;
@@ -126,9 +139,15 @@ public partial class RegisterPage : ContentPage
     {
         SemanticScreenReader.Announce(EnterPasswordLengthButton.Text);
 
+        if (PasswordLengthEditor.Text == null || PasswordLengthEditor.Text.Length == 0)
+        {
+			await DisplayAlert("Invalid entry", "Please enter a length between 8 and 16", "OK");
+            return;
+		}
         try
         {
-            _passwordLength = Int32.Parse(PasswordLengthEditor.Text);
+			CheckBoxGrid.IsVisible= true;
+			_passwordLength = Int32.Parse(PasswordLengthEditor.Text);
 
             if (_passwordLength < 8 || _passwordLength > 16 || PasswordLengthEditor.Text.Length == 0)
             {

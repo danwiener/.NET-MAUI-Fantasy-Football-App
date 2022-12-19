@@ -654,6 +654,7 @@ public partial class HomePage : ContentPage
 
 		player.TeamId = 0;
 		PlayersOnCurrentTeam.Remove(player);
+		TeamPlayers.Remove(player);
 		FreeAgents.Add(player);
 
 		CurrentPlayersCollectionView.ItemsSource = PlayersOnCurrentTeam;

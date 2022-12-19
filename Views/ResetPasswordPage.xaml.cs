@@ -14,7 +14,7 @@ public partial class ResetPasswordPage : ContentPage
 
 	protected async override void OnAppearing()
 	{
-		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(3, 1000); });
+		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(2, 1000); });
 	} // End method
 
 	private async void OnResetPasswordBtnClicked(object sender, EventArgs e)
