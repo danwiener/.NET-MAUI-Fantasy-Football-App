@@ -732,9 +732,6 @@
                             </Grid>
 
 
-
-
-
                             <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="8" Grid.Column="1">
                                 <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
                                 <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
@@ -1083,284 +1080,330 @@
                     <ColumnDefinition Width="25"/>
                 </Grid.ColumnDefinitions>
 
-                    <BoxView Color="#ffffff" Grid.Row="0" Grid.RowSpan="51" Grid.Column="0" Grid.ColumnSpan="3">
-                        <BoxView.Shadow>
-                            <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
-                        </BoxView.Shadow>
-                    </BoxView>
 
 
-                    <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Max # Teams" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="a" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
 
-                    <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                        <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Max # Players" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                        <Entry x:Name="zz" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="0" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="a" HeightRequest="38" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding MaxTeamsStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="QB Limit" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="b" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="1" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="zz" Placeholder="{Binding MaxPlayersStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="2" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="b" Placeholder="{Binding QbCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="3" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="c" Placeholder="{Binding RbCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="4" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="d" Placeholder="{Binding WrCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="5" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="ee" Placeholder="{Binding TeCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="6" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="f" Placeholder="{Binding DCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="7" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="g" Placeholder="{Binding KCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="8" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="h" Placeholder="{Binding PassingTDPointsStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="9" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="i" Placeholder="{Binding PPCStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="10" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="jj" Placeholder="{Binding PPIStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="11" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="k" Placeholder="{Binding PPTwentyFiveYdsPassStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="12" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="l" Placeholder="{Binding FortyYardPassBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="13" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="m" Placeholder="{Binding SixtyYardPassBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="14" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="n" Placeholder="{Binding ThreeHundredYardPassBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="15" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="o" Placeholder="{Binding FiveHundredYardPassBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="16" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="p" Placeholder="{Binding RushingTDPointsStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="17" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="q" Placeholder="{Binding ReceivingTDPointsStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="18" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="r" Placeholder="{Binding PPTenRushStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="19" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="s" Placeholder="{Binding FortyYardRushReceivingBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="20" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="t" Placeholder="{Binding SixtyYardRushReceivingBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="21" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="u" Placeholder="{Binding OneHundredYardRushReceivingBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="22" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="v" Placeholder="{Binding TwoHundredYardRushReceivingBonusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="23" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="w" Placeholder="{Binding PPRStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="24" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="x" Placeholder="{Binding TwoPointConversionStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="25" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="y" Placeholder="{Binding InterceptionOffenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="26" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="z" Placeholder="{Binding FumbleOffenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="27" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="aa" Placeholder="{Binding SafetyOffenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="28" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="bb" Placeholder="{Binding SackDefenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="29" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="cc" Placeholder="{Binding TackleDefenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="30" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="dd" Placeholder="{Binding FgPuntBlockStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="31" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="eee" Placeholder="{Binding InterceptionDefenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="32" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="ff" Placeholder="{Binding FumbleDefenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="33" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="gg" Placeholder="{Binding SafetyDefenseStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="34" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="hh" Placeholder="{Binding IntTdStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="35" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="ii" Placeholder="{Binding FumbleTdStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="36" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="jjj" Placeholder="{Binding ReturnTdStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="37" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="kk" Placeholder="{Binding FgTenToTwentyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="38" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="ll" Placeholder="{Binding FgMissedTenStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="39" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="mm" Placeholder="{Binding FgTwentyToThirtyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="40" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="nn" Placeholder="{Binding FgMissedTwentyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="41" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="oo" Placeholder="{Binding FgThirtyToFortyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="42" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="pp" Placeholder="{Binding FgMissedThirtyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="43" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="qq" Placeholder="{Binding FgFortyToFiftyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="44" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="rr" Placeholder="{Binding FgMissedfortyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="45" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="ss" Placeholder="{Binding FgFiftyToSixtyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="46" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="tt" Placeholder="{Binding FgMissedFiftyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="47" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="uu" Placeholder="{Binding FgSixtyPlusStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="48" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="vv" Placeholder="{Binding FgMissedSixtyStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="49" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="ww" Placeholder="{Binding XpMadeStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="50" Grid.Column="1">
+                        <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                        <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="xx" Placeholder="{Binding XpMissedStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+
                 </Grid>
-
-
-                <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="RB Limit" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="c" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="WR Limit" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="d" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="TE Limit" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="ee"  BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="DEFENSE Limit" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="f" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="K Limit" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="g"  BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per Passing TD" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="h" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per Completion" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="i" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per Incompletion" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="jj" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per 25 Yds Passing" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="k" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="40+ Yard Pass Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="l" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="60+ Yard Pass Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="m" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="300+ Yds Passing Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="n" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="500+ Yds Passing Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="o" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="16" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per Rushing TD" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="p" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per Receiving TD" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="q" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="18" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per 10 Yds Rushing/Receiving" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="r" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="40+ Yard Rush/Reception Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="s" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="20" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="60+ Yard Rush/Reception Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="t" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="21" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="100+ Yds Rushing/Receiving Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="u" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="22" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="200+ Yds Rushing/Receiving Bonus" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="v" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="23" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Points Per Reception" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="w" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="24" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Two Point Conversion" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="x" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="25" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Interception Offense" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="y" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="26" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Fumble Offense" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="z" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="27" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Safety Offense" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="aa" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="28" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Sack(D)" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="bb" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="29" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Tackle" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="cc" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="30" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="FG/Punt Blocked" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="dd" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="31" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Interception Defense" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="eee" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="32" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Fumble Defense" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="ff" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="33" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Safey Defense" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="gg" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="34" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Interception TD" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="hh" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="35" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Fumble TD" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="ii" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="36" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Return TD" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="jjj" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="37" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal 10-20 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="kk" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="38" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal Miss 10-20 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="ll" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="39" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal 20-30 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="mm" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="40" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal Miss 20-30 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="nn" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="41" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal 30-40 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="oo" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="42" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal Miss 30-40 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="pp" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-                <Grid Grid.Row="43" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal 40-50 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="qq" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="44" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal Miss 40-50 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="rr" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="45" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal 50-60 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="ss" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="46" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal Miss 50-60 Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="tt" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="47" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal 60+ Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="uu" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="48" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="Field Goal Miss 60+ Yds" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="vv" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="49" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="XP Made" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="ww" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-                <Grid Grid.Row="50" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" ColumnDefinitions="180, 180" HeightRequest="38" VerticalOptions="Center">
-                    <Label Grid.Column="0" Margin="2.5,0,2.5,0" Text="XP Missed" TextColor="Black" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="12"/>
-                    <Entry x:Name="xx" BackgroundColor="#e6e6e6" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" Margin="2.5,0,2.5,0" HeightRequest="38" WidthRequest="25"/>
-                </Grid>
-
-
-            </Grid>
             </ScrollView>
         </Grid>
 
