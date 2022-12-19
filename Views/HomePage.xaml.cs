@@ -635,6 +635,8 @@ public partial class HomePage : ContentPage
 		Team team = CurrentTeamCollectionView.SelectedItem as Team;
 
 		TitleLabel1.Text = $"TEAM \"{team.TeamName.ToUpper()}\" ROSTER";
+
+		await GetNumberTeams();
 	}
 
 	private async void OnDropPlayerClicked(object sender, EventArgs e)

@@ -23,14 +23,22 @@ public partial class ForgotPasswordPage : ContentPage
 
 	private async void OnSendForgotEmailBtn(object sender, EventArgs e)
 	{
-		string email = EmailEntry.Text;
-		ForgotPassword forgotPassword = new ForgotPassword(email);
-		await SendForgotPasswordEmailAsync(forgotPassword);
-
-		if (success)
+		try
 		{
-			await Shell.Current.GoToAsync($"{nameof(ResetPasswordPage)}");
+			string email = EmailEntry.Text;
+			ForgotPassword forgotPassword = new ForgotPassword(email);
+			await SendForgotPasswordEmailAsync(forgotPassword);
+
+			if (success)
+			{
+				await Shell.Current.GoToAsync($"{nameof(ResetPasswordPage)}");
+			}
 		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Error", "Connection issues, please try again", "Ok");
+		}
+
 	} // End method
 
 	public async Task SendForgotPasswordEmailAsync(ForgotPassword dto)

@@ -73,9 +73,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\FreeAgentsPage.xaml.cs">
-	    <DependentUpon>FreeAgentsPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
@@ -89,9 +86,6 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\ForgotPasswordPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\FreeAgentsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomePage.xaml">

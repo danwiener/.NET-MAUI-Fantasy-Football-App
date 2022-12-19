@@ -30,19 +30,28 @@ public partial class LoginPage : ContentPage
 
 	private async void OnLoginBtnClicked(object sender, EventArgs e)
     {
-        SemanticScreenReader.Announce(LoginBtn.Text);
-        string email = EmailEntry.Text;
-        string password = PasswordEntry.Text;
-
-        NewLogin newlogin = new NewLogin(email, password);
-        await LoginUserAsync(newlogin);
-
-        UserDTO dto = new UserDTO(int.Parse(userId));
-        var navParam = new Dictionary<string, object>()
+        try
         {
-            {"userid", dto }
-        };
-        await Shell.Current.GoToAsync($"{nameof(HomePage)}", navParam);
+			SemanticScreenReader.Announce(LoginBtn.Text);
+			string email = EmailEntry.Text;
+			string password = PasswordEntry.Text;
+
+			NewLogin newlogin = new NewLogin(email, password);
+			await LoginUserAsync(newlogin);
+
+			UserDTO dto = new UserDTO(int.Parse(userId));
+			var navParam = new Dictionary<string, object>()
+		    {
+			    {"userid", dto }
+		    };
+			await Shell.Current.GoToAsync($"{nameof(HomePage)}", navParam);
+		}
+        catch (Exception ex)
+        {
+			await DisplayAlert("Error", "Invalid credentials - Try again", "Ok");
+            return;
+		}
+
 	} // End method
 
 
@@ -55,43 +64,40 @@ public partial class LoginPage : ContentPage
 
 	public async Task LoginUserAsync(NewLogin nl)
     {
-            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nl);
-            var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-            var url = "http://localhost:8000/api/login"; // access the login endpoint to receive access token from authorization server
-            using var client = new HttpClient();
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nl);
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(url, data);
+		var url = "http://localhost:8000/api/login"; // access the login endpoint to receive access token from authorization server
+		using var client = new HttpClient();
 
-            if (!response.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Error", "Invalid credentials - Try again", "Ok");
-                return;
-            }
+		var response = await client.PostAsync(url, data);
 
-            var result = await response.Content.ReadAsStringAsync(); // receive the access token
-            string accessToken = JObject.Parse(result)["token"].ToString(); // parse access token to string
+		var result = await response.Content.ReadAsStringAsync(); // receive the access token
+		string accessToken = JObject.Parse(result)["token"].ToString(); // parse access token to string
 
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}"); // add to Authorization header to send back to API to request access to resource server/protected data
+		client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}"); // add to Authorization header to send back to API to request access to resource server/protected data
 
-            var newUrl = "http://localhost:8000/api/user"; // get request to user endpoint to receive protected user information and log user in
+		var newUrl = "http://localhost:8000/api/user"; // get request to user endpoint to receive protected user information and log user in
 
-            var response2 = await client.GetAsync(newUrl);
+		var response2 = await client.GetAsync(newUrl);
 
-            var result2 = await response2.Content.ReadAsStringAsync();
-            userId = JObject.Parse(result2)["UserId"].ToString(); // receive user id of user logged in
+		var result2 = await response2.Content.ReadAsStringAsync();
+		userId = JObject.Parse(result2)["UserId"].ToString(); // receive user id of user logged in
 
-            if (response2.IsSuccessStatusCode)
-            {
-                success = false;
-                await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
-            }
-            else
-            {
-                success = false;
-                await DisplayAlert("Error", $"Please try again", "Ok");
-            }
-    } // End method
+		if (response2.IsSuccessStatusCode)
+		{
+			success = false;
+			await DisplayAlert("Success", $"{nl.email} logged in successfully", "Ok");
+		}
+		else
+		{
+			success = false;
+			await DisplayAlert("Error", $"Please try again", "Ok");
+		}
+
+
+	} // End method
 
     // Go to register page
     private async void OnSignUpButtonClicked(object sender, EventArgs e)
