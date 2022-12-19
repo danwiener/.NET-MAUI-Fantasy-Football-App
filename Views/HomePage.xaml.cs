@@ -286,7 +286,10 @@ public partial class HomePage : ContentPage
 				client.DefaultRequestHeaders.Remove("LeagueIdHeader");
 				league.CurrentTeams = int.Parse(JObject.Parse(result10)["numberteams"].ToString());
 				league.CurrentTeamsStr = $"Current # Teams ({league.CurrentTeams})";
-				BelongedTo.Add(league);
+				if (!BelongedTo.Contains(league))
+				{
+					BelongedTo.Add(league);
+				}
 				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
 
 				client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
@@ -923,6 +926,7 @@ public partial class HomePage : ContentPage
 			DropBtn.IsVisible = true;
 		}
 
+
 		TitleLabel2.Text = $"TEAM INFO";
 		ViewTeamBtn.IsVisible = false;
 		GoBackTeamBtn.IsVisible = true;
@@ -1349,28 +1353,28 @@ public partial class HomePage : ContentPage
 		{
 			await DisplayAlert("Not successful", "Please try again", "Ok");
 		}
+		for (int i = 0; i < TeamsBelongedTo.Count; i++)
+		{
+			if (TeamsBelongedTo[i].League == dto.leagueid)
+			{
+				TeamsBelongedTo.Remove(TeamsBelongedTo[i]);
+			}
+		}
+		for (int i = 0; i < TeamsInLeague.Count; i++)
+		{
+			if (TeamsInLeague[i].League == dto.leagueid)
+			{
+				TeamsInLeague.Remove(TeamsInLeague[i]);
+			}
+		}
+		for (int i = 0; i < CurrentLeagueRules.Count; i++)
+		{
+			if (CurrentLeagueRules[i].LeagueId == dto.leagueid)
+			{
+				CurrentLeagueRules.Remove(CurrentLeagueRules[i]);
+			}
+		}
 
-		foreach (Team team in TeamsBelongedTo)
-		{
-			if (team.League == dto.leagueid)
-			{
-				TeamsBelongedTo.Remove(team);
-			}
-		}
-		foreach (Team team in TeamsInLeague)
-		{
-			if (team.League == dto.leagueid)
-			{
-				TeamsInLeague.Remove(team);
-			}
-		}
-		foreach (LeagueRules lr in CurrentLeagueRules)
-		{
-			if (lr.LeagueId == dto.leagueid)
-			{
-				CurrentLeagueRules.Remove(lr);
-			}
-		}
 
 	} // End method
 
@@ -1750,6 +1754,15 @@ public partial class HomePage : ContentPage
 
 	private async void OnEnterLeagueBtnClicked(object sender, EventArgs e)
 	{
+		string maxteams = MaxTeamsCreateLeagueEntry.Text;
+		foreach (char c in maxteams)
+		{
+			if (Char.IsLetter(c))
+			{
+				await DisplayAlert("Invalid max team entry", "Please enter a valid number of max teams now", "Ok");
+				return;
+			}
+		}
 		if (int.Parse(MaxTeamsCreateLeagueEntry.Text) > 16)
 		{
 			await DisplayAlert("League cannot contain more than 16 teams", "Please enter a number less than or equal to 16", "Ok");
@@ -1838,6 +1851,8 @@ public partial class HomePage : ContentPage
 
 			}
 
+			ViewTeamBtn.IsVisible = true;
+			DeleteTeamBtn.IsVisible = true;
 			DeleteBtn.IsVisible = true;
 			JoinLeagueBtn.IsVisible = true;
 			RulesBtn.IsVisible = true;
@@ -1983,6 +1998,9 @@ public partial class HomePage : ContentPage
 
 		CurrentLeagueCollectionViewGrid.IsVisible = false;
 		CurrentLeagueCollectionView.IsEnabled = false;
+
+		ViewTeamBtn.IsVisible = false;
+		DeleteTeamBtn.IsVisible = false;
 
 		DeleteBtn.IsVisible= false;
 		JoinLeagueBtn.IsVisible= false;

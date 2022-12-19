@@ -37,7 +37,7 @@ public partial class RegisterPage : ContentPage
     {
         base.OnAppearing();
 
-		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(3, 1000); });
+		Task scaleTitle = Task.Factory.StartNew(async () => { await TitleLabel.ScaleTo(2, 1000); });
 	} // End method
 
 	// Button event handlers

@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" RowDefinitions=".5*,.5*">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" RowDefinitions=".5*,.5*" >
             <Label x:Name="TitleLabel" Text="WELCOME BACK" FontSize="32" FontAttributes="Bold" FontFamily="PT" FontAutoScalingEnabled="True" TextColor="#394a55" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Scale="6">
                 <Label.Shadow>
                     <Shadow Brush="#394a55" Offset="0,20" Radius="20" Opacity="1.2"/>
@@ -25,89 +25,68 @@
             </Label>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" ZIndex="1" VerticalOptions="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".17*"/>
-                <ColumnDefinition Width=".66*"/>
-                <ColumnDefinition Width=".17*"/>
-            </Grid.ColumnDefinitions>
-
-
-            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="1" BackgroundColor="#e6e6e6" Padding="10">
-                <Grid ColumnDefinitions="25,*" RowDefinitions="*" Grid.Column="1" Grid.Row="1">
-                    <Image Source="email.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                    <Entry x:Name="EmailEntry" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="36" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="Email Address" PlaceholderColor="Black"/>
-                </Grid>
-            </Frame>
-
-
-            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="#e6e6e6" Padding="10">
-                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                    <Image Source="password.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                    <Grid ColumnDefinitions="*,25" RowDefinitions="*" Grid.Column="1">
-                        <Entry x:Name="PasswordEntry" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="0" Grid.Column="0" Grid.ColumnSpan="2" IsPassword="True" Placeholder="Password" PlaceholderColor="Black"/>
-                        <ImageButton x:Name="ShowPasswordButton" HeightRequest="25" WidthRequest="25" Source="showpassword.png" Grid.Column="1" Clicked="OnShowPasswordBtnClicked" ZIndex="6"/>
-                    </Grid>
-                </Grid>
-            </Frame>
-
-            <Grid Grid.Row="4" Grid.Column="1" RowDefinitions="*" ColumnDefinitions=".5*, .5*">
-                <Button Text="Forgot your password?" TextColor="White" Grid.Column="0" HorizontalOptions="StartAndExpand" FontSize="12" BackgroundColor="Transparent" FontAttributes="None" BorderWidth="0" BorderColor="Transparent" Margin="0,0,0,0" Clicked="OnForgotPasswordBtnClicked"/>
-                <HorizontalStackLayout Spacing="10" Grid.Column="1" HorizontalOptions="StartAndExpand">
-                    <Label Text="Don't have an account?" VerticalTextAlignment="Center" TextColor="White" FontSize="12"/>
-                    <Button Text="SIGN UP" FontSize="16" FontAttributes="Bold" TextColor="White" BackgroundColor="Transparent" VerticalOptions="Center" BorderColor="Transparent" BorderWidth="0" Margin="0,0,0,0" Clicked="OnSignUpButtonClicked" />
-                </HorizontalStackLayout>
-            </Grid>
-
-
-
-            
-            <Button 
-                        x:Name="LoginBtn"
-                        Text="SIGN IN"
-                        SemanticProperties.Hint="Logs user in if login credentials are valid"
-                        Clicked="OnLoginBtnClicked"
-                        BackgroundColor="#a6a6a6"
-                        TextColor="#6588a6"
-                        FontSize="26"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand" 
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Scale="1">
-            </Button>
-
-
-
-
-
-
-            <!--Microsoft colors-->
-            <!--<Grid Grid.Column="1" Grid.Row="5"  ZIndex="1">
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3" ColumnDefinitions=".25*,.5*,.25*" RowDefinitions=".25*,.5*,.25*">
+            <Grid Grid.Column="1" Grid.RowSpan="1" Grid.Row="1" ZIndex="1" VerticalOptions="Center" WidthRequest="380">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="88"/>
-                    <RowDefinition Height="88"/>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width=".8*"/>
+                    <ColumnDefinition Width=".1*"/>
                 </Grid.ColumnDefinitions>
-                <BoxView x:Name="M1" Grid.Row="0" Grid.Column="0" Color="#f34f1c" Opacity=".1"  ZIndex="3" />
-                <BoxView x:Name="M2" Grid.Row="0" Grid.Column="1" Color="#7fbc00" Opacity=".1"  ZIndex="3" />
-                <BoxView x:Name="M3" Grid.Row="1" Grid.Column="0" Color="#01a6f0" Opacity=".1" ZIndex="3"/>
-                <BoxView x:Name="M4" Grid.Row="1" Grid.Column="1" Color="#ffba01" Opacity=".1"  ZIndex="3"/>
-            </Grid>-->
+
+
+                <Grid RowDefinitions="*" ColumnDefinitions=".5*, .5*" Grid.Row="4" Grid.Column="1">
+                    <Button Text="Forgot your password?" TextColor="Black" Grid.Column="0" HorizontalOptions="StartAndExpand" FontSize="8" BackgroundColor="Transparent" FontAttributes="None" BorderWidth="0" BorderColor="Transparent" Margin="0,0,0,0" Clicked="OnForgotPasswordBtnClicked"/>
+                    <HorizontalStackLayout Grid.Column="1" HorizontalOptions="StartAndExpand">
+                        <Label Text="Don't have an account?" VerticalTextAlignment="Center" TextColor="Black" FontSize="8"/>
+                        <Button Text="SIGN UP" FontSize="12" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" VerticalOptions="Center" BorderColor="Transparent" BorderWidth="0" Margin="0,0,0,0" Clicked="OnSignUpButtonClicked" />
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="1" Grid.Column="1">
+                    <Image Source="email.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                    <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    <Entry HeightRequest="38" x:Name="EmailEntry"  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="Email Address" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="35,*,35" RowDefinitions="*" Grid.Row="2" Grid.Column="1">
+                    <Image Source="password.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                    <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    <Entry HeightRequest="38" x:Name="PasswordEntry" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" IsPassword="True" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="Password" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                    <ImageButton x:Name="ShowPasswordButton" HeightRequest="25" WidthRequest="25" Source="showpassword.png" Grid.Column="2" Clicked="OnShowPasswordBtnClicked" ZIndex="6" HorizontalOptions="Start"/>
+                </Grid>
+
+
+                <Button x:Name="LoginBtn" Grid.Row="3" Grid.Column="1" WidthRequest="304" Text="SIGN IN" CornerRadius="0" SemanticProperties.Hint="Logs user in if login credentials are valid" Clicked="OnLoginBtnClicked" HeightRequest="44"  VerticalOptions="Center" HorizontalOptions="Start" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#e6e6e6" BorderColor="#f2f2f2" BorderWidth="1" TextColor="Black" Margin="0, 0, 0, 0"/>
+
+
+            </Grid>
+
         </Grid>
+
+
+
+        <!--<Grid Grid.Column="1" Grid.Row="5"  ZIndex="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="88"/>
+                <RowDefinition Height="88"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <BoxView x:Name="M1" Grid.Row="0" Grid.Column="0" Color="#802ef2" Opacity=".8"  ZIndex="3" />
+            <BoxView x:Name="M2" Grid.Row="0" Grid.Column="1" Color="#327361" Opacity=".8"  ZIndex="3" />
+
+        </Grid>-->
+
     </Grid>
 
 </ContentPage>

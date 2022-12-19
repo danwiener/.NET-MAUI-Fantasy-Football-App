@@ -24,7 +24,7 @@ public partial class LoginPage : ContentPage
 
     protected async override void OnAppearing()
     {
-        Task scaleTitle = Task.Factory.StartNew(async() => { await TitleLabel.ScaleTo(3, 1000); });
+        Task scaleTitle = Task.Factory.StartNew(async() => { await TitleLabel.ScaleTo(2, 1000); });
 		//Task scaleLoginBtn = Task.Factory.StartNew(async () => { await LoginBtn.ScaleTo(1, 500); }); // To scale sign in button
     } // End method
 
@@ -46,7 +46,6 @@ public partial class LoginPage : ContentPage
 	} // End method
 
 
-    ////    Microsoft.Maui.Controls.Application.Current?.CloseWindow(Microsoft.Maui.Controls.Application.Current.MainPage.Window);
 
     private async void OnForgotPasswordBtnClicked(object sender, EventArgs e)
     {
@@ -99,10 +98,6 @@ public partial class LoginPage : ContentPage
 		await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
 	} // End method
 
-	private void OnForgotPasswordButtonClicked(object sender, EventArgs e)
-    {
-
-    }
 
 	// Show passsword
 	private void OnShowPasswordBtnClicked(object sender, EventArgs e)
