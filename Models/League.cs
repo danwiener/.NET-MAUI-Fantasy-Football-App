@@ -26,7 +26,7 @@ namespace FantasyFootballMAUI.Models
 		public string MaxTeamsStr { get; set; }
 
 		[JsonPropertyName("currentteams")]
-		public int CurrentTeams { get; set; } = default!;
+		public int CurrentTeams { get; set; }
 
 		public string CurrentTeamsStr { get; set; }
 

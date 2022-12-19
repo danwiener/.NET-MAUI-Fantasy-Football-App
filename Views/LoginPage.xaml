@@ -50,7 +50,7 @@
             </Frame>
 
 
-            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="White" Padding="10">
+            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="#e6e6e6" Padding="10">
                 <Grid ColumnDefinitions="25,*" RowDefinitions="*">
                     <Image Source="password.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
                     <Grid ColumnDefinitions="*,25" RowDefinitions="*" Grid.Column="1">

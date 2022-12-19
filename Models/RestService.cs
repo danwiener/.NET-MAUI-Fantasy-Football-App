@@ -168,7 +168,6 @@ namespace FantasyFootballMAUI.Models
 			creator_id = creatorid;
 			league_id = leagueid;
         }
-
     }
 
 }

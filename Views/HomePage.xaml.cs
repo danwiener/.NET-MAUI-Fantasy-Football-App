@@ -278,14 +278,14 @@ public partial class HomePage : ContentPage
 				int creatorId = int.Parse(JObject.Parse(result3)["creator"].ToString());
 				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
 
-				var Url10 = "http://localhost:8000/api/getcurrentnumberteams";
-				client.DefaultRequestHeaders.Add("NumberTeamsHeader", $"{leagueId}"); // get current number of teams in league
+				var Url10 = "http://localhost:8000/api/numberteams";
+				client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{leagueId}"); // get current number of teams in league
 				var response10 = await client.GetAsync(Url10);
 				var result10 = await response10.Content.ReadAsStringAsync();
 
-				client.DefaultRequestHeaders.Remove("NumberTeamsHeader");
+				client.DefaultRequestHeaders.Remove("LeagueIdHeader");
 				league.CurrentTeams = int.Parse(JObject.Parse(result10)["numberteams"].ToString());
-
+				league.CurrentTeamsStr = $"Current # Teams ({league.CurrentTeams})";
 				BelongedTo.Add(league);
 				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
 
@@ -335,7 +335,7 @@ public partial class HomePage : ContentPage
 			int leagueId = int.Parse(JObject.Parse(result6)["leagueid"].ToString());
 			Team team = new Team(teamid, teamname, createdondate, creatorId, leagueId, creatorId == GetUserId.UserId);
 
-			TeamsBelongedTo.Add(team);
+
 			var Url7 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
 
 			client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
@@ -365,7 +365,9 @@ public partial class HomePage : ContentPage
 			string leaguename = JObject.Parse(result8)["leaguename"].ToString();
 
 			team.LeagueName = leaguename;
-
+			team.LeagueNameStr = $"League Name ({team.LeagueName})";
+			TeamsBelongedTo.Add(team);
+			TeamsBelongedToCollectionView.ItemsSource = TeamsBelongedTo;
 		}
 
 	}
@@ -608,6 +610,56 @@ public partial class HomePage : ContentPage
 
 	}
 
+
+	public async Task GetNumberTeams()
+	{
+		var Url = "http://localhost:8000/api/numberteams";
+		using var client = new HttpClient();
+
+		foreach (League league in GlobalLeagues)
+		{
+			client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{league.LeagueId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+
+			var response = await client.GetAsync(Url);
+			var result = await response.Content.ReadAsStringAsync();
+			client.DefaultRequestHeaders.Remove("LeagueIdHeader"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+			int? numberteams = int.Parse(JObject.Parse(result)["numberteams"].ToString());
+			if (numberteams != null)
+			{
+				league.CurrentTeams = (int)numberteams;
+				league.CurrentTeamsStr = $"Current # Teams ({league.CurrentTeams})";
+			}
+		}
+		foreach (League league in BelongedTo)
+		{
+			client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{league.LeagueId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+
+			var response = await client.GetAsync(Url);
+			var result = await response.Content.ReadAsStringAsync();
+			client.DefaultRequestHeaders.Remove("LeagueIdHeader"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+			int? numberteams = int.Parse(JObject.Parse(result)["numberteams"].ToString());
+			if (numberteams != null)
+			{
+				league.CurrentTeams = (int)numberteams;
+				league.CurrentTeamsStr = $"Current # Teams ({league.CurrentTeams})";
+			}
+		}
+		foreach (League league in CurrentlySelected)
+		{
+			client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{league.LeagueId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+
+			var response = await client.GetAsync(Url);
+			var result = await response.Content.ReadAsStringAsync();
+			client.DefaultRequestHeaders.Remove("LeagueIdHeader"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
+			int? numberteams = int.Parse(JObject.Parse(result)["numberteams"].ToString());
+			if (numberteams != null)
+			{
+				league.CurrentTeams = (int)numberteams;
+				league.CurrentTeamsStr = $"Current # Teams ({league.CurrentTeams})";
+			}
+		}
+
+	}
 	public async Task DropPlayer(DropPlayerDTO dto)
 	{
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
@@ -844,6 +896,7 @@ public partial class HomePage : ContentPage
 			CurrentLeagueCollectionView.IsEnabled = true;
 			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
 
+
 			League league = CurrentLeagueCollectionView.SelectedItem as League;
 			await GetTeamsInLeague(league.LeagueId);
 			TeamsBelongedToGrid.IsVisible = false;
@@ -862,6 +915,8 @@ public partial class HomePage : ContentPage
 
 			OrLabel.IsVisible= false;
 			JoinCreateBtn.IsVisible= false;
+
+			await GetNumberTeams();
 		}
 		else if (GlobalLeaguesGrid.IsVisible)
 		{
@@ -898,6 +953,9 @@ public partial class HomePage : ContentPage
 			JoinLeagueBtn.IsVisible = false;
 			CreateLeagueBtn.IsVisible = false;
 			globalHasBeenSelected = true;
+
+
+			await GetNumberTeams();
 		}
 
 		JoinLeagueBtn.IsVisible = true;
@@ -1079,7 +1137,6 @@ public partial class HomePage : ContentPage
 		CurrentTeamCollectionView.SelectedItem = null;
 		TeamsInLeagueCollectionView.SelectedItem = null;
 		TeamsBelongedToCollectionView.SelectedItem = null;
-
 	}
 
 	private async void OnDeleteLeagueClicked(object sender, EventArgs e)
@@ -1591,7 +1648,6 @@ public partial class HomePage : ContentPage
 		TeamsInLeague.Clear();
 	    await getUserEmailAndUserName(GetUserId.UserId);
 		await GetTeamsInLeague(league.LeagueId);
-
 		TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
 
 	}

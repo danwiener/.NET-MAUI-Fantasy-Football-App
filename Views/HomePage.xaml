@@ -173,26 +173,38 @@
                                 <RowDefinition Height="44"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".17*"/>
-                                <ColumnDefinition Width=".66*"/>
-                                <ColumnDefinition Width=".17*"/>
+                                <ColumnDefinition Width=".1*"/>
+                                <ColumnDefinition Width=".8*"/>
+                                <ColumnDefinition Width=".1*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="0" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Image Source="league.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding LeagueNameStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
 
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="1" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*,35" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="I Am Commissioner" PlaceholderColor="Black"/>
-                                    <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" Grid.Column="2" IsChecked="{Binding CreatedByCurrentUser}" WidthRequest="25" HeightRequest="25" VerticalOptions="Start" HorizontalOptions="Start" ZIndex="9"/>
-                                </Grid>
-                            </Frame>
+
+                            <!--<BoxView Color="#6588a6" Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <BoxView Color="#6588a6" Grid.Row="3" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
+                                </BoxView.Shadow>
+                            </BoxView>-->
+
+
+                            <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="0" Grid.Column="1">
+                                <Image Source="league.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                                <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding LeagueNameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+
+
+                            <Grid ColumnDefinitions="*,35" RowDefinitions="*" Grid.Row="1" Grid.Column="1">
+                                <Entry HeightRequest="38" IsEnabled="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="I Am Commissioner" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9" Grid.Column="1" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32"/>
+                            </Grid>
+
 
                         </Grid>
 
@@ -244,75 +256,30 @@
                                 <RowDefinition Height="44"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0"/>
-                                <ColumnDefinition Width="175"/>
-                                <ColumnDefinition Width="185"/>
+                                <ColumnDefinition Width=".1*"/>
+                                <ColumnDefinition Width=".8*"/>
+                                <ColumnDefinition Width=".1*"/>
                             </Grid.ColumnDefinitions>
 
 
-                            <BoxView Color="#ffffff" Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3">
-                                <BoxView.Shadow>
-                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
-                                </BoxView.Shadow>
-                            </BoxView>
+                                <Entry HeightRequest="38" Grid.Row="0" Grid.Column="1" IsEnabled="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding TeamNameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
 
-                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="Team Name" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="18"/>
-                                <Label 
-                                Text="{Binding TeamName}"
-                                TextColor="Black"
-                                Margin="10,0,0,0"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextDecorations="Underline"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand"
-                                Grid.ColumnSpan="1"
-                                ZIndex="7"/>
-                            </HorizontalStackLayout>
+
+                            <Entry HeightRequest="38" Grid.Row="1" Grid.Column="1" IsEnabled="False" BackgroundColor="#f2f2f2" TextColor="Black"
+                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="5" Placeholder="{Binding LeagueNameStr}" PlaceholderColor="Black"/>
+
+                            <Entry HeightRequest="38" Grid.Row="2" Grid.Column="1" IsEnabled="False" BackgroundColor="#f2f2f2" TextColor="Black"
+                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="5" Placeholder="{Binding CreatedOnDateStr}" PlaceholderColor="Black"/>
 
 
 
-                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="League" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="18"/>
-                                <Label 
-                                Text="{Binding LeagueName}"
-                                TextColor="Black"
-                                Margin="10,0,0,0"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextDecorations="Underline"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand"
-                                Grid.ColumnSpan="1"
-                                ZIndex="7"/>
-                            </HorizontalStackLayout>
-
-                            <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="Created On" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="18"/>
-                                <Label 
-                                Text="{Binding CreatedOnDate}"
-                                TextColor="Black"
-                                Margin="10,0,0,0"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextDecorations="Underline"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand"
-                                Grid.ColumnSpan="1"
-                                ZIndex="7"/>
-                            </HorizontalStackLayout>
+                            <Grid ColumnDefinitions="*,35" RowDefinitions="*" Grid.Row="3" Grid.Column="1">
+                                <Entry HeightRequest="38" IsEnabled="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="My Team" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9" Grid.Column="1" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32"/>
+                            </Grid>
 
 
-
-                            <!--<Image x:Name="LeagueIcon" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="60" WidthRequest="60" Source="{Binding ImageSource}"/>-->
-                            
-                            <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Margin="5, 0, 2.5, 0" Text="My Team" LineBreakMode="TailTruncation" TextColor="Black" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
-                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
-                            </HorizontalStackLayout>
                         </Grid>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -348,82 +315,33 @@
                     <DataTemplate>
                         <Grid Padding="10" VerticalOptions="Center">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="22"/>
-                                <RowDefinition Height="22"/>
-                                <RowDefinition Height="22"/>
-                                <RowDefinition Height="22"/>
-                                <RowDefinition Height="22"/>
-                                <RowDefinition Height="22"/>
-                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="44"/>
+                                <RowDefinition Height="44"/>
+                                <RowDefinition Height="44"/>
+                                <RowDefinition Height="44"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0"/>
-                                <ColumnDefinition Width="175"/>
-                                <ColumnDefinition Width="185"/>
+                                <ColumnDefinition Width=".1*"/>
+                                <ColumnDefinition Width=".8*"/>
+                                <ColumnDefinition Width=".1*"/>
                             </Grid.ColumnDefinitions>
 
 
-                            <BoxView Color="#ffffff" Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Grid.ColumnSpan="3" >
-                                <BoxView.Shadow>
-                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
-                                </BoxView.Shadow>
-                            </BoxView>
+                            <Entry HeightRequest="38" Grid.Row="0" Grid.Column="1" IsEnabled="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding TeamNameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
 
-                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="Team Name" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="18"/>
-                                <Label 
-                                Text="{Binding TeamName}"
-                                TextColor="Black"
-                                Margin="10,0,0,0"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextDecorations="Underline"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand"
-                                Grid.ColumnSpan="1"
-                                ZIndex="7"/>
-                            </HorizontalStackLayout>
+
+                            <Entry HeightRequest="38" Grid.Row="1" Grid.Column="1" IsEnabled="False" BackgroundColor="#f2f2f2" TextColor="Black"
+                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="5" Placeholder="{Binding LeagueNameStr}" PlaceholderColor="Black"/>
+
+                            <Entry HeightRequest="38" Grid.Row="2" Grid.Column="1" IsEnabled="False" BackgroundColor="#f2f2f2" TextColor="Black"
+                        MaxLength="32" VerticalTextAlignment="Center" ZIndex="5" Placeholder="{Binding CreatedOnDateStr}" PlaceholderColor="Black"/>
 
 
 
-                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="League" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="18"/>
-                                <Label 
-                                Text="{Binding TeamName}"
-                                TextColor="Black"
-                                Margin="10,0,0,0"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextDecorations="Underline"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand"
-                                Grid.ColumnSpan="1"
-                                ZIndex="7"/>
-                            </HorizontalStackLayout>
-
-                            <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Text="Created On" TextColor="Black" VerticalOptions="CenterAndExpand" FontSize="18"/>
-                                <Label 
-                                Text="{Binding CreatedOnDate}"
-                                TextColor="Black"
-                                Margin="10,0,0,0"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextDecorations="Underline"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand"
-                                Grid.ColumnSpan="1"
-                                ZIndex="7"/>
-                            </HorizontalStackLayout>
-
-
-
-                            <!--<Image x:Name="LeagueIcon" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="60" WidthRequest="60" Source="{Binding ImageSource}"/>-->
-
-                            <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                                <Label Margin="5, 0, 2.5, 0" Text="My Team" LineBreakMode="TailTruncation" TextColor="Black" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Italic"/>
-                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9"/>
-                            </HorizontalStackLayout>
+                            <Grid ColumnDefinitions="*,35" RowDefinitions="*" Grid.Row="3" Grid.Column="1">
+                                <Entry HeightRequest="38" IsEnabled="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="My Team" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9" Grid.Column="1" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32"/>
+                            </Grid>
                         </Grid>
 
                     </DataTemplate>
@@ -457,9 +375,9 @@
                                 <RowDefinition Height="22"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".07*"/>
-                                <ColumnDefinition Width=".86*"/>
-                                <ColumnDefinition Width=".07*"/>
+                                <ColumnDefinition Width=".1*"/>
+                                <ColumnDefinition Width=".8*"/>
+                                <ColumnDefinition Width=".1*"/>
                             </Grid.ColumnDefinitions>
 
 
@@ -469,34 +387,22 @@
                                 </BoxView.Shadow>
                             </BoxView>
 
+                            <BoxView Color="#ffffff" Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
+                                </BoxView.Shadow>
+                            </BoxView>
 
 
 
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="1" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Image Source="player.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding PositionStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
+                            <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="1" Grid.Column="1">
+                                <Image Source="player.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                                <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding PositionStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                            </Grid>
 
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Image Source="player.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding PlayerNameStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="3" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Image Source="player.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding TeamStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
+                            <Entry HeightRequest="38" Grid.Row="2" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding PlayerNameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                            <Entry HeightRequest="38" Grid.Row="3" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding TeamStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
                         </Grid>
 
                     </DataTemplate>
@@ -532,6 +438,20 @@
                                 <ColumnDefinition Width=".86*"/>
                                 <ColumnDefinition Width=".07*"/>
                             </Grid.ColumnDefinitions>
+
+
+                            <BoxView Color="#ffffff" Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
+                            <BoxView Color="#ffffff" Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3">
+                                <BoxView.Shadow>
+                                    <Shadow Brush="black" Offset="0,10" Radius="20" Opacity="0.8"/>
+                                </BoxView.Shadow>
+                            </BoxView>
+
 
 
 
@@ -594,66 +514,33 @@
                                 <RowDefinition Height="44"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".17*"/>
-                                <ColumnDefinition Width=".66*"/>
-                                <ColumnDefinition Width=".17*"/>
+                                <ColumnDefinition Width=".1*"/>
+                                <ColumnDefinition Width=".8*"/>
+                                <ColumnDefinition Width=".1*"/>
                             </Grid.ColumnDefinitions>
 
 
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="0" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Image Source="league.png" HeightRequest="25" WidthRequest="25" Grid.Column="0"/>
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding LeagueIdStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
+                            <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="0" Grid.Column="1">
+                                <Image Source="league.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
+                                <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding LeagueIdStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <Entry HeightRequest="38" Grid.Row="1" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding LeagueNameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+
+                            <Entry HeightRequest="38" Grid.Row="2" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding MaxTeamsStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+
+                            <Entry HeightRequest="38" Grid.Row="3" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding CurrentTeamsStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+
+                            <Entry HeightRequest="38" Grid.Row="4" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding CreatorUsernameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+
+                            <Entry HeightRequest="38" Grid.Row="5" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="{Binding CreatorNameStr}" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
 
 
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="1" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding LeagueNameStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="2" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding MaxTeamsStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="3" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding CurrentTeamsStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="4" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding CreatorUsernameStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="5" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="{Binding CreatorNameStr}" PlaceholderColor="Black"/>
-                                </Grid>
-                            </Frame>
-
-                            <Frame HeightRequest="38" BorderColor="Transparent" HasShadow="False" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="2.5,0,0,0" Grid.Column="1" Grid.Row="6" BackgroundColor="#e6e6e6" Padding="10">
-                                <Grid ColumnDefinitions="25,*,35" RowDefinitions="*">
-                                    <Entry IsEnabled="False" HeightRequest="38" Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="#f2f2f2" TextColor="Black"
-                                    MaxLength="60" FontSize="12" VerticalTextAlignment="Center" ZIndex="5" Grid.Column="1" Placeholder="I Am Commissioner" PlaceholderColor="Black"/>
-                                    <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" Grid.Column="2" IsChecked="{Binding CreatedByCurrentUser}" WidthRequest="25" HeightRequest="25" VerticalOptions="Start" HorizontalOptions="Start" ZIndex="9"/>
-                                </Grid>
-                            </Frame>
+                            <Grid ColumnDefinitions="*,35" RowDefinitions="*" Grid.Row="6" Grid.Column="1">
+                                <Entry HeightRequest="38" IsEnabled="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" Placeholder="I Am Commissioner" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <CheckBox BackgroundColor="#6588a6" Color="#6588a6" IsEnabled="False" IsChecked="{Binding CreatedByCurrentUser}" VerticalOptions="Center" ZIndex="9" Grid.Column="1" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32"/>
+                            </Grid>
                         </Grid>
 
                     </DataTemplate>

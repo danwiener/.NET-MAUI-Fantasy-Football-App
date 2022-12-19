@@ -17,8 +17,12 @@ namespace FantasyFootballMAUI.Models
 		[JsonPropertyName("teamname")]
 		public string TeamName { get; set; } = default!;
 
+		public string TeamNameStr { get; set; }
+
 		[JsonPropertyName("createdondate")]
 		public string CreatedOnDate { get; set; } = default!;
+
+		public string CreatedOnDateStr { get; set; }
 
 
 		[JsonPropertyName("creator")]
@@ -28,6 +32,8 @@ namespace FantasyFootballMAUI.Models
 		public int League { get; set; }
 
 		public string LeagueName { get; set; }
+
+		public string LeagueNameStr { get; set; }
 
 		public string CreatorUsername { get; set; } = default!;
 
@@ -43,6 +49,10 @@ namespace FantasyFootballMAUI.Models
 			Creator = creator;
 			League = leagueid;
 			CreatedByCurrentUser = createdbycurrentuser;
+
+			TeamNameStr = $"Team Name ({TeamName})";
+			LeagueNameStr = $"League Name ({LeagueName})";
+			CreatedOnDateStr = $"Created On ({CreatedOnDate.ToString()})";
 		}
 	}
 }
