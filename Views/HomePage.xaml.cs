@@ -2118,57 +2118,57 @@ public partial class HomePage : ContentPage
 		TitleLabel1.Text = "EDITING LEAGUE RULES";
 
 
-		a.Text = CurrentLeagueRules[0].MaxTeams.ToString();
-		b.Text = CurrentLeagueRules[0].QbCount.ToString();
-		c.Text = CurrentLeagueRules[0].RbCount.ToString();
-		d.Text = CurrentLeagueRules[0].WrCount.ToString();
-		ee.Text = CurrentLeagueRules[0].TeCount.ToString();
-		f.Text = CurrentLeagueRules[0].DCount.ToString();
-		g.Text = CurrentLeagueRules[0].KCount.ToString();
-		h.Text = CurrentLeagueRules[0].PassingTDPoints.ToString();
-		i.Text = CurrentLeagueRules[0].PPC.ToString();
-		jj.Text = CurrentLeagueRules[0].PPI.ToString();
-		k.Text = CurrentLeagueRules[0].PPTwentyFiveYdsPass.ToString();
-		l.Text = CurrentLeagueRules[0].FortyYardPassBonus.ToString();
-		m.Text = CurrentLeagueRules[0].SixtyYardPassBonus.ToString();
-		n.Text = CurrentLeagueRules[0].ThreeHundredYardPassBonus.ToString();
-		o.Text = CurrentLeagueRules[0].FiveHundredYardPassBonus.ToString();
-		p.Text = CurrentLeagueRules[0].RushingTDPoints.ToString();
-		q.Text = CurrentLeagueRules[0].ReceivingTDPoints.ToString();
-		r.Text = CurrentLeagueRules[0].PPTenRush.ToString();
-		s.Text = CurrentLeagueRules[0].FortyYardRushReceivingBonus.ToString();
-		t.Text = CurrentLeagueRules[0].SixtyYardRushReceivingBonus.ToString();
-		u.Text = CurrentLeagueRules[0].OneHundredYardRushReceivingBonus.ToString();
-		v.Text = CurrentLeagueRules[0].TwoHundredYardRushReceivingBonus.ToString();
-		w.Text = CurrentLeagueRules[0].PPR.ToString();
-		x.Text = CurrentLeagueRules[0].TwoPointConversion.ToString();
-		y.Text = CurrentLeagueRules[0].InterceptionOffense.ToString();
-		z.Text = CurrentLeagueRules[0].FumbleOffense.ToString();
-		aa.Text = CurrentLeagueRules[0].SafetyOffense.ToString();
-		bb.Text = CurrentLeagueRules[0].SackDefense.ToString();
-		cc.Text = CurrentLeagueRules[0].TackleDefense.ToString();
-		dd.Text = CurrentLeagueRules[0].FgPuntBlock.ToString();
-		eee.Text = CurrentLeagueRules[0].InterceptionDefense.ToString();
-		ff.Text = CurrentLeagueRules[0].FumbleDefense.ToString();
-		gg.Text = CurrentLeagueRules[0].SafetyDefense.ToString();
-		hh.Text = CurrentLeagueRules[0].IntTd.ToString();
-		ii.Text = CurrentLeagueRules[0].FumbleTd.ToString();
-		jjj.Text = CurrentLeagueRules[0].ReturnTd.ToString();
-		kk.Text = CurrentLeagueRules[0].FgTenToTwenty.ToString();
-		ll.Text = CurrentLeagueRules[0].FgMissedTen.ToString();
-		mm.Text = CurrentLeagueRules[0].FgTwentyToThirty.ToString();
-		nn.Text = CurrentLeagueRules[0].FgMissedTwenty.ToString();
-		oo.Text = CurrentLeagueRules[0].FgThirtyToForty.ToString();
-		pp.Text = CurrentLeagueRules[0].FgMissedThirty.ToString();
-		qq.Text = CurrentLeagueRules[0].FgFortyToFifty.ToString();
-		rr.Text = CurrentLeagueRules[0].FgMissedforty.ToString();
-		ss.Text = CurrentLeagueRules[0].FgFiftyToSixty.ToString();
-		tt.Text = CurrentLeagueRules[0].FgMissedFifty.ToString();
-		uu.Text = CurrentLeagueRules[0].FgSixtyPlus.ToString();
-		vv.Text = CurrentLeagueRules[0].FgMissedSixty.ToString();
-		ww.Text = CurrentLeagueRules[0].XpMade.ToString();
-		xx.Text = CurrentLeagueRules[0].XpMissed.ToString();
-		zz.Text = CurrentLeagueRules[0].MaxPlayers.ToString();
+		a.Placeholder = CurrentLeagueRules[0].MaxTeamsStr;
+		b.Placeholder = CurrentLeagueRules[0].QbCountStr;
+		c.Placeholder = CurrentLeagueRules[0].RbCountStr;
+		d.Placeholder = CurrentLeagueRules[0].WrCountStr;
+		ee.Placeholder = CurrentLeagueRules[0].TeCountStr;
+		f.Placeholder = CurrentLeagueRules[0].DCountStr;
+		g.Placeholder = CurrentLeagueRules[0].KCountStr;
+		h.Placeholder = CurrentLeagueRules[0].PassingTDPointsStr;
+		i.Placeholder = CurrentLeagueRules[0].PPCStr;
+		jj.Placeholder = CurrentLeagueRules[0].PPIStr;
+		k.Placeholder = CurrentLeagueRules[0].PPTwentyFiveYdsPassStr;
+		l.Placeholder = CurrentLeagueRules[0].FortyYardPassBonusStr;
+		m.Placeholder = CurrentLeagueRules[0].SixtyYardPassBonusStr;
+		n.Placeholder = CurrentLeagueRules[0].ThreeHundredYardPassBonusStr;
+		o.Placeholder = CurrentLeagueRules[0].FiveHundredYardPassBonusStr;
+		p.Placeholder = CurrentLeagueRules[0].RushingTDPointsStr;
+		q.Placeholder = CurrentLeagueRules[0].ReceivingTDPointsStr;
+		r.Placeholder = CurrentLeagueRules[0].PPTenRushStr;
+		s.Placeholder = CurrentLeagueRules[0].FortyYardRushReceivingBonusStr;
+		t.Placeholder = CurrentLeagueRules[0].SixtyYardRushReceivingBonusStr;
+		u.Placeholder = CurrentLeagueRules[0].OneHundredYardRushReceivingBonusStr;
+		v.Placeholder = CurrentLeagueRules[0].TwoHundredYardRushReceivingBonusStr;
+		w.Placeholder = CurrentLeagueRules[0].PPRStr;
+		x.Placeholder = CurrentLeagueRules[0].TwoPointConversionStr;
+		y.Placeholder = CurrentLeagueRules[0].InterceptionOffenseStr;
+		z.Placeholder = CurrentLeagueRules[0].FumbleOffenseStr;
+		aa.Placeholder = CurrentLeagueRules[0].SafetyOffenseStr;
+		bb.Placeholder = CurrentLeagueRules[0].SackDefenseStr;
+		cc.Placeholder = CurrentLeagueRules[0].TackleDefenseStr;
+		dd.Placeholder = CurrentLeagueRules[0].FgPuntBlockStr;
+		eee.Placeholder = CurrentLeagueRules[0].InterceptionDefenseStr;
+		ff.Placeholder = CurrentLeagueRules[0].FumbleDefenseStr;
+		gg.Placeholder = CurrentLeagueRules[0].SafetyDefenseStr;
+		hh.Placeholder = CurrentLeagueRules[0].IntTdStr;
+		ii.Placeholder = CurrentLeagueRules[0].FumbleTdStr;
+		jjj.Placeholder = CurrentLeagueRules[0].ReturnTdStr;
+		kk.Placeholder = CurrentLeagueRules[0].FgTenToTwentyStr;
+		ll.Placeholder = CurrentLeagueRules[0].FgMissedTenStr;
+		mm.Placeholder = CurrentLeagueRules[0].FgTwentyToThirtyStr;
+		nn.Placeholder = CurrentLeagueRules[0].FgMissedTwentyStr;
+		oo.Placeholder = CurrentLeagueRules[0].FgThirtyToFortyStr;
+		pp.Placeholder = CurrentLeagueRules[0].FgMissedThirtyStr;
+		qq.Placeholder = CurrentLeagueRules[0].FgFortyToFiftyStr;
+		rr.Placeholder = CurrentLeagueRules[0].FgMissedfortyStr;
+		ss.Placeholder = CurrentLeagueRules[0].FgFiftyToSixtyStr;
+		tt.Placeholder = CurrentLeagueRules[0].FgMissedFiftyStr;
+		uu.Placeholder = CurrentLeagueRules[0].FgSixtyPlusStr;
+		vv.Placeholder = CurrentLeagueRules[0].FgMissedSixtyStr;
+		ww.Placeholder = CurrentLeagueRules[0].XpMadeStr;
+		xx.Placeholder = CurrentLeagueRules[0].XpMissedStr;
+		zz.Placeholder = CurrentLeagueRules[0].MaxPlayersStr;
 
 
 	}
@@ -2177,42 +2177,561 @@ public partial class HomePage : ContentPage
 	{
 		try
 		{
-			if (int.Parse(a.Text) > 16) {
+			LeagueRules currentLeagueRules = CurrentLeagueRules[0];
+
+			if (a.Text != null && int.Parse(a.Text) > 16) {
 				await DisplayAlert("Error", "League cannot contain more than 16 teams. Please lower limit", "Ok");
 				return;
 			}
-			else if (int.Parse(b.Text) > 4)
+			else if (b.Text != null && int.Parse(b.Text) > 4)
 			{
 				await DisplayAlert("Error", "League cannot contain more than 4 QBs. Please lower limit", "Ok");
 				return;
 			}
-			else if (int.Parse(c.Text) > 5)
+			else if (c.Text != null && int.Parse(c.Text) > 5)
 			{
 				await DisplayAlert("Error", "League cannot contain more than 5 RBs. Please lower limit", "Ok");
 				return;
 			}
-			else if (int.Parse(d.Text) > 6)
+			else if (d.Text != null && int.Parse(d.Text) > 6)
 			{
 				await DisplayAlert("Error", "League cannot contain more than 6 WRs. Please lower limit", "Ok");
 				return;
 			}
-			else if (int.Parse(ee.Text) > 4)
+			else if (ee.Text != null && int.Parse(ee.Text) > 4)
 			{
 				await DisplayAlert("Error", "League cannot contain more than 4 TEs. Please lower limit", "Ok");
 				return;
 			}
-			else if (int.Parse(f.Text) > 3)
+			else if (f.Text != null && int.Parse(f.Text) > 3)
 			{
 				await DisplayAlert("Error", "League cannot contain more than 3 Ds. Please lower limit", "Ok");
 				return;
 			}
-			else if (int.Parse(g.Text) > 3)
+			else if (g.Text != null && int.Parse(g.Text) > 3)
 			{
 				await DisplayAlert("Error", "League cannot contain more than 3 Ks. Please lower limit", "Ok");
 				return;
 			}
-			LeagueRules newLeagueRules = new LeagueRules(CurrentLeagueRules[0].LeagueId, int.Parse(a.Text), int.Parse(zz.Text), int.Parse(b.Text), int.Parse(c.Text), int.Parse(d.Text), int.Parse(ee.Text), int.Parse(f.Text), int.Parse(g.Text), int.Parse(h.Text), Convert.ToDouble(i.Text), Convert.ToDouble(jj.Text), int.Parse(k.Text), int.Parse(l.Text), int.Parse(m.Text), int.Parse(n.Text), int.Parse(o.Text), int.Parse(p.Text), int.Parse(q.Text), int.Parse(r.Text), int.Parse(s.Text), int.Parse(t.Text), int.Parse(u.Text), int.Parse(v.Text), Convert.ToDouble(w.Text), int.Parse(x.Text), int.Parse(y.Text), int.Parse(z.Text), int.Parse(aa.Text), int.Parse(bb.Text), Convert.ToDouble(cc.Text), int.Parse(dd.Text), int.Parse(eee.Text), int.Parse(ff.Text), int.Parse(gg.Text), int.Parse(hh.Text), int.Parse(ii.Text), int.Parse(jjj.Text), int.Parse(kk.Text), int.Parse(ll.Text), int.Parse(mm.Text), int.Parse(nn.Text), int.Parse(oo.Text), int.Parse(pp.Text), int.Parse(qq.Text), int.Parse(rr.Text), int.Parse(ss.Text), int.Parse(tt.Text), int.Parse(uu.Text), int.Parse(vv.Text), int.Parse(ww.Text), int.Parse(xx.Text));
+
+			int ab;
+			int zzb;
+			int bbb;
+			int cb;
+			int db;
+			int eeb;
+			int fb;
+			int gb;
+			int hb;
+			double ib;
+			double jjb;
+			int kb;
+			int lb;
+			int mb;
+			int nb;
+			int ob;
+			int pb;
+			int qb;
+			int rb;
+			int sb;
+			int tb;
+			int ub;
+			int vb;
+			double wb;
+			int xb;
+			int yb;
+			int zb;
+			int aab;
+			int bbbb;
+			double ccb;
+			int ddb;
+			int eeeb;
+			int ffb;
+			int ggb;
+			int hhb;
+			int iib;
+			int jjjb;
+			int kkb;
+			int llb;
+			int mmb;
+			int nnb;
+			int oob;
+			int ppb;
+			int qqb;
+			int rrb;
+			int ssb;
+			int ttb;
+			int uub;
+			int vvb;
+			int wwb;
+			int xxb;
+
+
+			if (a.Text != null)
+			{
+				ab = int.Parse(a.Text);
+			}
+			else
+			{
+				ab = currentLeagueRules.MaxTeams;
+			}
+			if (zz.Text != null)
+			{
+				zzb = int.Parse(zz.Text);
+			}
+			else
+			{
+				zzb = currentLeagueRules.MaxPlayers;
+			}
+			if (b.Text != null)
+			{
+				bbb = int.Parse(b.Text);
+			}
+			else
+			{
+				bbb = currentLeagueRules.QbCount;
+			}
+			if (c.Text != null)
+			{
+				cb = int.Parse(c.Text);
+			}
+			else
+			{
+				cb = currentLeagueRules.RbCount;
+			}
+			if (d.Text != null)
+			{
+				db = int.Parse(d.Text);
+			}
+			else
+			{
+				db = currentLeagueRules.WrCount;
+			}
+			if (ee.Text != null)
+			{
+				eeb = int.Parse(ee.Text);
+			}
+			else
+			{
+				eeb = currentLeagueRules.TeCount;
+			}
+			if (f.Text != null)
+			{
+				fb = int.Parse(f.Text);
+			}
+			else
+			{
+				fb = currentLeagueRules.DCount;
+			}
+			if (g.Text != null)
+			{
+				gb = int.Parse(g.Text);
+			}
+			else
+			{
+				gb = currentLeagueRules.KCount;
+			}
+			if (h.Text != null)
+			{
+				hb = int.Parse(h.Text);
+			}
+			else
+			{
+				hb = currentLeagueRules.PassingTDPoints;
+			}
+			if (i.Text != null)
+			{
+				ib = Convert.ToDouble(i.Text);
+			}
+			else
+			{
+				ib = currentLeagueRules.PPC;
+			}
+			if (jj.Text != null)
+			{
+				jjb = Convert.ToDouble(jj.Text);
+			}
+			else
+			{
+				jjb = currentLeagueRules.PPI;
+			}
+			if (k.Text != null)
+			{
+				kb = int.Parse(k.Text);
+			}
+			else
+			{
+				kb = currentLeagueRules.PPTwentyFiveYdsPass;
+			}
+			if (l.Text != null)
+			{
+				lb = int.Parse(l.Text);
+			}
+			else
+			{
+				lb = currentLeagueRules.FortyYardPassBonus;
+			}
+			if (m.Text != null)
+			{
+				mb = int.Parse(m.Text);
+			}
+			else
+			{
+				mb = currentLeagueRules.SixtyYardPassBonus;
+			}
+			if (n.Text != null)
+			{
+				nb = int.Parse(n.Text);
+			}
+			else
+			{
+				nb = currentLeagueRules.ThreeHundredYardPassBonus;
+			}
+			if (o.Text != null)
+			{
+				ob = int.Parse(o.Text);
+			}
+			else
+			{
+				ob = currentLeagueRules.FiveHundredYardPassBonus;
+			}
+			if (p.Text != null)
+			{
+				pb = int.Parse(p.Text);
+			}
+			else
+			{
+				pb = currentLeagueRules.RushingTDPoints;
+			}
+			if (q.Text != null)
+			{
+				qb = int.Parse(q.Text);
+			}
+			else
+			{
+				qb = currentLeagueRules.ReceivingTDPoints;
+			}
+			if (r.Text != null)
+			{
+				rb = int.Parse(r.Text);
+			}
+			else
+			{
+				rb = currentLeagueRules.PPTenRush;
+			}
+			if (s.Text != null)
+			{
+				sb = int.Parse(s.Text);
+			}
+			else
+			{
+				sb = currentLeagueRules.FortyYardRushReceivingBonus;
+			}
+			if (t.Text != null)
+			{
+				tb = int.Parse(t.Text);
+			}
+			else
+			{
+				tb = currentLeagueRules.SixtyYardRushReceivingBonus;
+			}
+			if (u.Text != null)
+			{
+				ub = int.Parse(u.Text);
+			}
+			else
+			{
+				ub = currentLeagueRules.OneHundredYardRushReceivingBonus;
+			}
+			if (v.Text != null)
+			{
+				vb = int.Parse(v.Text);
+			}
+			else
+			{
+				vb = currentLeagueRules.TwoHundredYardRushReceivingBonus;
+			}
+			if (w.Text != null)
+			{
+				wb = Convert.ToDouble(w.Text);
+			}
+			else
+			{
+				wb = currentLeagueRules.PPR;
+			}
+			if (x.Text != null)
+			{
+				xb = int.Parse(x.Text);
+			}
+			else
+			{
+				xb = currentLeagueRules.TwoPointConversion;
+			}
+			if (y.Text != null)
+			{
+				yb = int.Parse(y.Text);
+			}
+			else
+			{
+				yb = currentLeagueRules.InterceptionOffense;
+			}
+			if (z.Text != null)
+			{
+				zb = int.Parse(z.Text);
+			}
+			else
+			{
+				zb = currentLeagueRules.FumbleOffense;
+			}
+			if (aa.Text != null)
+			{
+				aab = int.Parse(aa.Text);
+			}
+			else
+			{
+				aab = currentLeagueRules.SafetyOffense;
+			}
+			if (bb.Text != null)
+			{
+				bbbb = int.Parse(bb.Text);
+			}
+			else
+			{
+				bbbb = currentLeagueRules.SackDefense;
+			}
+			if (cc.Text != null)
+			{
+				ccb = Convert.ToDouble(cc.Text);
+			}
+			else
+			{
+				ccb = currentLeagueRules.TackleDefense;
+			}
+			if (dd.Text != null)
+			{
+				ddb = int.Parse(ee.Text);
+			}
+			else
+			{
+				ddb = currentLeagueRules.FgPuntBlock;
+			}
+			if (eee.Text != null)
+			{
+				eeeb = int.Parse(eee.Text);
+			}
+			else
+			{
+				eeeb = currentLeagueRules.InterceptionDefense;
+			}
+			if (ff.Text != null)
+			{
+				ffb = int.Parse(ff.Text);
+			}
+			else
+			{
+				ffb = currentLeagueRules.FumbleDefense;
+			}
+			if (gg.Text != null)
+			{
+				ggb = int.Parse(gg.Text);
+			}
+			else
+			{
+				ggb = currentLeagueRules.SafetyDefense;
+			}
+			if (hh.Text != null)
+			{
+				hhb = int.Parse(hh.Text);
+			}
+			else
+			{
+				hhb = currentLeagueRules.IntTd;
+			}
+			if (ii.Text != null)
+			{
+				iib = int.Parse(ii.Text);
+			}
+			else
+			{
+				iib = currentLeagueRules.FumbleTd;
+			}
+			if (jjj.Text != null)
+			{
+				jjjb = int.Parse(jj.Text);
+			}
+			else
+			{
+				jjjb = currentLeagueRules.ReturnTd;
+			}
+			if (kk.Text != null)
+			{
+				kkb = int.Parse(kk.Text);
+			}
+			else
+			{
+				kkb = currentLeagueRules.FgTenToTwenty;
+			}
+			if (ll.Text != null)
+			{
+				llb = int.Parse(ll.Text);
+			}
+			else
+			{
+				llb = currentLeagueRules.FgMissedTen;
+			}
+			if (mm.Text != null)
+			{
+				mmb = int.Parse(mm.Text);
+			}
+			else
+			{
+				mmb = currentLeagueRules.FgTwentyToThirty;
+			}
+			if (nn.Text != null)
+			{
+				nnb = int.Parse(nn.Text);
+			}
+			else
+			{
+				nnb = currentLeagueRules.FgMissedTwenty;
+			}
+			if (oo.Text != null)
+			{
+				oob = int.Parse(oo.Text);
+			}
+			else
+			{
+				oob = currentLeagueRules.FgThirtyToForty;
+			}
+			if (pp.Text != null)
+			{
+				ppb = int.Parse(pp.Text);
+			}
+			else
+			{
+				ppb = currentLeagueRules.FgMissedThirty;
+			}
+			if (qq.Text != null)
+			{
+				qqb = int.Parse(qq.Text);
+			}
+			else
+			{
+				qqb = currentLeagueRules.FgFortyToFifty;
+			}
+			if (rr.Text != null)
+			{
+				rrb = int.Parse(rr.Text);
+			}
+			else
+			{
+				rrb = currentLeagueRules.FgMissedforty;
+			}
+			if (ss.Text != null)
+			{
+				ssb = int.Parse(ss.Text);
+			}
+			else
+			{
+				ssb = currentLeagueRules.FgFiftyToSixty;
+			}
+			if (tt.Text != null)
+			{
+				ttb = int.Parse(tt.Text);
+			}
+			else
+			{
+				ttb = currentLeagueRules.FgMissedFifty;
+			}
+			if (uu.Text != null)
+			{
+				uub = int.Parse(uu.Text);
+			}
+			else
+			{
+				uub = currentLeagueRules.FgSixtyPlus;
+			}
+			if (vv.Text != null)
+			{
+				vvb = int.Parse(vv.Text);
+			}
+			else
+			{
+				vvb = currentLeagueRules.FgMissedSixty;
+			}
+			if (ww.Text != null)
+			{
+				wwb = int.Parse(ww.Text);
+			}
+			else
+			{
+				wwb = currentLeagueRules.XpMade;
+			}
+			if (xx.Text != null)
+			{
+				xxb = int.Parse(xx.Text);
+			}
+			else
+			{
+				xxb = currentLeagueRules.XpMissed;
+			}
+
+
+			LeagueRules newLeagueRules = new LeagueRules(CurrentLeagueRules[0].LeagueId, ab, zzb, bbb, cb, db, eeb, fb, gb, hb, ib, jjb, kb, lb, mb, nb, ob, pb, qb, rb, sb, tb, ub, vb, wb, xb, yb, zb, aab, bbbb, ccb, ddb, eeeb, ffb, ggb, hhb, iib, jjjb, kkb, llb, mmb, nnb, oob, ppb, qqb, rrb, ssb, ttb, uub, vvb, wwb, xxb);
 			await PostRules(newLeagueRules);
+
+			a.Text = null;
+			b.Text = null;
+			c.Text = null;
+			d.Text = null;
+			ee.Text = null;
+			f.Text = null;
+			g.Text = null;
+			h.Text = null;
+			i.Text = null;
+			jj.Text = null;
+			k.Text = null;
+			l.Text = null;
+			m.Text = null;
+			n.Text = null;
+			o.Text = null;
+			p.Text = null;
+			q.Text = null;
+			r.Text = null;
+			s.Text = null;
+			t.Text = null;
+			u.Text = null;
+			v.Text = null;
+			w.Text = null;
+			x.Text = null;
+			y.Text = null;
+			z.Text = null;
+			aa.Text = null;
+			bb.Text = null;
+			cc.Text = null;
+			dd.Text = null;
+			eee.Text = null;
+			ff.Text = null;
+			gg.Text = null;
+			hh.Text = null;
+			ii.Text = null;
+			jjj.Text = null;
+			kk.Text = null;
+			ll.Text = null;
+			mm.Text = null;
+			nn.Text = null;
+			oo.Text = null;
+			pp.Text = null;
+			qq.Text = null;
+			rr.Text = null;
+			ss.Text = null;
+			tt.Text = null;
+			uu.Text = null;
+			vv.Text = null;
+			ww.Text = null;
+			xx.Text = null;
+			zz.Text = null;
+
 
 			CurrentLeagueRules.Clear();
 			await GetRules(newLeagueRules.LeagueId);
