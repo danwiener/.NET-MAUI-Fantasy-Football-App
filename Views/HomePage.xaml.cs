@@ -2104,7 +2104,7 @@ public partial class HomePage : ContentPage
 		else
 		{
 			await DisplayAlert("Not successful", $"{result}", "Ok");
-			throw new Exception("Team already contains more players than specified limit. Please check your values and try again.");
+			throw new Exception("Team already contains more players than specified limit. Please adjust limits and try again.");
 		}
 	}
 
