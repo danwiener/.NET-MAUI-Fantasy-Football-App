@@ -2103,7 +2103,8 @@ public partial class HomePage : ContentPage
 		}
 		else
 		{
-			await DisplayAlert("Not successful", "Please try again", "Ok");
+			await DisplayAlert("Not successful", $"{result}", "Ok");
+			throw new Exception("Team already contains more players than specified limit. Please check your values and try again.");
 		}
 	}
 
@@ -2132,8 +2133,8 @@ public partial class HomePage : ContentPage
 		c.Placeholder = CurrentLeagueRules[0].RbCountStr;
 		d.Placeholder = CurrentLeagueRules[0].WrCountStr;
 		ee.Placeholder = CurrentLeagueRules[0].TeCountStr;
-		f.Placeholder = CurrentLeagueRules[0].DCountStr;
-		g.Placeholder = CurrentLeagueRules[0].KCountStr;
+		f.Placeholder = CurrentLeagueRules[0].defensecountStr;
+		g.Placeholder = CurrentLeagueRules[0].kcountStr;
 		h.Placeholder = CurrentLeagueRules[0].PassingTDPointsStr;
 		i.Placeholder = CurrentLeagueRules[0].PPCStr;
 		jj.Placeholder = CurrentLeagueRules[0].PPIStr;
@@ -2186,6 +2187,7 @@ public partial class HomePage : ContentPage
 	{
 		try
 		{
+
 			LeagueRules currentLeagueRules = CurrentLeagueRules[0];
 
 			if (a.Text != null && int.Parse(a.Text) > 16) {
@@ -2222,7 +2224,7 @@ public partial class HomePage : ContentPage
 				await DisplayAlert("Error", "League cannot contain more than 3 Ks. Please lower limit", "Ok");
 				return;
 			}
-			int currDCount = CurrentLeagueRules[0].DCount;
+
 			int ab;
 			int zzb;
 			int bbb;
@@ -2330,7 +2332,7 @@ public partial class HomePage : ContentPage
 			}
 			else
 			{
-				fb = currentLeagueRules.DCount;
+				fb = currentLeagueRules.defensecount;
 			}
 			if (g.Text != null)
 			{
@@ -2338,7 +2340,7 @@ public partial class HomePage : ContentPage
 			}
 			else
 			{
-				gb = currentLeagueRules.KCount;
+				gb = currentLeagueRules.kcount;
 			}
 			if (h.Text != null)
 			{
@@ -2685,9 +2687,15 @@ public partial class HomePage : ContentPage
 				xxb = currentLeagueRules.XpMissed;
 			}
 
-
 			LeagueRules newLeagueRules = new LeagueRules(CurrentLeagueRules[0].LeagueId, ab, zzb, bbb, cb, db, eeb, fb, gb, hb, ib, jjb, kb, lb, mb, nb, ob, pb, qb, rb, sb, tb, ub, vb, wb, xb, yb, zb, aab, bbbb, ccb, ddb, eeeb, ffb, ggb, hhb, iib, jjjb, kkb, llb, mmb, nnb, oob, ppb, qqb, rrb, ssb, ttb, uub, vvb, wwb, xxb);
-			await PostRules(newLeagueRules);
+			try
+			{
+				await PostRules(newLeagueRules);
+			}
+			catch (Exception ex)
+			{
+				return;
+			}
 
 			a.Text = null;
 			b.Text = null;
@@ -2743,6 +2751,7 @@ public partial class HomePage : ContentPage
 
 
 			CurrentLeagueRules.Clear();
+			
 			await GetRules(newLeagueRules.LeagueId);
 			LeagueRulesCollectionView.ItemsSource = CurrentLeagueRules;
 			BelongedTo.Where(l => l.LeagueId == newLeagueRules.LeagueId).FirstOrDefault().MaxTeams = newLeagueRules.MaxTeams;

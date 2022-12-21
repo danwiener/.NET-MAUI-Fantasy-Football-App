@@ -44,13 +44,13 @@ namespace FantasyFootballMAUI.Models
 		public string TeCountStr { get; set; }
 
 		[JsonPropertyName("defensecount")]
-		public int DCount { get; set; } = 2;
+		public int defensecount { get; set; } = 2;
 
-		public string DCountStr { get; set; }
+		public string defensecountStr { get; set; }
 
 		[JsonPropertyName("kcount")]
-		public int KCount { get; set; } = 1;
-		public string KCountStr { get; set; }
+		public int kcount { get; set; } = 1;
+		public string kcountStr { get; set; }
 
 		[JsonPropertyName("passingtdpoints")]
 		public int PassingTDPoints { get; set; } = 4;
@@ -262,7 +262,7 @@ namespace FantasyFootballMAUI.Models
 		public string XpMissedStr { get; set; }
 
 
-		public LeagueRules(int leagueId, int maxTeams, int maxplayers, int qbCount, int rbCount, int wrCount, int teCount, int dCount, int kCount, int passingTDPoints, double pPC, double pPI, int pPTwentyFiveYdsPass, int fortyYardPassBonus, int sixtyYardPassBonus, int threeHundredYardPassBonus, int fiveHundredYardPassBonus, int rushingTDPoints, int receivingTDPoints, int pPTenRush, int fortyYardRushReceivingBonus, int sixtyYardRushReceivingBonus, int oneHundredYardRushReceivingBonus, int twoHundredYardRushReceivingBonus, double pPR, int twoPointConversion, int interceptionOffense, int fumbleOffense, int safetyOffense, int sackDefense, double tackleDefense, int fgPuntBlock, int interceptionDefense, int fumbleDefense, int safetyDefense, int intTd, int fumbleTd, int returnTd, int fgTenToTwenty, int fgMissedTen, int fgTwentyToThirty, int fgMissedTwenty, int fgThirtyToForty, int fgMissedThirty, int fgFortyToFifty, int fgMissedforty, int fgFiftyToSixty, int fgMissedFifty, int fgSixtyPlus, int fgMissedSixty, int xpMade, int xpMissed)
+		public LeagueRules(int leagueId, int maxTeams, int maxplayers, int qbCount, int rbCount, int wrCount, int teCount, int dcount, int kcount, int passingTDPoints, double pPC, double pPI, int pPTwentyFiveYdsPass, int fortyYardPassBonus, int sixtyYardPassBonus, int threeHundredYardPassBonus, int fiveHundredYardPassBonus, int rushingTDPoints, int receivingTDPoints, int pPTenRush, int fortyYardRushReceivingBonus, int sixtyYardRushReceivingBonus, int oneHundredYardRushReceivingBonus, int twoHundredYardRushReceivingBonus, double pPR, int twoPointConversion, int interceptionOffense, int fumbleOffense, int safetyOffense, int sackDefense, double tackleDefense, int fgPuntBlock, int interceptionDefense, int fumbleDefense, int safetyDefense, int intTd, int fumbleTd, int returnTd, int fgTenToTwenty, int fgMissedTen, int fgTwentyToThirty, int fgMissedTwenty, int fgThirtyToForty, int fgMissedThirty, int fgFortyToFifty, int fgMissedforty, int fgFiftyToSixty, int fgMissedFifty, int fgSixtyPlus, int fgMissedSixty, int xpMade, int xpMissed)
 		{
 			LeagueId = leagueId;
 			MaxTeams = maxTeams;
@@ -271,8 +271,8 @@ namespace FantasyFootballMAUI.Models
 			RbCount = rbCount;
 			WrCount = wrCount;
 			TeCount = teCount;
-			DCount = dCount;
-			KCount = kCount;
+			defensecount = dcount;
+			kcount = kcount;
 			PassingTDPoints = passingTDPoints;
 			PPC = pPC;
 			PPI = pPI;
@@ -323,8 +323,8 @@ namespace FantasyFootballMAUI.Models
 			RbCountStr = $"RB Limit ({RbCount})";
 			WrCountStr = $"WR Limit ({WrCount})";
 			TeCountStr = $"TE Limit ({TeCount})";
-			DCountStr = $"DEFENSE Limit ({DCount})";
-			KCountStr = $"K Limit ({KCount})";
+			defensecountStr = $"DEFENSE Limit ({defensecount})";
+			kcountStr = $"K Limit ({kcount})";
 			PassingTDPointsStr = $"Points Per Passing TD ({PassingTDPoints})";
 			PPCStr = $"Points Per Completion ({PPC})";
 			PPIStr = $"Points Per Incompletion ({PPI})";

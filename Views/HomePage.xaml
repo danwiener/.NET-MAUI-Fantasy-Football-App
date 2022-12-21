@@ -722,13 +722,13 @@
                             <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="6" Grid.Column="1">
                                 <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
                                 <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
-                                <Entry Placeholder="{Binding DCountStr}" HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <Entry Placeholder="{Binding defensecountStr}" HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
                             </Grid>
 
                             <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="7" Grid.Column="1">
                                 <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
                                 <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
-                                <Entry Placeholder="{Binding KCountStr}" HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                                <Entry Placeholder="{Binding kcountStr}" HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
                             </Grid>
 
 
@@ -1123,13 +1123,13 @@
                     <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="6" Grid.Column="1">
                         <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
                         <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
-                        <Entry x:Name="f" Placeholder="{Binding DCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="f" Placeholder="{Binding defensecountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
                     </Grid>
 
                     <Grid ColumnDefinitions="35,*" RowDefinitions="*" Grid.Row="7" Grid.Column="1">
                         <Image Source="hashtag.png" HeightRequest="25" WidthRequest="25" Grid.Column="0" ZIndex="5" Margin="2.5,0,-5,0"/>
                         <Entry HeightRequest="38" Grid.Row="0" IsEnabled="false" Grid.Column="0" Grid.ColumnSpan="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="3" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
-                        <Entry x:Name="g" Placeholder="{Binding KCountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="g" Placeholder="{Binding kcountStr}" HeightRequest="38" Grid.Row="0"  Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" BackgroundColor="#f2f2f2" TextColor="Black" ZIndex="5" PlaceholderColor="Black" VerticalTextAlignment="Center"/>
                     </Grid>
 
 
