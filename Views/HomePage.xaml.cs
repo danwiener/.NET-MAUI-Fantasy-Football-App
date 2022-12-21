@@ -748,7 +748,15 @@ public partial class HomePage : ContentPage
 
 		AddPlayerDTO dto = new AddPlayerDTO(player.PlayerId, player.PlayerName, team.TeamName, team.TeamId);
 
-		await AddPlayer(dto);
+		try
+		{
+			await AddPlayer(dto);
+		}
+		catch (Exception ex)
+		{
+			return;
+		}
+		
 		FreeAgents.Where(p => p.PlayerId == dto.PlayerId).FirstOrDefault().TeamId = dto.TeamId;
 		TeamPlayers.Add(FreeAgents.Where(p => p.PlayerId == dto.PlayerId).FirstOrDefault());
 		FreeAgents.Remove(FreeAgents.Where(p => p.PlayerId == dto.PlayerId).FirstOrDefault());
@@ -798,7 +806,8 @@ public partial class HomePage : ContentPage
 		}
 		else
 		{
-			await DisplayAlert("Not successful", "Please try again", "Ok");
+			await DisplayAlert("Position limit reached", $"{result}", "Ok");
+			throw new Exception("exception");
 		}
 
 	} // End method
@@ -2213,7 +2222,7 @@ public partial class HomePage : ContentPage
 				await DisplayAlert("Error", "League cannot contain more than 3 Ks. Please lower limit", "Ok");
 				return;
 			}
-
+			int currDCount = CurrentLeagueRules[0].DCount;
 			int ab;
 			int zzb;
 			int bbb;
