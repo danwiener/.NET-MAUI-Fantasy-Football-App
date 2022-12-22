@@ -50,3 +50,9 @@ To circumvent this, I randomly generate a list of 1248 names from a list of 1500
 Since we don't want my API controller to generate a NEW list of players each time a new league is created, my API checks the db for existing players. If none exist, my algorithm deploys to generate 1280 total players, and otherwise, my API copies the list of 1280 existing players (per league), removes the league ID # formerly associated with each of those players, and assigns to each copied player the league ID # of the newly created league. This way users of my app can select from a consistent, non-varying pool of players regardless of which fantasy league they play from. Fun logic to implement. :)
 
 12/17 added SEND EMAIL capability to send password reset emails using a reset token when a user selects "Forgot My Password". Also added "Join League" functionality to my front end which already existed as an endpoint capability in my API, but is now integrated with the front end.
+
+
+12/21 Got backend API and database fully up and running in Azure cloud! :) Submitted front end client to Microsoft App store and thereafter added logout capability as well.
+
+PRIVACY POLICY
+https://app.termly.io/document/privacy-policy/1072374e-2247-45d2-9899-7f8a4cca91e5
