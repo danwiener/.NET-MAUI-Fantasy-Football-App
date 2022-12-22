@@ -52,5 +52,7 @@ Since we don't want my API controller to generate a NEW list of players each tim
 12/17 added SEND EMAIL capability to send password reset emails using a reset token when a user selects "Forgot My Password". Also added "Join League" functionality to my front end which already existed as an endpoint capability in my API, but is now integrated with the front end.
 
 
+12/21 Got backend API and database fully up and running in Azure cloud! :) Submitted front end client to Microsoft App store and thereafter added logout capability as well.
+
 PRIVACY POLICY
 https://app.termly.io/document/privacy-policy/1072374e-2247-45d2-9899-7f8a4cca91e5
