@@ -31,7 +31,7 @@ public partial class ForgotPasswordPage : ContentPage
 
 			if (success)
 			{
-				await Shell.Current.GoToAsync($"{nameof(ResetPasswordPage)}");
+				await Shell.Current.GoToAsync($"{nameof(ResetPage)}");
 			}
 		}
 		catch (Exception ex)
@@ -45,7 +45,7 @@ public partial class ForgotPasswordPage : ContentPage
 	{
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
-		var url = "http://localhost:8000/api/forgot"; // access the forgot endpoint to generate a reset token and send password reset email
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/forgot"; // access the forgot endpoint to generate a reset token and send password reset email
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);

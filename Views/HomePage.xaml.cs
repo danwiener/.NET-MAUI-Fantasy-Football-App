@@ -199,6 +199,7 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = this;
+		Routing.RegisterRoute(nameof(OpeningPage), typeof(OpeningPage));
 	}
 
 	protected override async void OnAppearing()
@@ -235,7 +236,7 @@ public partial class HomePage : ContentPage
 	int j = 1;
 	public async Task getUserEmailAndUserName(int userId)
 	{
-		var Url = "http://localhost:8000/api/getuser";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getuser";
 		using var client = new HttpClient();
 
 		client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {userId}"); // add user id to UsernameEmail header to receive back user and user's information
@@ -250,7 +251,7 @@ public partial class HomePage : ContentPage
 		user = new User(userId, Username, Name, Email);
 
 		// Get leagues
-		var Url2 = "http://localhost:8000/api/getleaguesbelongedto";
+		var Url2 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getleaguesbelongedto";
 		client.DefaultRequestHeaders.Remove("UsernameEmail");
 		client.DefaultRequestHeaders.Add("LeaguesBelongedToHeader", $"{userId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
 		var response2 = await client.GetAsync(Url2);
@@ -263,7 +264,7 @@ public partial class HomePage : ContentPage
 		}
 		else
 		{
-			var Url3 = "http://localhost:8000/api/getleagues";
+			var Url3 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getleagues";
 
 			for (int i = 0; i < leagueids.Count(); i++)
 			{
@@ -278,7 +279,7 @@ public partial class HomePage : ContentPage
 				int creatorId = int.Parse(JObject.Parse(result3)["creator"].ToString());
 				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
 
-				var Url10 = "http://localhost:8000/api/numberteams";
+				var Url10 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/numberteams";
 				client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{leagueId}"); // get current number of teams in league
 				var response10 = await client.GetAsync(Url10);
 				var result10 = await response10.Content.ReadAsStringAsync();
@@ -290,7 +291,7 @@ public partial class HomePage : ContentPage
 				{
 					BelongedTo.Add(league);
 				}
-				var Url4 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+				var Url4 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getuser"; // retrieve every user which created every league
 
 				client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
 				var response4 = await client.GetAsync(Url4);
@@ -314,7 +315,7 @@ public partial class HomePage : ContentPage
 		}
 
 		// Get teams
-		var Url5 = "http://localhost:8000/api/getteamsbelongedto";
+		var Url5 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getteamsbelongedto";
 		client.DefaultRequestHeaders.Clear();
 		client.DefaultRequestHeaders.Add("TeamsBelongedToHeader", $"{userId}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
 		var response5 = await client.GetAsync(Url5);
@@ -322,7 +323,7 @@ public partial class HomePage : ContentPage
 
 		int[]? teamids = (int[])JObject.Parse(result5)["teamsbelongedto"].ToObject<int[]>();
 
-		var Url6 = "http://localhost:8000/api/getteams";
+		var Url6 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getteams";
 
 		for (int i = 0; i < teamids.Count(); i++)
 		{
@@ -339,7 +340,7 @@ public partial class HomePage : ContentPage
 			Team team = new Team(teamid, teamname, createdondate, creatorId, leagueId, creatorId == GetUserId.UserId);
 
 
-			var Url7 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+			var Url7 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getuser"; // retrieve every user which created every league
 
 			client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
 			var response7 = await client.GetAsync(Url7);
@@ -358,7 +359,7 @@ public partial class HomePage : ContentPage
 			team.CreatorName = user.Name; // Merge name and username from user into league for collection view binding purposes
 			team.CreatorUsername = user.Username;
 
-			var Url8 = "http://localhost:8000/api/getleagues"; // retrieve league info associated with team
+			var Url8 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getleagues"; // retrieve league info associated with team
 			client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{team.League}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
 			var response8 = await client.GetAsync(Url8);
 			var result8 = await response8.Content.ReadAsStringAsync();
@@ -444,7 +445,7 @@ public partial class HomePage : ContentPage
 
 	public async Task GetPlayersInLeague(int leagueid)
 	{
-		var Url = "http://localhost:8000/api/getplayersinleague";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getplayersinleague";
 		using var client = new HttpClient();
 
 		client.DefaultRequestHeaders.Add("PlayersInLeagueHeader", $"{leagueid}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
@@ -453,7 +454,7 @@ public partial class HomePage : ContentPage
 
 		int[] playerids = (int[])JObject.Parse(result)["playeridinleague"].ToObject<int[]>();
 
-		var Url2 = "http://localhost:8000/api/getplayers";
+		var Url2 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getplayers";
 
 		foreach (int id in playerids)
 		{
@@ -483,7 +484,7 @@ public partial class HomePage : ContentPage
 	}
 	public async Task GetTeamPlayers(int teamid)
 	{
-		var Url = "http://localhost:8000/api/getteamplayers";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getteamplayers";
 		using var client = new HttpClient();
 
 		client.DefaultRequestHeaders.Add("TeamPlayersHeader", $"{teamid}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
@@ -492,7 +493,7 @@ public partial class HomePage : ContentPage
 
 		int[] playerids = (int[])JObject.Parse(result)["playeridinleague"].ToObject<int[]>();
 
-		var Url2 = "http://localhost:8000/api/getplayers";
+		var Url2 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getplayers";
 
 		foreach (int id in playerids)
 		{
@@ -517,7 +518,7 @@ public partial class HomePage : ContentPage
 	// Get all teams associated with a league
 	public async Task GetTeamsInLeague(int leagueid)
 	{
-		var Url = "http://localhost:8000/api/getteamsinleague";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getteamsinleague";
 		using var client = new HttpClient();
 
 		client.DefaultRequestHeaders.Add("TeamsInLeagueHeader", $"{leagueid}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
@@ -526,7 +527,7 @@ public partial class HomePage : ContentPage
 
 		int[]? teamids = (int[])JObject.Parse(result)["teamsbelongedto"].ToObject<int[]>();
 
-		var Url2 = "http://localhost:8000/api/getteams";
+		var Url2 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getteams";
 
 		foreach (int id in teamids)
 		{
@@ -544,7 +545,7 @@ public partial class HomePage : ContentPage
 			Team team = new Team(teamid, teamname, createdondate, creatorId, leagueId, creatorId == GetUserId.UserId);
 
 
-			var Url7 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+			var Url7 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getuser"; // retrieve every user which created every league
 
 			client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
 			var response7 = await client.GetAsync(Url7);
@@ -563,7 +564,7 @@ public partial class HomePage : ContentPage
 			team.CreatorName = user.Name; // Merge name and username from user into league for collection view binding purposes
 			team.CreatorUsername = user.Username;
 
-			var Url8 = "http://localhost:8000/api/getleagues"; // retrieve league info associated with team
+			var Url8 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getleagues"; // retrieve league info associated with team
 			client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{team.League}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
 			var response8 = await client.GetAsync(Url8);
 			var result8 = await response8.Content.ReadAsStringAsync();
@@ -666,7 +667,7 @@ public partial class HomePage : ContentPage
 
 	public async Task GetNumberTeams()
 	{
-		var Url = "http://localhost:8000/api/numberteams";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/numberteams";
 		using var client = new HttpClient();
 
 		foreach (League league in GlobalLeagues)
@@ -718,7 +719,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/dropplayer"; // access the register endpoint to register new user
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/dropplayer"; // access the register endpoint to register new user
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);
@@ -793,7 +794,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/addplayer"; // access the register endpoint to register new user
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/addplayer"; // access the register endpoint to register new user
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);
@@ -946,6 +947,7 @@ public partial class HomePage : ContentPage
 
 	private async void OnViewLeagueClicked(object sender, EventArgs e)
 	{
+		
 		if (LeaguesBelongedToGrid.IsVisible)
 		{
 			if (LeaguesBelongedToCollectionView.SelectedItem == null)
@@ -960,11 +962,13 @@ public partial class HomePage : ContentPage
 				GoBackTeamBtn.IsVisible = false;
 				ViewTeamBtn.IsVisible = true;
 			}
+			await GetNumberTeams();
 			CurrentLeagueCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
 			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
 
-
+			LeaguesBelongedToGrid.IsVisible = false;
+			LeaguesBelongedToCollectionView.IsEnabled = false;
 			League league = CurrentLeagueCollectionView.SelectedItem as League;
 			await GetTeamsInLeague(league.LeagueId);
 			TeamsBelongedToGrid.IsVisible = false;
@@ -977,17 +981,18 @@ public partial class HomePage : ContentPage
 			TitleLabel2.Text = "LEAGUE TEAMS";
 			TitleLabel1.Text = "LEAGUE INFO";
 
-			LeaguesBelongedToGrid.IsVisible = false;
-			LeaguesBelongedToCollectionView.IsEnabled = false;
+
 			globalHasBeenSelected = false;
 
 			OrLabel.IsVisible= false;
 			JoinCreateBtn.IsVisible= false;
 
-			await GetNumberTeams();
+			
+
 		}
 		else if (GlobalLeaguesGrid.IsVisible)
 		{
+
 			if (GlobalLeaguesCollectionView.SelectedItem == null)
 			{
 				await DisplayAlert("No league selected", "Please select a league to view", "Ok");
@@ -1000,6 +1005,9 @@ public partial class HomePage : ContentPage
 				GoBackTeamBtn.IsVisible = false;
 				ViewTeamBtn.IsVisible = true;
 			}
+			await GetNumberTeams();
+			GlobalLeaguesGrid.IsVisible = false;
+			GlobalLeaguesCollectionView.IsEnabled = false;
 			CurrentLeagueCollectionViewGrid.IsVisible = true;
 			CurrentLeagueCollectionView.IsEnabled = true;
 			CurrentLeagueCollectionView.SelectedItem = CurrentlySelected.FirstOrDefault();
@@ -1015,15 +1023,12 @@ public partial class HomePage : ContentPage
 
 			TitleLabel2.Text = "LEAGUE TEAMS";
 			TitleLabel1.Text = "LEAGUE INFO";
-			GlobalLeaguesGrid.IsVisible = false;
-			GlobalLeaguesCollectionView.IsEnabled = false;
+
 			GoBackBtn2.IsVisible = false;
 			JoinLeagueBtn.IsVisible = false;
 			CreateLeagueBtn.IsVisible = false;
 			globalHasBeenSelected = true;
 
-
-			await GetNumberTeams();
 		}
 
 		JoinLeagueBtn.IsVisible = true;
@@ -1034,6 +1039,94 @@ public partial class HomePage : ContentPage
 
 	}
 
+	private async void OnSignoutClicked(object sender, EventArgs e)
+	{
+		SignoutDTO dto = new SignoutDTO();
+		dto.UserId = GetUserId.UserId;
+		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+
+		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/logout"; // access the register endpoint to register new user
+		using var client = new HttpClient();
+
+		var response = await client.PostAsync(url, data);
+
+		var result = await response.Content.ReadAsStringAsync();
+
+		if (BelongedTo != null)
+		{
+			BelongedTo.Clear();
+		}
+		if (TeamsBelongedTo != null)
+		{
+			TeamsBelongedTo.Clear();
+		}
+		if (TeamsInLeague != null)
+		{
+			TeamsInLeague.Clear();
+		}
+		if (CurrentlySelectedTeam != null)
+		{
+			CurrentlySelectedTeam.Clear();
+		}
+		if (CurrentlySelectedTeamInLeague != null)
+		{
+			CurrentlySelectedTeamInLeague.Clear();
+		}
+		if (GlobalLeagues != null)
+		{
+			GlobalLeagues.Clear();
+		}
+		if (Creators != null)
+		{
+			Creators.Clear();
+		}
+		if (TeamCreators != null)
+		{
+			TeamCreators.Clear();
+		}
+		if (GlobalLeagueCreators != null)
+		{
+			GlobalLeagueCreators.Clear();
+		}
+		if (CurrentlySelected != null)
+		{
+			CurrentlySelected.Clear();
+		}
+		if (CurrentlySelectedPlayer != null)
+		{
+			CurrentlySelectedPlayer.Clear();
+		}
+		if (CurrentLeagueRules != null)
+		{
+			CurrentLeagueRules.Clear();
+		}
+		if (FreeAgents != null)
+		{
+			FreeAgents.Clear();
+		}
+		if (TeamPlayers != null)
+		{
+			TeamPlayers.Clear();
+		}
+		if (PlayersOnCurrentTeam != null)
+		{
+			PlayersOnCurrentTeam.Clear();
+		}
+		
+
+		if (response.IsSuccessStatusCode)
+		{
+			await DisplayAlert("Success", $"You are now signed out", "Ok");
+		}
+		else
+		{
+			await DisplayAlert("Not successful", "Please try again", "Ok");
+		}
+		
+		App.Current.MainPage = new AppShell();
+	}
 
 	private async void OnDeleteTeamClicked(object sender, EventArgs e)
 	{
@@ -1052,6 +1145,10 @@ public partial class HomePage : ContentPage
 			FreeAgents.Clear();
 			TeamPlayers.Clear();
 			await GetPlayersInLeague(team.League);
+
+			TeamsInLeague.Clear();
+			await GetTeamsInLeague(team.League);
+
 			foreach (Team item in TeamsInLeague)
 			{
 				if (item.TeamId == dto.teamid)
@@ -1116,6 +1213,8 @@ public partial class HomePage : ContentPage
 				await DisplayAlert("Not team owner", "You may only delete teams that you created", "Ok");
 				return;
 			}
+			TeamsInLeague.Clear();
+			await GetTeamsInLeague(team.League);
 			dto = new DeleteTeamDTO(team.TeamId, team.TeamName);
 			await DeleteTeam(dto);
 
@@ -1192,6 +1291,7 @@ public partial class HomePage : ContentPage
 
 				ViewFreeAgentsBtn.IsVisible = false;
 				DropBtn.IsVisible = false;
+
 			}
 		}
 		if (CurrentlySelectedTeam is not null)
@@ -1350,7 +1450,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/deleteleague"; // access the register endpoint to register new user
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/deleteleague"; // access the register endpoint to register new user
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);
@@ -1395,7 +1495,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/deleteteam"; // access the register endpoint to register new user
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/deleteteam"; // access the register endpoint to register new user
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);
@@ -1444,7 +1544,7 @@ public partial class HomePage : ContentPage
 
 	public async Task GetGlobalLeagues()
 	{
-		var Url = "http://localhost:8000/api/getgloballeagueids";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getgloballeagueids";
 		using var client = new HttpClient();
 
 		var response = await client.GetAsync(Url);
@@ -1457,7 +1557,7 @@ public partial class HomePage : ContentPage
 		}
 		else
 		{
-			var Url2 = "http://localhost:8000/api/getleagues";
+			var Url2 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getleagues";
 			for (int i = 0; i < leagueids.Count(); i++)
 			{
 				client.DefaultRequestHeaders.Add("LeagueIdHeader", $"{leagueids[i]}"); // add user id to LeaguesBelongedTo header to receive back leagues user belongs to
@@ -1472,7 +1572,7 @@ public partial class HomePage : ContentPage
 				League league = new League(leagueId, leaguename, maxteams, creatorId, creatorId == GetUserId.UserId);
 
 
-				var Url3 = "http://localhost:8000/api/getuser"; // retrieve every user which created every league
+				var Url3 = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getuser"; // retrieve every user which created every league
 
 				client.DefaultRequestHeaders.Add("UsernameEmail", $"Bearer {creatorId}");
 				var response3 = await client.GetAsync(Url3);
@@ -1705,6 +1805,7 @@ public partial class HomePage : ContentPage
 
 	private async void OnEnterTeamClicked(object sender, EventArgs e)
 	{
+		await GetNumberTeams();
 		if (TeamNameEntry.Text is null)
 		{
 			await DisplayAlert("Must enter a valid team name", "Please enter a team name now", "Ok");
@@ -1712,6 +1813,12 @@ public partial class HomePage : ContentPage
 		}
 
 		League league = CurrentLeagueCollectionView.SelectedItem as League;
+
+		if (league.CurrentTeams >= league.MaxTeams)
+		{
+			await DisplayAlert("Max teams reached", $"Cannot create additional teams in league {league.LeagueName} given the current rules. Please update rules or delete existing teams now :)", "Ok");
+			return;
+		}
 
 		CreateTeamDTO dto = new CreateTeamDTO(TeamNameEntry.Text, GetUserId.UserId, league.LeagueId);
 
@@ -1725,6 +1832,7 @@ public partial class HomePage : ContentPage
 
 		CreateTeamGrid.IsVisible = false;
 		CreateTeamGridOuter.IsVisible = false;
+		TeamNameEntry.Text = null;
 
 		TeamsInLeagueGrid.IsVisible = true;
 		TeamsInLeagueCollectionView.IsEnabled = true;
@@ -1733,8 +1841,16 @@ public partial class HomePage : ContentPage
 
 
 		TeamsInLeague.Clear();
+		
 	    await getUserEmailAndUserName(GetUserId.UserId);
 		await GetTeamsInLeague(league.LeagueId);
+		await GetNumberTeams();
+
+		LeaguesBelongedToCollectionView.ItemsSource = BelongedTo;
+		GlobalLeaguesCollectionView.ItemsSource = GlobalLeagues;
+
+		CurrentLeagueCollectionView.ItemsSource = CurrentlySelected;
+
 		TeamsInLeagueCollectionView.ItemsSource = TeamsInLeague;
 
 		GoBackBtn.IsVisible = true;
@@ -1748,7 +1864,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var Url = "http://localhost:8000/api/createteam";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/createteam";
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(Url, data);
@@ -1760,7 +1876,7 @@ public partial class HomePage : ContentPage
 		}
 		else
 		{
-			await DisplayAlert("Not successful", "Please try again", "Ok");
+			await DisplayAlert("Not successful", "Team name might already exist in this league, please try again", "Ok");
 		}
 	}
 
@@ -1819,7 +1935,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var Url = "http://localhost:8000/api/createleague";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/createleague";
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(Url, data);
@@ -2023,7 +2139,7 @@ public partial class HomePage : ContentPage
 
 	public async Task GetRules(int leagueid)
 	{
-		var Url = "http://localhost:8000/api/getleaguerules";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/getleaguerules";
 		using var client = new HttpClient();
 		client.DefaultRequestHeaders.Add("LeagueIdForRulesHeader", $"{leagueid}");
 
@@ -2091,7 +2207,7 @@ public partial class HomePage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(lr);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var Url = "http://localhost:8000/api/postleaguerules";
+		var Url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/postleaguerules";
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(Url, data);

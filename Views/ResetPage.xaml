@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FantasyFootballMAUI.ResetPasswordPage"
+             x:Class="FantasyFootballMAUI.ResetPage"
              BackgroundColor="#e6e6e6"
+             Shell.NavBarIsVisible="False"
              Title="Reset Password">
 
     <Grid x:Name="ResetPasswordGrid">
@@ -55,72 +56,8 @@
                     <Button Text="GO BACK" FontSize="12" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" VerticalOptions="Center" BorderColor="Transparent" BorderWidth="0" Margin="-5,0,0,0" Clicked="OnGoBackButtonClicked" />
                 </HorizontalStackLayout>
             </Grid>
-            
-            
 
 
-
-            <!--<BoxView Color="#f34f1c" Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, 88, 88, 0"
-               HeightRequest="44"
-               WidthRequest="44" CornerRadius="22" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#7fbc00" Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, 66, 66, 0"
-               HeightRequest="44"
-               WidthRequest="44" CornerRadius="22" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#01a6f0" Grid.Row="6"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, 44, 44, 0"
-               HeightRequest="44"
-               WidthRequest="44" CornerRadius="22" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#ffba01" Grid.Row="6"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, 22, 22, 0"
-               HeightRequest="44"
-               WidthRequest="44" CornerRadius="22" Opacity=".05" ZIndex="0">
-            </BoxView>
-
-            <BoxView Color="#f34f1c" Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -22, -11, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#7fbc00" Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -44, -24, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#01a6f0" Grid.Row="6"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -66, -41, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#ffba01" Grid.Row="6"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -88, -61, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#f34f1c" Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -110, -78, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#7fbc00" Grid.Row="5"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -132, -92, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#01a6f0" Grid.Row="6"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -154, -103, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>
-            <BoxView Color="#ffba01" Grid.Row="6"  Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"
-               Margin="0, -176, -117, 0"
-               HeightRequest="88"
-               WidthRequest="88" CornerRadius="44" Opacity=".05" ZIndex="0">
-            </BoxView>-->
 
 
 
@@ -154,26 +91,6 @@
 
         </Grid>
 
-        <!--<BoxView Color="#eeeeee" Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand"
-               Margin="2, 0, 0, 0"
-               HeightRequest="250"
-               WidthRequest="250" CornerRadius="125" ZIndex="0" Opacity="1">
-        </BoxView>
-        <BoxView Color="#438696" Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand"
-               Margin="65, -125, 0, 0"
-               HeightRequest="250"
-               WidthRequest="250" CornerRadius="125" ZIndex="0" Opacity="1">
-        </BoxView>
-        <BoxView Color="#de6b28" Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand"
-               Margin="2, -250, 0, 0"
-               HeightRequest="250"
-               WidthRequest="250" CornerRadius="125" ZIndex="0" Opacity="1">
-        </BoxView>
-        <BoxView Color="#978d83" Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand"
-               Margin="22, -350, 0, 0"
-               HeightRequest="250"
-               WidthRequest="250" CornerRadius="125" ZIndex="0" Opacity="1">
-        </BoxView>-->
 
     </Grid>
 

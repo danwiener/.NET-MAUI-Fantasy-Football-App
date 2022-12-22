@@ -68,7 +68,7 @@ public partial class LoginPage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nl);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/login"; // access the login endpoint to receive access token from authorization server
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/login"; // access the login endpoint to receive access token from authorization server
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);
@@ -78,7 +78,7 @@ public partial class LoginPage : ContentPage
 
 		client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}"); // add to Authorization header to send back to API to request access to resource server/protected data
 
-		var newUrl = "http://localhost:8000/api/user"; // get request to user endpoint to receive protected user information and log user in
+		var newUrl = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/user"; // get request to user endpoint to receive protected user information and log user in
 
 		var response2 = await client.GetAsync(newUrl);
 

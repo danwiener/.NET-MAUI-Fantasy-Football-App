@@ -179,4 +179,9 @@ namespace FantasyFootballMAUI.Models
 		public int DCount { get; set; }
 	}
 
+    public class SignoutDTO
+    {
+        public int UserId;
+    }
+
 }

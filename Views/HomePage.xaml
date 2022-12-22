@@ -47,7 +47,6 @@
         <Label x:Name="UsernameLabel" Grid.Row="0" FontAttributes="Bold" FontFamily="PT" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0d0000" CharacterSpacing="2" />
 
 
-        <Label x:Name="HomeLabel" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="14" FontAttributes="Bold" TextColor="#26658C"/>
 
         <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" ColumnDefinitions=".5*,.5*" VerticalOptions="End" Margin="0,0,0,-5">
             <Label x:Name="TitleLabel1" Grid.Column="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="LEAGUES BELONGED TO" FontSize="22" FontAttributes="Bold" FontFamily="PT" FontAutoScalingEnabled="True" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Scale="3">
@@ -290,6 +289,7 @@
 
                 <Button Text="DELETE TEAM" CornerRadius="0" BorderColor="#ffffff" BorderWidth="1" x:Name="DeleteTeamBtn" Padding="-5" Clicked="OnDeleteTeamClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#e6e6e6" TextColor="Black" Margin="2.5, 0, 0, 0"/>
                 <Button Text="ENTER" CornerRadius="0" BorderColor="#ffffff" BorderWidth="1" x:Name="EnterTeamBtn" IsVisible="false" Padding="-5" Clicked="OnEnterTeamClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#e6e6e6" TextColor="Black" Margin="2.5, 0, 0, 0"/>
+                <Button Text="SIGN OUT" CornerRadius="0" BorderColor="#ffffff" BorderWidth="1" x:Name="SignoutBtn" Padding="-5" Clicked="OnSignoutClicked" HeightRequest="44" WidthRequest="90" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True" FontSize="8" BackgroundColor="#e6e6e6" TextColor="Black" Margin="2.5, 0, 0, 0"/>
 
             </HorizontalStackLayout>
         </Grid>

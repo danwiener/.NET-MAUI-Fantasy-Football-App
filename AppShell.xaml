@@ -28,7 +28,7 @@
         </DataTemplate>
     </Shell.ItemTemplate>
     <ShellContent
-        x:Name="WelcomePage"
+        x:Name="OpeningPage"
         Title="Welcome"
         ContentTemplate="{DataTemplate local:OpeningPage}"
         Route="OpeningPage"/>
@@ -55,6 +55,11 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:HomePage}"
         Route="HomePage"/>
+
+    <ShellContent
+        Title="ResetPage"
+        ContentTemplate="{DataTemplate local:ResetPage}"
+        Route="ResetPage"/>
 
 
 

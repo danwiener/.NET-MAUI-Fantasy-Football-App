@@ -69,7 +69,7 @@ public partial class RegisterPage : ContentPage
         var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(nu);
         var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-        var url = "http://localhost:8000/api/register"; // access the register endpoint to register new user
+        var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/register"; // access the register endpoint to register new user
         using var client = new HttpClient();
 
         var response = await client.PostAsync(url, data);

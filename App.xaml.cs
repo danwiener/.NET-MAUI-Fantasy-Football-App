@@ -22,15 +22,17 @@ public partial class App : Application
 #endif
 		});
 
-			//var navPage = new NavigationPage(new RegisterPage());
-			//navPage.BarBackgroundColor = Color.FromArgb("eeeeee");
-			//navPage.BarTextColor = Color.FromArgb("233b66");
-			//navPage.WidthRequest = 600;
-			//navPage.HeightRequest = 500;
+		//var navPage = new NavigationPage(new RegisterPage());
+		//navPage.BarBackgroundColor = Color.FromArgb("eeeeee");
+		//navPage.BarTextColor = Color.FromArgb("233b66");
+		//navPage.WidthRequest = 600;
+		//navPage.HeightRequest = 500;
 
-			
+		
 			//appshell.WidthRequest = 600;
 			//appshell.HeightRequest = 500;
-			MainPage = new AppShell();
+		MainPage = new AppShell();
+
+			
 	} // End constructor
 }

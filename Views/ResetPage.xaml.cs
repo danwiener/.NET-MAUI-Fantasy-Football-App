@@ -4,10 +4,10 @@ using System.Text;
 namespace FantasyFootballMAUI;
 
 
-public partial class ResetPasswordPage : ContentPage
+public partial class ResetPage : ContentPage
 {
 	bool success;
-	public ResetPasswordPage()
+	public ResetPage()
 	{
 		InitializeComponent();
 	}
@@ -34,7 +34,7 @@ public partial class ResetPasswordPage : ContentPage
 		var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
 		var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-		var url = "http://localhost:8000/api/reset"; // access the reset endpoint to check whether passwords match, search db for token equal to token pasted into app, and then find user associated with email attached to token to change that user's password
+		var url = "https://buttonhookfantasyfootballapi.azurewebsites.net/api/reset"; // access the reset endpoint to check whether passwords match, search db for token equal to token pasted into app, and then find user associated with email attached to token to change that user's password
 		using var client = new HttpClient();
 
 		var response = await client.PostAsync(url, data);
