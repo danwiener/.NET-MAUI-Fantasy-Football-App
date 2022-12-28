@@ -54,8 +54,6 @@ Since we don't want my API controller to generate a NEW list of players each tim
 
 12/21 Got backend API and database fully up and running in Azure cloud! :) Submitted front end client to Microsoft App store and thereafter added logout capability as well.
 
-12/27 After a marathon of online research including posting/devouring Stackoverflow posts, hours of YouTube videos, and reaching out to everybody I know, I erroneously submitted a .msix installer for my app to the app store- but soon discovered that the msix file only correctly ran/installed my app when launched and stored in the same directory as all of my app's 900+ dependency files. Upon bundling these into a .msixupload package, I was denied because the app store does not permit more than 16 files per upload. An alternative to this solution was to package my app into a single .exe, which I was successfully able to do. However, I encountered the same issue where the app could only be launched among/from the same directory as all of its dependencies. I then determined upon further research that I would need to embed my dependency files into the singular .exe for a larger overall file, but one that would not need be present among hundreds of other files to execute. I achieved success by downloading and tinkering with a wonderful app called BoxedApp Packer. This enabled me to submit to the app store a second time. However since I submitted a directly downloadable .exe file the second time around rather than an .msix package, I had to link to a CDN and provide a list of exe return codes which are listed below :).
-
 
 STANDARD INSTALL SCENARIOS AND RETURN VALUES FOR INSTALLING MY APP FROM THE APP STORE:
 
