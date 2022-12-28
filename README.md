@@ -58,13 +58,21 @@ Since we don't want my API controller to generate a NEW list of players each tim
 
 
 STANDARD INSTALL SCENARIOS AND RETURN VALUES FOR INSTALLING MY APP FROM THE APP STORE:
+
 -Installation cancelled by user: The install operation was cancelled by the user. Return Code 0
+
 -Application already exists: The applicaton already exists on the device. Return Code 1
+
 -Installation already in progress: Another installation is already in progress. User needs to complete the installation before proceeding with this install. Return Code 2
+
 -Disk space is full: The disk space is full. Return Code 3
+
 -Reboot required: A restart is required to complete the install. Return Code 4
+
 -Network failure: Provide custom return code values for various network related failures. Return Code 5
+
 -Package rejected during installation: Package rejected during installation due to a security policy enabled on the device. Return Code 6
+
 -Installation successful: Installation has been successful. Return Code 7
 
 PRIVACY POLICY
