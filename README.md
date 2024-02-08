@@ -72,6 +72,10 @@ STANDARD INSTALL SCENARIOS AND RETURN VALUES FOR INSTALLING MY APP FROM THE APP 
 -Package rejected during installation: Package rejected during installation due to a security policy enabled on the device. Return Code 6
 
 -Installation successful: Installation has been successful. Return Code 7
-
 PRIVACY POLICY
 https://app.termly.io/document/privacy-policy/1072374e-2247-45d2-9899-7f8a4cca91e5
+
+NOTE: I am no longer paying to maintain the Azure channel on which my SQL database was hosted and thus can no longer utilize app features such as create-account or login, which are required to access the fantasy-football portion of the app.
+
+![2024-02-07 19_33_42-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/a4672716-bbda-4b3c-bda7-c46a2fad9377)
+
