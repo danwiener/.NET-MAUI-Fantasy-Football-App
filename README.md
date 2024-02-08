@@ -77,5 +77,14 @@ https://app.termly.io/document/privacy-policy/1072374e-2247-45d2-9899-7f8a4cca91
 
 NOTE: I am no longer paying to maintain the Azure channel on which my SQL database was hosted and thus can no longer utilize app features such as create-account or login, which are required to access the fantasy-football portion of the app.
 
-![2024-02-07 19_33_42-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/a4672716-bbda-4b3c-bda7-c46a2fad9377)
+Screenshots of the application (video demonstration in LinkedIn):
+![2024-02-07 19_31_52-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/05264d79-97ba-4f55-a358-84fdbdb66dc7)
+![2024-02-07 19_33_54-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/10d6702e-4863-496d-8488-b96362cad706)
+![2024-02-07 19_32_58-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/978d8866-52c2-4f4b-bd19-69a6eb92d330)
+![2024-02-07 19_33_42-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/33d374e3-3fcb-48e4-98d0-7d2550808084)
+![2024-02-07 19_33_31-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/643ccfa8-67cf-4dc1-9684-25df0748c45f)
+![2024-02-07 19_34_01-](https://github.com/danwiener/.NET-MAUI-Fantasy-Football-App/assets/111164839/a080a7a2-79a3-4349-8db5-7c27b89699a2)
+
+
+
 
